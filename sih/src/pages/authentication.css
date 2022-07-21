@@ -259,3 +259,8 @@
     font-weight: 500;
 }
 /* signin.jsx ends */
+
+
+.Mui-selected{
+    display: none !important;
+}
