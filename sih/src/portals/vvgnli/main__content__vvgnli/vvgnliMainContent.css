@@ -1,0 +1,13 @@
+.vvgnli__main__content{
+    width: calc(100vw - 17vw);
+    height: 82vh;
+    margin: auto;
+    /* border: 5px solid black; */
+    box-shadow: 4px 4px 3px;
+    border-radius: 1rem;
+}
+
+.vvgnli__main__content__container{
+    display: flex;
+    justify-content: space-between;
+}

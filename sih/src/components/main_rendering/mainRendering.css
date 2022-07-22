@@ -1,0 +1,10 @@
+.main__rendering{
+    width: 100%;
+    box-shadow: 0px -4px 3px;
+    height: calc(100vh - 14vh);
+    
+}
+
+.main__rendering__container{
+    background-color: yellow;
+}

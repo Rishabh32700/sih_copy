@@ -1,0 +1,8 @@
+.sub__content__rendering{
+    width: 83%;
+    height: 100%;
+    /* border: 2px solid red; */
+    border-radius: 1rem;
+    overflow: scroll;
+    box-shadow: inset 4px 4px 2px black;
+}
