@@ -1,0 +1,15 @@
+.navbar__nav__items__container{
+    /* border: 2px solid red; */
+    display: flex;
+    width: 80vw;
+    justify-content: space-between;
+}
+
+.navbar__nav__items__container1{
+    /* border: 2px solid blue; */
+    display: flex;
+}
+
+.navbar__nav__items__container2{
+    /* border: 2px solid green; */
+}
