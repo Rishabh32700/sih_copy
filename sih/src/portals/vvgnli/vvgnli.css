@@ -1,3 +1,8 @@
+.vvgnli{
+    height: 100%;
+}
+
 .vvgnli__container{
     display: flex;
+    /* border: 2px solid red; */
 }
