@@ -18,8 +18,10 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import MuiPhoneNumber from "material-ui-phone-number";
 import AddressInput from "material-ui-address-input";
+import { useForm } from "react-hook-form";
 
 import "./authentication.css";
+import { useProgressStyles, useStatStyles } from "@chakra-ui/react";
 
 // address class component srart
 export class ControlledAddressInput extends Component {
@@ -58,15 +60,42 @@ export class ControlledAddressInput extends Component {
 // address class component ends
 
 const Signup = () => {
-  const [religion, setreligion] = useState("");
-  const [phone, setPhone] = useState("");
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleChange = (event) => {
-    setreligion(event.target.value);
+  const onSubmit = () => {
+    console.log("hello");
+    console.log(date);
+    console.log(isValidDate());
   };
+  const [religion, setreligion] = useState("");
+  const [gender, setGender] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState("");
+  const [dateError, setDateError] = useState(false);
+
 
   const handlePhnChange = (value) => {
     setPhone(value);
+  };
+
+  const isValidDate = () => {
+     debugger
+     if(date < new Date().toLocaleDateString("en-CA")){
+      setDateError(false);
+      console.log("If")
+    }
+    else{
+      setDateError(true);
+      console.log("else")
+     }
+    //  return date < new Date().toLocaleDateString("en-CA") ?true:false;
+     debugger
+      
   };
 
   return (
@@ -90,6 +119,17 @@ const Signup = () => {
                   variant="outlined"
                   label="Enter first name"
                   fullWidth
+                  required
+                  error={errors.firstName}
+                  {...register("firstName", {
+                    required: "This field is required",
+                    minLength: { value: 3, message: "Atleast 3 character" },
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Invalid Name",
+                    },
+                  })}
+                  helperText={errors.firstName ? errors.firstName.message : ""}
                 />
               </div>
               <div className="lastname">
@@ -99,6 +139,17 @@ const Signup = () => {
                   variant="outlined"
                   label="Enter last name"
                   fullWidth
+                  required
+                  error={errors.lastName}
+                  {...register("lastName", {
+                    required: "This field is required",
+                    minLength: { value: 3, message: "Atleast 3 character" },
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Invalid Name",
+                    },
+                  })}
+                  helperText={errors.lastName ? errors.lastName.message : ""}
                 />
               </div>
               <div className="father__name">
@@ -108,6 +159,19 @@ const Signup = () => {
                   variant="outlined"
                   label="Enter father's name"
                   fullWidth
+                  required
+                  error={errors.fathersName}
+                  {...register("fathersName", {
+                    required: "This field is required",
+                    minLength: { value: 3, message: "Atleast 3 character" },
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Invalid Name",
+                    },
+                  })}
+                  helperText={
+                    errors.fathersName ? errors.fathersName.message : ""
+                  }
                 />
               </div>
             </div>
@@ -122,6 +186,7 @@ const Signup = () => {
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
                   className="gender__radio__button"
+                  onChange={(e)=>setGender(e.target.value)}
                 >
                   <FormControlLabel
                     value="female"
@@ -146,12 +211,16 @@ const Signup = () => {
                   id="date"
                   label="Date of Birth"
                   type="date"
+                  onChange={(event) => setDate(event.target.value)}
                   defaultValue="2017-05-24"
                   sx={{ width: 220 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={dateError}
+
                 />
+                {console.log(dateError,"Dtaeerroe")}
               </div>
 
               <div className="religion__container">
@@ -166,9 +235,12 @@ const Signup = () => {
                   <Select
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={religion}
-                    onChange={handleChange}
                     label="Religion"
+                    error={errors.religion}
+                    {...register("religion", {
+                      required: "Religion is required",
+                    })}
+                    helperText={errors.religion ? errors.religion.message : ""}
                   >
                     <MenuItem value={10}>Hindu</MenuItem>
                     <MenuItem value={20}>Muslim</MenuItem>
@@ -188,6 +260,18 @@ const Signup = () => {
                     variant="outlined"
                     label="Enter user name"
                     fullWidth
+                    required
+                    error={errors.userName}
+                    {...register("userName", {
+                      required: "This field is required",
+                      minLength: { value: 3, message: "Atleast 3 character" },
+                      pattern: {
+                        value: /^[A-Za-z0-9]*$/i,
+                        message:
+                          "Username should consist of number and characters only",
+                      },
+                    })}
+                    helperText={errors.userName ? errors.userName.message : ""}
                   />
                 </div>
                 <div className="ph-no__container">
@@ -195,6 +279,17 @@ const Signup = () => {
                     defaultCountry={"in"}
                     onChange={handlePhnChange}
                     value={phone}
+                    required
+                    error={errors.phone}
+                    {...register("phone", {
+                      required: "This field is required",
+                      minLength: { value: 10, message: "Invlaid Number" },
+                      pattern: {
+                        value: /^[0-9]+$/i,
+                        message: "Phone should consist of number",
+                      },
+                    })}
+                    helperText={errors.phone ? errors.phone.message : ""}
                   />
                 </div>
               </div>
@@ -204,8 +299,19 @@ const Signup = () => {
                     id="email"
                     type="email"
                     variant="outlined"
+                    error={!!errors?.email}
+                    helperText={errors?.email ? errors.email.message : ""}
                     label="Enter Email"
                     fullWidth
+                    required
+                    {...register("email", {
+                      required: "Requird field",
+                      pattern: {
+                        value:
+                          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: "Invalid Email",
+                      },
+                    })}
                   />
                 </div>
                 <div className="password__confirm-password__container">
@@ -216,15 +322,49 @@ const Signup = () => {
                       variant="outlined"
                       label="Enter password"
                       fullWidth
+                      required
+                      error={errors.password}
+                      {...register("password", {
+                        required: "This field is required",
+                        minLength: { value: 8, message: "Atleast 8 character" },
+                        maxLength: {
+                          value: 16,
+                          message: "Atmost 16 character",
+                        },
+                        pattern: {
+                          value:
+                            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*['@','#','$','&','%']).{8,15}$/,
+                          message:
+                            "Password should consist of atleast one number, one uppercase ,one lowercase and one special character",
+                        },
+                      })}
+                      helperText={
+                        errors.password ? errors.password.message : ""
+                      }
                     />
                   </div>
                   <div className="confirm__password">
                     <TextField
                       id="confirm__password"
                       type="password"
+                      required
                       variant="outlined"
                       label="Confirm password"
                       fullWidth
+                      error={errors.confirm__password}
+                      {...register("confirm__password", {
+                        required: true,
+                        validate: (val) => {
+                          if (watch("password") !== val) {
+                            return "Your passwords do no match";
+                          }
+                        },
+                      })}
+                      helperText={
+                        errors.confirm__password
+                          ? errors.confirm__password.message
+                          : ""
+                      }
                     />
                   </div>
                 </div>
@@ -249,7 +389,12 @@ const Signup = () => {
                 />
               </div>
               <div className="create__account__button button">
-                <Button variant="contained" color="primary" fullWidth>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={handleSubmit(onSubmit)}
+                >
                   Create Account
                 </Button>
               </div>
