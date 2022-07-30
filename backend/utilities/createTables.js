@@ -23,6 +23,7 @@ class TABLES {
     }
 
     initTable() {
+        console.log("port is : ", process.env.PORT);
         for(let i in this.sql){
             this.db.query(this.sql[i], (err, result) => {
                 if(err)
