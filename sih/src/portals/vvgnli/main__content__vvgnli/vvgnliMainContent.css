@@ -1,10 +1,11 @@
 .vvgnli__main__content{
-    width: calc(100vw - 17vw);
-    height: 82vh;
+    width: 95vw;
+    height: 80vh;
     margin: auto;
     /* border: 5px solid black; */
-    box-shadow: 4px 4px 3px;
-    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 2px 2px 3px black;
+
 }
 
 .vvgnli__main__content__container{

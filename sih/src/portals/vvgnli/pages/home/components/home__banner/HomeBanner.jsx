@@ -14,7 +14,7 @@ const HomeBanner = () => {
         <div className="home__banner__container">
           <div className="banner__left__part">
             <img src={logo} alt="" />
-            <img src={logo2} alt="" />
+            <img className='home__banner__logo2' src={logo2} alt="" />
             <div className="heading">
               <div className="hindi__heading">
                 <h2>वी. वी. गिरि राष्ट्रीय श्रम संस्थान</h2>

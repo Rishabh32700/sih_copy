@@ -22,6 +22,9 @@ import { useForm } from "react-hook-form";
 
 import "./authentication.css";
 import { useProgressStyles, useStatStyles } from "@chakra-ui/react";
+import axios from 'axios'
+import config from "../ApiConfig/Config";
+
 
 // address class component srart
 export class ControlledAddressInput extends Component {
@@ -67,10 +70,30 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
+  const onSubmit = (data) => {
     console.log("hello");
     console.log(date);
     console.log(isValidDate());
+    data["phoneNumber"] = phone;
+    data["email"] = data.email;
+    data["name"] = data.firstName + " " + data.lastName
+
+    const user = {user: data}
+
+    console.log("user", user);
+    console.log(data);
+
+    axios
+    .post(
+      config.server.path + config.server.port1 + config.api.signUp,user
+    )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   };
   const [religion, setreligion] = useState("");
   const [gender, setGender] = useState("");

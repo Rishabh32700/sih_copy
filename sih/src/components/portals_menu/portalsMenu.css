@@ -3,7 +3,7 @@
     height: 10vh;
     /* border : 2px solid red; */
     /* background-image: linear-gradient(to bottom right, #69d1f1 ); */
-    background-color: #1760de;
+    /* background-color: #1760de; */
     /* background-color: white; */
     /* background-color: darkgrey; */
 }
@@ -34,20 +34,20 @@
 }
 
 
-.portals__menu__container button{
-    border: none;
+.portals__menu button{
+    /* border: none;
     outline: none;
     background: white;
     font-weight: 600;
     padding: .5em 1em;
     border-radius: 50px;
-    box-shadow: 3px 3px 4px 2px black;
+    box-shadow: 3px 3px 4px 2px black; */
     transition: all 0.5s;
 }
 
 
   
-  .portals__menu__container button:hover{
+  .portals__menu button:hover{
     cursor: pointer;
     transform: scale(1.1);
   }

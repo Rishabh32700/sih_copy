@@ -22,7 +22,6 @@ const MainRendering = () => {
                 {myData.state===2?<SocialMedia />:''}
                 {myData.state===3?<Webinars />:''}
                 {myData.state===4?'Btn 4':''}
-                
             </div>
         </div>
     </>
