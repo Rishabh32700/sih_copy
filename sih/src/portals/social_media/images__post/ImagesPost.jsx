@@ -12,7 +12,6 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import { faShare } from '@fortawesome/free-solid-svg-icons'
 import SearchPhotos from './components/searchPhotos/searchPhotos';
 
-
 const ImagesPost = () => {
   return (
     <>
