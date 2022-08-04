@@ -15,72 +15,54 @@ const SocialMedia = () => {
       <div className="socialMedia">
         <div className="socialMedia__container">
           <div className="social__media__buttons">
-            <Stack
-              spacing={2}
-              direction="row"
-              style={{ height: "100%", width: "10%" }}
+
+            <Button
+              variant="contained"
+              style={{
+                width: "10%",
+                height: "100%",
+                backgroundColor: "white",
+                color: "#1976d2",
+                fontWeight: "800",
+                fontSize: ".8rem",
+              }}
+              onClick={() => {
+                setImagesOrVideos(<ImagesPost />);
+              }}
             >
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "white",
-                  color: "#1976d2",
-                  fontWeight: "800",
-                  fontSize: ".8rem",
-                }}
-                onClick={() => {
-                  setImagesOrVideos(<ImagesPost />);
-                }}
-              >
-                Images
-              </Button>
-            </Stack>
-            <Stack
-              spacing={2}
-              direction="row"
-              style={{ height: "100%", width: "15%" }}
+              Images
+            </Button>
+
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                id="contained-button-file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                  Upload
+                </Button>
+              </label>
+            </div>
+
+            <Button
+              variant="contained"
+              style={{
+                width: "10%",
+                height: "100%",
+                backgroundColor: "white",
+                color: "#1976d2",
+                fontWeight: "800",
+                fontSize: ".8rem",
+              }}
+              onClick={() => {
+                setImagesOrVideos(<VideoPost />);
+              }}
             >
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "white",
-                  color: "#1976d2",
-                  fontWeight: "800",
-                  fontSize: ".8rem",
-                }}
-                onClick={() => {
-                  setImagesOrVideos(<UploadSocialMediaContent />);
-                }}
-              >
-                Upload Content
-              </Button>
-            </Stack>
-            <Stack
-              spacing={2}
-              direction="row"
-              style={{ height: "100%", width: "10%" }}
-            >
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "white",
-                  color: "#1976d2",
-                  fontWeight: "800",
-                  fontSize: ".8rem",
-                }}
-                onClick={() => {
-                  setImagesOrVideos(<VideoPost />);
-                }}
-              >
-                Videos
-              </Button>
-            </Stack>
+              Videos
+            </Button>
           </div>
           <div className="social__media__rendering">{imagesOrVideos}</div>
         </div>
