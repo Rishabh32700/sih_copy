@@ -9,8 +9,8 @@ const About = () => {
     <>
         <div className="about">
             <div className="about__container">
-                <SubContentRendering />
                 <AboutUsSubmenu />
+                <SubContentRendering />
             </div>
         </div>
     </>

@@ -425,9 +425,9 @@ const Signup = () => {
 
             <div className="authentication__links__signup">
               <p className="links">
-                <Link to="/">Already have an account ?</Link>
+                <Link to="/login">Already have an account ?</Link>
                 <p>OR</p>
-                <Link to="/home">Use as guest</Link>
+                <Link to="/">Use as guest</Link>
               </p>
             </div>
           </div>

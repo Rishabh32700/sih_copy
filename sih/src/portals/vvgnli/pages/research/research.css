@@ -6,9 +6,12 @@
 }
 
 .research__container{
-    /* border-radius: 1rem; */
+    width: 100%;
+    height: 82vh;
+    border-radius: 1rem;
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    
+    /* justify-content: space-between; */
+    padding: .5rem .8rem;
 }

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./webinars.css";
 import "./App.css";
 import HomePage from "./components/HomePage/HomePage";
-import NoMatch from "./components/NoMatch/NoMatch";
+
 
 const Webinars = () => {
   return (
@@ -12,7 +12,7 @@ const Webinars = () => {
         <div className="webinars__container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<NoMatch />} />
+            {/* <Route path="*" element={<NoMatch />} /> */}
           </Routes>
         </div>
       </div>
