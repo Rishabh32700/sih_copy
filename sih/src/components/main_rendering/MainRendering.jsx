@@ -18,8 +18,8 @@ const MainRendering = () => {
     <>
         <div className="main__rendering">
             <div className="main__rendering__container">
-            <ThemeLanguageSwitcher />
-            <PortalsMenu />
+            {/* <ThemeLanguageSwitcher />
+            <PortalsMenu /> */}
                 {myData.state===1?<Vvgnli />:null}
                 {myData.state===2?<SocialMedia />:null}
                 {myData.state===3?<Webinars />:null}

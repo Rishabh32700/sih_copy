@@ -34,16 +34,16 @@ const Infrastructure = () => {
                 </p>
               </div>
               <div className="infrastructure__pics__container">
-                <div class="scroll-table1">
-                  <div class="scroll-table">
-                    <table class="views-view-grid cols-4">
+                <div className="scroll-table1">
+                  <div className="scroll-table">
+                    <table className="views-view-grid cols-4">
                       <tbody>
-                        <tr class="row-1 row-first">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-1 row-first">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/1.Main%20Gate.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -60,11 +60,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/6.Seminar%20Hall.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -81,11 +81,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/26.Library.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -102,11 +102,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-4 col-last">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-4 col-last">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/16.Hostel%20Block.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -124,12 +124,12 @@ const Infrastructure = () => {
                             </div>
                           </td>
                         </tr>
-                        <tr class="row-2">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-2">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/5.Campus.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -146,11 +146,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/4.Campus.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -167,11 +167,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/3.Campus.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -217,16 +217,16 @@ const Infrastructure = () => {
                 </p>
               </div>
               <div className="infrastructure__pics__container">
-                <div class="scroll-table1">
-                  <div class="scroll-table">
-                    <table class="views-view-grid cols-4">
+                <div className="scroll-table1">
+                  <div className="scroll-table">
+                    <table className="views-view-grid cols-4">
                       <tbody>
-                        <tr class="row-1 row-first">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-1 row-first">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/16.Hostel%20Block.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -243,11 +243,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/17.Hostel%20Block%20Entrance_0.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -264,11 +264,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/hostel-single-occupancy.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -285,11 +285,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-4 col-last">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-4 col-last">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/19.Hostel%20Double%20Occupancy.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -307,12 +307,12 @@ const Infrastructure = () => {
                             </div>
                           </td>
                         </tr>
-                        <tr class="row-2">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-2">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/21.Hostel%20Gym.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -329,11 +329,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/20.Hostel%20Gym_0.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -350,11 +350,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/hostel-dining-hall_0.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -371,11 +371,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-4 col-last">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-4 col-last">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/22.Computer%20Room%20in%20Hostel.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -411,17 +411,17 @@ const Infrastructure = () => {
                 </p>
               </div>
               <div className="infrastructure__pics__container">
-                <div class="scroll-table1">
-                  <div class="scroll-table">
-                    <table class="views-view-grid cols-4">
+                <div className="scroll-table1">
+                  <div className="scroll-table">
+                    <table className="views-view-grid cols-4">
                       <tbody></tbody>
                       <tbody>
-                        <tr class="row-1 row-first">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-1 row-first">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/6.Seminar%20Hall.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -438,11 +438,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/7.Seminar%20Hall%20Entrance.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -459,11 +459,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/8.Seminar%20Hall%20Passage.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -480,11 +480,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-4 col-last">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-4 col-last">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/seminar-hall-lounge.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -502,12 +502,12 @@ const Infrastructure = () => {
                             </div>
                           </td>
                         </tr>
-                        <tr class="row-2">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-2">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/training-hall-vimarsh.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -524,11 +524,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/training-hall-vivechan.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -545,11 +545,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-3">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-3">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/training-hall-vikalp1.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -566,11 +566,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-4 col-last">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-4 col-last">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/training-hall-vichar.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -588,12 +588,12 @@ const Infrastructure = () => {
                             </div>
                           </td>
                         </tr>
-                        <tr class="row-3">
-                          <td class="col-1 col-first">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                        <tr className="row-3">
+                          <td className="col-1 col-first">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/training-hall-vinimay1.jpg"
                                   target="_BLANK"
                                   title="External site that opens in a new window "
@@ -610,11 +610,11 @@ const Infrastructure = () => {
                               </div>
                             </div>
                           </td>
-                          <td class="col-2">
-                            <div class="views-field views-field-field-gallery-photo">
-                              <div class="field-content">
+                          <td className="col-2">
+                            <div className="views-field views-field-field-gallery-photo">
+                              <div className="field-content">
                                 <a
-                                  class="lightbox-processed"
+                                  className="lightbox-processed"
                                   href="https://vvgnli.gov.in/sites/default/files/15.Seminar%20Block%20Tea%20%20Longue.JPG"
                                   target="_BLANK"
                                   title="External site that opens in a new window "

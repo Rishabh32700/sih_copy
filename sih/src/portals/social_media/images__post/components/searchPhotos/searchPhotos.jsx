@@ -33,7 +33,7 @@ const SearchPhotos = () => {
   };
 
   useEffect(() => {
-    // fetchFirst();
+    fetchFirst();
   }, []);
 
   useEffect(() => {
