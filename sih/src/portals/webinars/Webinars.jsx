@@ -12,7 +12,6 @@ const Webinars = () => {
         <div className="webinars__container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* <Route path="*" element={<NoMatch />} /> */}
           </Routes>
         </div>
       </div>
