@@ -1,0 +1,19 @@
+.dashboard__community__modal__list{
+    height: 100%;
+    overflow: scroll;
+    padding: 15px;
+}
+.dashboard__community__modal{
+    padding: 10px;
+}
+
+.dashboard__community__modal__container{
+    padding-bottom: 10px;
+    height: 100%;
+
+}
+.webinar__viewRecoding__button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

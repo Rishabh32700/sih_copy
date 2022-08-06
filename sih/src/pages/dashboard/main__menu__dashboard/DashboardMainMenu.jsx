@@ -135,6 +135,18 @@ export default function DashboardMainMenu() {
             <ListItemText primary="Webinar" />
           </ListItemButton>
         </ListItem>
+        <ListItem
+          disablePadding
+          onClick={() => {
+            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+              "imageModal"
+            );
+          }}
+        >
+          <ListItemButton>
+            <ListItemText primary="Image Modal" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );

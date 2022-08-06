@@ -7,6 +7,7 @@ import DashboardResearch from '../pages/research/DashboardResearch'
 import DashboardWebinar from '../pages/webinars/DashboardWebinar'
 import DashboardCommunityVideos from '../pages/community/DashboardCommunity'
 import DashboardCommunityImages from '../pages/community/DashboardCommunityImages'
+import DashboardModalImages from '../pages/community/DashboardModalImages'
 
 
 const DashboardMainContent = () => {
@@ -23,6 +24,7 @@ const DashboardMainContent = () => {
                   {/* {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'community'?<DashboardCommunity />:''} */}
                   {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'research'?<DashboardResearch />:''}
                   {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'webinar'?<DashboardWebinar />:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'imageModal'?<DashboardModalImages />:''}
                 </div>
             </div>
         </>

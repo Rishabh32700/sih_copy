@@ -149,9 +149,9 @@ const TABLE_HEAD = [
 const DashboardCommunityVideos = () => {
   
   return (
-    <div className="dashboard__research">
-      <div className="dashboard__research__container">
-        <div className="dashboard__research__list">
+    <div className="dashboard__community">
+      <div className="dashboard__community__container">
+        <div className="dashboard__community__list">
           <Page>
             <Container>
               <Stack

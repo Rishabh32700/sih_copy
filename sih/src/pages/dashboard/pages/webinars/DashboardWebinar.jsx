@@ -30,7 +30,7 @@ const WEBINARLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     host: "Ashley Jacobson",
     webinarLink: "https://google.com",
-    status: "scheduled",
+    status: "completed",
     usersLink: "https://google.com",
   },
   {
@@ -48,7 +48,7 @@ const WEBINARLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     host: "Ashley Jacobson",
     webinarLink: "https://google.com",
-    status: "scheduled",
+    status: "completed",
     usersLink: "https://google.com",
   },
   {
