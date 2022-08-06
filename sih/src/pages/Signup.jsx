@@ -8,6 +8,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  FormHelperText,
+  FormGroup,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -19,17 +21,18 @@ import FormLabel from "@mui/material/FormLabel";
 import MuiPhoneNumber from "material-ui-phone-number";
 import AddressInput from "material-ui-address-input";
 import { useForm } from "react-hook-form";
+import "react-phone-input-2/lib/style.css";
 
 import "./authentication.css";
-import { useProgressStyles, useStatStyles } from "@chakra-ui/react";
-import axios from 'axios'
+import PhoneInput from "react-phone-input-2";
+import axios from "axios";
 import config from "../ApiConfig/Config";
-
 
 // address class component srart
 export class ControlledAddressInput extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       address: "",
       addresses: [],
@@ -47,6 +50,13 @@ export class ControlledAddressInput extends Component {
       address: addressIndex,
     });
   };
+  componentDidMount() {
+    this.props.setAddress(this.state);
+  }
+  componentDidUpdate() {
+    this.props.setAddress(this.state);
+    // this.props.setAddressError({ state: false, message: "" });
+  }
 
   render() {
     return (
@@ -56,6 +66,10 @@ export class ControlledAddressInput extends Component {
         onChange={this.handleChangeAddress}
         value={this.state.address}
         allAddresses={this.state.addresses}
+        error={this.props.addressError.state}
+        // helperText={
+        //   this.props.addressError.state ? this.props.address.message : ""
+        // }
       />
     );
   }
@@ -70,55 +84,129 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("hello");
-    console.log(date);
-    console.log(isValidDate());
-    data["phoneNumber"] = phone;
-    data["email"] = data.email;
-    data["name"] = data.firstName + " " + data.lastName
+    if (isValidAddress() && isTermsValid()) {
+      const userAddress = address.addresses[0];
+      const userSignIn = {
+        name: data.firstName + " " + data.lastName,
+        fatherName: data.fathersName,
+        gender: data.gender,
+        dob: data.dob,
+        religion: data.religion,
+        phone: phoneNumber,
+        username: data.userName,
+        email: data.email,
+        password: data.password,
+        address: userAddress.addressLine1 + " " + userAddress.addressLine2,
+        city: userAddress.city,
+        state: userAddress.region,
+        country: userAddress.country,
+        zipcode: userAddress.zip,
+        dialCode: dialCode,
+        countryCode: countryCode,
+        countryName: countryName,
+      };
+      console.log(userSignIn);
+      const response = await axios.post(
+        "https://demoapisih.herokuapp.com/api/vvgnli/signup",
+        { ...JSON.stringify({ userSignIn }) }
+      );
+    }
 
-    const user = {user: data}
+    // data["phoneNumber"] = phone;
+    // data["email"] = data.email;
+    // data["name"] = data.firstName + " " + data.lastName;
 
-    console.log("user", user);
-    console.log(data);
+    // const user = { user: data };
+    // console.log(data);
 
-    axios
-    .post(
-      config.server.path + config.server.port1 + config.api.signUp,user
-    )
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
+    // axios
+    //   .post(config.server.path + config.server.port1 + config.api.signUp, user)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
-  const [religion, setreligion] = useState("");
-  const [gender, setGender] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("+91");
+  const [terms, setTerms] = useState(false);
+  const [termsError, setTermsError] = useState(false);
   const [date, setDate] = useState("");
-  const [dateError, setDateError] = useState(false);
+  const [phoneError, setPhoneError] = useState({ state: false, message: "" });
+  const [address, setAddress] = useState({
+    address: "",
+    addresses: [],
+  });
+  const [addressError, setAddressError] = useState({
+    state: false,
+    message: "",
+  });
+  const [countryCode, setCountryCode] = useState("");
+  const [dialCode, setDialCode] = useState("");
+  const [countryName, setCountryName] = useState("");
 
-
-  const handlePhnChange = (value) => {
+  const handlePhnChange = (e, value) => {
+    console.log(value, e);
     setPhone(value);
   };
-
-  const isValidDate = () => {
-     debugger
-     if(date < new Date().toLocaleDateString("en-CA")){
-      setDateError(false);
-      console.log("If")
+  const isTermsValid = () => {
+    setTermsError(false);
+    if (terms === false) {
+      setTermsError(true);
+      return false;
     }
-    else{
-      setDateError(true);
-      console.log("else")
-     }
-    //  return date < new Date().toLocaleDateString("en-CA") ?true:false;
-     debugger
-      
+    return true;
+  };
+  const isValidDate = (val) => {
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth();
+    let currentDay = currentDate.getDate();
+
+    let userDate = new Date(val);
+    let userYear = userDate.getFullYear();
+    let userMonth = userDate.getMonth();
+    let userDay = userDate.getDate();
+
+    let age = currentYear - userYear;
+    let age_month = currentMonth - userMonth;
+    let age_day = currentDay - userDay;
+
+    if (age > 100) {
+      return "Age cannot be more than 100 Years.Please enter correct age";
+    }
+    if (age_month < 0 || (age_month == 0 && age_day < 0)) {
+      age = parseInt(age) - 1;
+    }
+    if ((age == 18 && age_month <= 0 && age_day <= 0) || age < 18) {
+      return "Age should be more than 18 years.Please enter a valid Date of Birth";
+    }
+    return true;
+  };
+  const isValidPhoneNumber = () => {
+    setPhoneError({ state: false, message: "" });
+    if (phone === "+91") {
+      setPhoneError({ state: true, message: "This field is required" });
+      return false;
+    }
+    return true;
+  };
+  const isValidAddress = () => {
+    setAddressError({
+      state: false,
+      message: "",
+    });
+    if (address.addresses.length === 0) {
+      setAddressError({
+        state: true,
+        message: "This field is required",
+      });
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -201,32 +289,57 @@ const Signup = () => {
 
             <div className="personal__information__container">
               <div className="gender__selection__container">
-                <FormLabel id="demo-row-radio-buttons-group-label">
-                  Gender
-                </FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  className="gender__radio__button"
-                  onChange={(e)=>setGender(e.target.value)}
+                <FormControl
+                  sx={{ m: 3 }}
+                  error={errors.gender}
+                  variant="standard"
                 >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  <FormLabel id="demo-error-radios">Genders</FormLabel>
+                  <RadioGroup
+                    row
+                    name="gender"
+                    {...register("gender", {
+                      required: "This field is required",
+                    })}
+                  >
+                    <FormControlLabel
+                      value="male"
+                      control={
+                        <Radio
+                          {...register("gender", {
+                            required: "Choose your gender",
+                          })}
+                        />
+                      }
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="female"
+                      control={
+                        <Radio
+                          {...register("gender", {
+                            required: "Choose your gender",
+                          })}
+                        />
+                      }
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="other"
+                      control={
+                        <Radio
+                          {...register("gender", {
+                            required: "Choose your gender",
+                          })}
+                        />
+                      }
+                      label="Other"
+                    />
+                  </RadioGroup>
+                  <FormHelperText>
+                    {errors.gender ? errors.gender.message : ""}
+                  </FormHelperText>
+                </FormControl>
               </div>
 
               <div className="dob__container">
@@ -235,15 +348,18 @@ const Signup = () => {
                   label="Date of Birth"
                   type="date"
                   onChange={(event) => setDate(event.target.value)}
-                  defaultValue="2017-05-24"
+                  defaultValue={date}
                   sx={{ width: 220 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  error={dateError}
-
+                  error={errors.dob}
+                  {...register("dob", {
+                    required: true,
+                    validate: isValidDate,
+                  })}
+                  helperText={errors.dob ? errors.dob.message : ""}
                 />
-                {console.log(dateError,"Dtaeerroe")}
               </div>
 
               <div className="religion__container">
@@ -265,10 +381,10 @@ const Signup = () => {
                     })}
                     helperText={errors.religion ? errors.religion.message : ""}
                   >
-                    <MenuItem value={10}>Hindu</MenuItem>
-                    <MenuItem value={20}>Muslim</MenuItem>
-                    <MenuItem value={30}>Sikh</MenuItem>
-                    <MenuItem value={30}>Christian</MenuItem>
+                    <MenuItem value={"Hindu"}>Hindu</MenuItem>
+                    <MenuItem value={"Muslim"}>Muslim</MenuItem>
+                    <MenuItem value={"Sikh"}>Sikh</MenuItem>
+                    <MenuItem value={"Christian"}>Christian</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -298,21 +414,29 @@ const Signup = () => {
                   />
                 </div>
                 <div className="ph-no__container">
-                  <MuiPhoneNumber
+                  {/* <MuiPhoneNumber
                     defaultCountry={"in"}
-                    onChange={handlePhnChange}
+                    onChange={(e) => handlePhnChange(e)}
                     value={phone}
+                    error={phoneError.state}
                     required
-                    error={errors.phone}
-                    {...register("phone", {
-                      required: "This field is required",
-                      minLength: { value: 10, message: "Invlaid Number" },
-                      pattern: {
-                        value: /^[0-9]+$/i,
-                        message: "Phone should consist of number",
-                      },
-                    })}
-                    helperText={errors.phone ? errors.phone.message : ""}
+                    helperText={phoneError.state ? phoneError.message : ""}
+                  /> */}
+                  <PhoneInput
+                    style={{ width: "100%", height: "100%", outline: "none" }}
+                    id="phonenumber"
+                    country={"in"}
+                    value={phoneNumber}
+                    onChange={(value, country) => {
+                      // setPhone(e)
+                      setPhoneNumber(value);
+                      // setError({ ...error, phoneError: "" });
+                      console.log("values::", value);
+                      console.log("country ====>", country);
+                      setDialCode(country.dialCode);
+                      setCountryName(country.name);
+                      setCountryCode(country.countryCode);
+                    }}
                   />
                 </div>
               </div>
@@ -328,7 +452,7 @@ const Signup = () => {
                     fullWidth
                     required
                     {...register("email", {
-                      required: "Requird field",
+                      required: "Required field",
                       pattern: {
                         value:
                           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -395,23 +519,42 @@ const Signup = () => {
             </div>
 
             <div className="address__container">
-              <ControlledAddressInput />
+              <ControlledAddressInput
+                setAddress={setAddress}
+                addressError={addressError}
+                setAddressError={setAddressError}
+              />
             </div>
 
             <div className="terms__and__button__container__signup">
               <div className="terms__checkbox">
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      icon={<CheckBoxOutlineBlankIcon />}
-                      checkboxicon={<CheckBoxIcon />}
-                      name="checkedI"
+                <FormControl error={termsError}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          icon={<CheckBoxOutlineBlankIcon />}
+                          checkboxicon={<CheckBoxIcon />}
+                          name="checkedI"
+                          value={terms}
+                          onChange={(e) => {
+                            setTerms(e.target.checked);
+                          }}
+                          helperText={"hi"}
+                        />
+                      }
+                      label="I agree terms and conditions"
                     />
-                  }
-                  label="I agree terms and conditions"
-                />
+                  </FormGroup>
+                  <FormHelperText>
+                    {termsError ? `Check the terms and conditions` : ""}
+                  </FormHelperText>
+                </FormControl>
               </div>
-              <div className="create__account__button button">
+              <div
+                className="create__account__button button"
+                style={{ marginTop: "10px" }}
+              >
                 <Button
                   variant="contained"
                   color="primary"

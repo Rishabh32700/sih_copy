@@ -6,6 +6,10 @@ import {
   FormControlLabel,
   Checkbox,
   Typography,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
@@ -13,6 +17,8 @@ import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./authentication.css";
 import { useForm } from "react-hook-form";
+import { FormControl } from "react-bootstrap";
+import axios from "axios";
 
 const Login = () => {
   const {
@@ -20,8 +26,18 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const response = await axios.post(
+      "https://demoapisih.herokuapp.com/api/vvgnli/loginValidate",
+      { ...JSON.stringify({ data }) }
+    );
+    console.log(response);
+  };
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
 
   return (
@@ -83,8 +99,28 @@ const Login = () => {
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-            </div>
+              <div>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                <Select
+                  fullWidth
+                  variant="outlined"
+                  defaultValue="Role"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Type"
+                  {...register("role", {
+                    required: "Type is required",
+                  })}
+                  error={errors.type}
+                  helperText={errors.type ? errors.type.message : ""}
+                >
+                  <MenuItem value={"Admin"}>Admin</MenuItem>
+                  <MenuItem value={"Regular"}>Regular</MenuItem>
+                </Select>
 
+                {console.log(errors)}
+              </div>
+            </div>
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
                 <FormControlLabel
