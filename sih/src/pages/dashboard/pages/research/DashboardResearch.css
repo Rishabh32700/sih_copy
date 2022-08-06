@@ -1,3 +1,9 @@
-.dashboard__research__list{
-    /* margin: auto; */
+.dashboard__research {
+    width: 100%;
+}
+
+.dashboard__research__container {
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 10px;
 }

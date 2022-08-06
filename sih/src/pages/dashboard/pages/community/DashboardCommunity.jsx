@@ -21,7 +21,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -29,7 +29,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -37,7 +37,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: false,
   },
   {
     name: "Frozen yoghurt",
@@ -45,7 +45,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -53,7 +53,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: false,
   },
   {
     name: "Frozen yoghurt",
@@ -61,7 +61,79 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
   },
 ];
 const TABLE_HEAD = [
@@ -70,7 +142,7 @@ const TABLE_HEAD = [
   { id: "category", label: "Category", alignRight: false },
   { id: "date", label: "Date", alignRight: false },
   { id: "paperLink", label: "Post link", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
+  { id: "status", label: "Verified", alignRight: false },
   { id: "action", label: "Action", alignRight: false },
 ];
 
@@ -89,13 +161,13 @@ const DashboardCommunity = () => {
                 mb={5}
               >
                 <Typography variant="h4" gutterBottom>
-                  Research Worsks
+                  Images
                 </Typography>
               </Stack>
 
               <Card>
                 {/* <Scrollbar> */}
-                  <TableContainer sx={{ minWidth: 900 }}>
+                  <TableContainer sx={{ minWidth:600 }}>
                     <Table>
                       <WebinarListHead
                         headLabel={TABLE_HEAD}
@@ -138,10 +210,10 @@ const DashboardCommunity = () => {
                                   target="_blank"
                                   rel="noreferrer"
                                 >
-                                  Open Webinar
+                                  Open post
                                 </a>
                               </TableCell>
-                              <TableCell align="left">{status}</TableCell>
+                              <TableCell align="left">{status ? "Yes":"NO"}</TableCell>
                               <TableCell align="right">
                                 <Box component="div" sx={{ display: "inline" }}>
                                   <CancelIcon color="action" />

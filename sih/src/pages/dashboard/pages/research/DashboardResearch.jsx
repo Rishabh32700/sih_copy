@@ -9,7 +9,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography} from "@mui/material";
+import { Card, Stack, Container, Typography } from "@mui/material";
 // import Scrollbar from "./components/ScrollBar";
 
 import Page from "../home/Page";
@@ -22,7 +22,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -30,7 +30,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: false,
   },
   {
     name: "Frozen yoghurt",
@@ -38,7 +38,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -46,7 +46,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: false,
   },
   {
     name: "Frozen yoghurt",
@@ -54,7 +54,7 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
   },
   {
     name: "Frozen yoghurt",
@@ -62,7 +62,71 @@ const RESEARCHLIST = [
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
-    status: "scheduled",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
   },
 ];
 const TABLE_HEAD = [
@@ -89,75 +153,87 @@ const DashboardResearch = () => {
                 mb={5}
               >
                 <Typography variant="h4" gutterBottom>
-                  Research Worsks
+                  Research Works
                 </Typography>
               </Stack>
+              <div className="dashboard__research__table__container">
+                <div className="dashboard__research__table">
+                  <Card>
+                    {/* <Scrollbar> */}
+                    <TableContainer sx={{ minWidth: 600 }}>
+                      <Table>
+                        <WebinarListHead
+                          headLabel={TABLE_HEAD}
+                          rowCount={RESEARCHLIST.length}
+                        />
+                        <TableBody>
+                          {RESEARCHLIST.map((row, id) => {
+                            const {
+                              name,
+                              userId,
+                              status,
+                              category,
+                              paperLink,
+                              date,
+                            } = row;
+                            return (
+                              <TableRow hover key={id} tabIndex={-1}>
+                                <TableCell
+                                  component="th"
+                                  scope="row"
+                                  padding="10px"
+                                >
+                                  <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={2}
+                                  >
+                                    <Typography variant="subtitle2" noWrap>
+                                      {name}
+                                    </Typography>
+                                  </Stack>
+                                </TableCell>
+                                <TableCell align="left">{userId}</TableCell>
+                                <TableCell align="left">{category}</TableCell>
+                                <TableCell align="left">{date}</TableCell>
+                                <TableCell align="left">
+                                  {" "}
+                                  <a
+                                    href={paperLink}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    Open Paper
+                                  </a>
+                                </TableCell>
+                                <TableCell align="left">
+                                  {status ? "Yes" : "NO"}
+                                </TableCell>
 
-              <Card>
-                {/* <Scrollbar> */}
-                  <TableContainer sx={{ minWidth: 900 }}>
-                    <Table>
-                      <WebinarListHead
-                        headLabel={TABLE_HEAD}
-                        rowCount={RESEARCHLIST.length}
-                      />
-                      <TableBody>
-                        {RESEARCHLIST.map((row, id) => {
-                          const {
-                            name,
-                            userId,
-                            status,
-                            category,
-                            paperLink,
-                            date,
-                          } = row;
-                          return (
-                            <TableRow hover key={id} tabIndex={-1}>
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                padding="10px"
-                              >
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={2}
-                                >
-                                  <Typography variant="subtitle2" noWrap>
-                                    {name}
-                                  </Typography>
-                                </Stack>
-                              </TableCell>
-                              <TableCell align="left">{userId}</TableCell>
-                              <TableCell align="left">{category}</TableCell>
-                              <TableCell align="left">{date}</TableCell>
-                              <TableCell align="left">
-                                {" "}
-                                <a
-                                  href={paperLink}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Open Webinar
-                                </a>
-                              </TableCell>
-                              <TableCell align="left">{status}</TableCell>
-                              <TableCell align="right">
-                                <Box component="div" sx={{ display: "inline" }}>
-                                  <CancelIcon color="action" />
-                                </Box>
-                                <Box component="div" sx={{ display: "inline" }}>
-                                  <DoneIcon color="primary" />
-                                </Box>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                {/* </Scrollbar> */}
-              </Card>
+                                <TableCell align="right">
+                                  <Box
+                                    component="div"
+                                    sx={{ display: "inline" }}
+                                  >
+                                    <CancelIcon color="action" />
+                                  </Box>
+                                  <Box
+                                    component="div"
+                                    sx={{ display: "inline" }}
+                                  >
+                                    <DoneIcon color="primary" />
+                                  </Box>
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    {/* </Scrollbar> */}
+                  </Card>
+                </div>
+              </div>
             </Container>
           </Page>
         </div>

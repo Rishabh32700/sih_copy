@@ -69,6 +69,105 @@ const WEBINARLIST = [
     status: "scheduled",
     usersLink: "https://google.com",
   },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
+  {
+    name: "Frozen yoghurt",
+    department: " Ministry of External Affair",
+    date: "Thu Sep 03 2020 08:21:14",
+    host: "Ashley Jacobson",
+    webinarLink: "https://google.com",
+    status: "scheduled",
+    usersLink: "https://google.com",
+  },
 ];
 const TABLE_HEAD = [
   { id: "webinarName", label: "Webinar Name", alignRight: false },
@@ -101,7 +200,7 @@ const DashboardWebinar = () => {
 
               <Card>
                 {/* <Scrollbar> */}
-                  <TableContainer sx={{ minWidth: 800 }}>
+                  <TableContainer sx={{ minWidth: 600 }}>
                     <Table>
                       <WebinarListHead
                         headLabel={TABLE_HEAD}

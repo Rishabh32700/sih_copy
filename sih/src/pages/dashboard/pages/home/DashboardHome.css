@@ -1,0 +1,10 @@
+.dashboard__home__container {
+    height: 100%;
+}
+
+.dashboard__home__card__container{
+
+    height: 85%;
+    display: flex;
+    overflow: auto;
+}
