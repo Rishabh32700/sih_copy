@@ -4,15 +4,16 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
+import TableHead from "@mui/material/TableHead";
+import Paper from "@mui/material/Paper";
 import "./DashboardWebinar.css";
-import WebinarListHead from "./components/WebinarListHead";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography} from "@mui/material";
-import Scrollbar from "./components/ScrollBar";
-import Page from "../home/Page";
+import {  Typography } from "@mui/material";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
 
 const WEBINARLIST = [
   {
@@ -169,113 +170,83 @@ const WEBINARLIST = [
     usersLink: "https://google.com",
   },
 ];
-const TABLE_HEAD = [
-  { id: "webinarName", label: "Webinar Name", alignRight: false },
-  { id: "dept", label: "Dept", alignRight: false },
-  { id: "date", label: "Date", alignRight: false },
-  { id: "host", label: "Host", alignRight: false },
-  { id: "webinarLink", label: "Webinar link", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
-  { id: "users", label: "Registered Users", alignRight: false },
-  { id: "action", label: "Action", alignRight: false },
-];
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 const DashboardWebinar = () => {
   return (
-    <div className="dashboard__webinar">
-      <div className="dashboard__webinar__container">
-        <div className="dashboard__webinar__list">
-          <Page>
-            <Container>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                mb={5}
-              >
-                <Typography variant="h4" gutterBottom>
-                  Webinars
-                </Typography>
-              </Stack>
-
-              <Card>
-                {/* <Scrollbar> */}
-                  <TableContainer sx={{ minWidth: 600 }}>
-                    <Table>
-                      <WebinarListHead
-                        headLabel={TABLE_HEAD}
-                        rowCount={WEBINARLIST.length}
-                      />
-                      <TableBody>
-                        {WEBINARLIST.map((row, id) => {
-                          const {
-                            name,
-                            date,
-                            status,
-                            department,
-                            webinarLink,
-                            usersLink,
-                            host,
-                          } = row;
-                          return (
-                            <TableRow hover key={id} tabIndex={-1}>
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                padding="10px"
-                              >
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={2}
-                                >
-                                  <Typography variant="subtitle2" noWrap>
-                                    {name}
-                                  </Typography>
-                                </Stack>
-                              </TableCell>
-                              <TableCell align="left">{department}</TableCell>
-                              <TableCell align="left">{date}</TableCell>
-                              <TableCell align="left">{host}</TableCell>
-                              <TableCell align="left">
-                                {" "}
-                                <a
-                                  href={webinarLink}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Open Webinar
-                                </a>
-                              </TableCell>
-                              <TableCell align="left">{status}</TableCell>
-                              <TableCell align="left">
-                                {" "}
-                                <a
-                                  href={usersLink}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  See Users
-                                </a>
-                              </TableCell>
-                              <TableCell align="right">
-                                <Box component="div" sx={{ display: "inline" }}>
-                                  <CancelIcon color="action" />
-                                </Box>
-                                <Box component="div" sx={{ display: "inline" }}>
-                                  <DoneIcon color="primary" />
-                                </Box>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                {/* </Scrollbar> */}
-              </Card>
-            </Container>
-          </Page>
+    <div className="dashboard__research">
+      <div className="dashboard__research__container">
+        <div className="dashboard__research__heading">
+          <Typography variant="h3" gutterBottom component="div">
+            Webinars Section
+          </Typography>
+        </div>
+        <div className="dashboard__research__table">
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Webinar Name</StyledTableCell>
+                  <StyledTableCell align="right">Department</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
+                  <StyledTableCell align="right">Host</StyledTableCell>
+                  <StyledTableCell align="right">Webinar Link</StyledTableCell>
+                  <StyledTableCell align="right">Status</StyledTableCell>
+                  <StyledTableCell align="right">Registers Users</StyledTableCell>
+                  <StyledTableCell align="right">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {WEBINARLIST.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.department}</StyledTableCell>
+                    <StyledTableCell align="left">{row.date}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {row.host}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <a href={row.webinarLink}>Webinar Link</a>
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {row.status ? "Scheduled" : "Completed"}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <a href={row.usersLink}>Users Link</a>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <CancelIcon color="action" />
+                      </Box>
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <DoneIcon color="primary" />
+                      </Box>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>

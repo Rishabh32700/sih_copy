@@ -17,3 +17,18 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.dashboard__community__container{
+    width: 100%;
+}
+
+
+.dashboard__community {
+    width: 100%;
+}
+
+.dashboard__community__container {
+    height: 100%;
+    overflow: auto;
+    padding: 10px 20px 20px 20px;
+}

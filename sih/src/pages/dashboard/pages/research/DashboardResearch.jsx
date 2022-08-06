@@ -4,14 +4,17 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
+import TableHead from "@mui/material/TableHead";
+import Paper from "@mui/material/Paper";
 import "./DashboardResearch.css";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
 import { Card, Stack, Container, Typography } from "@mui/material";
+import { tableCellClasses } from "@mui/material/TableCell";
 // import Scrollbar from "./components/ScrollBar";
-
+import { styled } from "@mui/material/styles";
 import Page from "../home/Page";
 import WebinarListHead from "../webinars/components/WebinarListHead";
 
@@ -129,113 +132,81 @@ const RESEARCHLIST = [
     status: true,
   },
 ];
-const TABLE_HEAD = [
-  { id: "userName", label: "User Name", alignRight: false },
-  { id: "userId", label: "User Id", alignRight: false },
-  { id: "category", label: "Category", alignRight: false },
-  { id: "date", label: "Date", alignRight: false },
-  { id: "paperLink", label: "Paper link", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
-  { id: "action", label: "Action", alignRight: false },
-];
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 const DashboardResearch = () => {
   return (
     <div className="dashboard__research">
       <div className="dashboard__research__container">
-        <div className="dashboard__research__list">
-          <Page>
-            <Container>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                mb={5}
-              >
-                <Typography variant="h4" gutterBottom>
-                  Research Works
-                </Typography>
-              </Stack>
-              <div className="dashboard__research__table__container">
-                <div className="dashboard__research__table">
-                  <Card>
-                    {/* <Scrollbar> */}
-                    <TableContainer sx={{ minWidth: 600 }}>
-                      <Table>
-                        <WebinarListHead
-                          headLabel={TABLE_HEAD}
-                          rowCount={RESEARCHLIST.length}
-                        />
-                        <TableBody>
-                          {RESEARCHLIST.map((row, id) => {
-                            const {
-                              name,
-                              userId,
-                              status,
-                              category,
-                              paperLink,
-                              date,
-                            } = row;
-                            return (
-                              <TableRow hover key={id} tabIndex={-1}>
-                                <TableCell
-                                  component="th"
-                                  scope="row"
-                                  padding="10px"
-                                >
-                                  <Stack
-                                    direction="row"
-                                    alignItems="center"
-                                    spacing={2}
-                                  >
-                                    <Typography variant="subtitle2" noWrap>
-                                      {name}
-                                    </Typography>
-                                  </Stack>
-                                </TableCell>
-                                <TableCell align="left">{userId}</TableCell>
-                                <TableCell align="left">{category}</TableCell>
-                                <TableCell align="left">{date}</TableCell>
-                                <TableCell align="left">
-                                  {" "}
-                                  <a
-                                    href={paperLink}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                  >
-                                    Open Paper
-                                  </a>
-                                </TableCell>
-                                <TableCell align="left">
-                                  {status ? "Yes" : "NO"}
-                                </TableCell>
-
-                                <TableCell align="right">
-                                  <Box
-                                    component="div"
-                                    sx={{ display: "inline" }}
-                                  >
-                                    <CancelIcon color="action" />
-                                  </Box>
-                                  <Box
-                                    component="div"
-                                    sx={{ display: "inline" }}
-                                  >
-                                    <DoneIcon color="primary" />
-                                  </Box>
-                                </TableCell>
-                              </TableRow>
-                            );
-                          })}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                    {/* </Scrollbar> */}
-                  </Card>
-                </div>
-              </div>
-            </Container>
-          </Page>
+        <div className="dashboard__research__heading">
+          <Typography variant="h3" gutterBottom component="div">
+            Webinars Section
+          </Typography>
+        </div>
+        <div className="dashboard__research__table">
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>User Name</StyledTableCell>
+                  <StyledTableCell align="right">User Id</StyledTableCell>
+                  <StyledTableCell align="right">Category</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
+                  <StyledTableCell align="right">Paper Link</StyledTableCell>
+                  <StyledTableCell align="right">Status</StyledTableCell>
+                  <StyledTableCell align="right">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {RESEARCHLIST.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.userId}</StyledTableCell>
+                    <StyledTableCell align="left">{row.date}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {row.category}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {row.paperLink}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {row.status ? "Yes" : "No"}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <CancelIcon color="action" />
+                      </Box>
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <DoneIcon color="primary" />
+                      </Box>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>
