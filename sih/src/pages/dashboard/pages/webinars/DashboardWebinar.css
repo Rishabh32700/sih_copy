@@ -1,0 +1,14 @@
+.dashboard__webinar{
+    margin-top: 50px;
+}
+.dashboard__webinar__list{
+    /* height: 100%;
+    display: flex;
+    overflow: scroll; */
+    padding-bottom: 10px;
+}
+.dashboard__webinar__container{
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 10px;
+}

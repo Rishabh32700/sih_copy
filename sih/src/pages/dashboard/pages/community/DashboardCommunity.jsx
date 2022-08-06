@@ -1,9 +1,169 @@
-import React from 'react'
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import DoneIcon from "@mui/icons-material/Done";
+import Box from "@material-ui/core/Box";
+import CancelIcon from "@mui/icons-material/Cancel";
+// material
+import { Card, Stack, Container, Typography} from "@mui/material";
+// import Scrollbar from "./components/ScrollBar";
+
+import Page from "../home/Page";
+import WebinarListHead from "../webinars/components/WebinarListHead";
+
+const RESEARCHLIST = [
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: "scheduled",
+  },
+];
+const TABLE_HEAD = [
+  { id: "userName", label: "User Name", alignRight: false },
+  { id: "userId", label: "User Id", alignRight: false },
+  { id: "category", label: "Category", alignRight: false },
+  { id: "date", label: "Date", alignRight: false },
+  { id: "paperLink", label: "Post link", alignRight: false },
+  { id: "status", label: "Status", alignRight: false },
+  { id: "action", label: "Action", alignRight: false },
+];
 
 const DashboardCommunity = () => {
+  
   return (
-    <div>DashboardCommunity Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus illum cupiditate ad quam aperiam, facilis iste modi dolores autem quos sit ullam consequuntur esse aliquam culpa iusto a excepturi nulla dolor. Qui beatae assumenda laborum excepturi fugit tempora blanditiis tempore temporibus voluptatum minus asperiores nesciunt amet dolore numquam vel facere repudiandae quo, enim fuga quis rem exercitationem dicta maxime sed? Repudiandae maiores eius impedit esse exercitationem temporibus expedita recusandae pariatur molestiae, ducimus deleniti dicta minima labore repellendus natus? Animi consectetur voluptas hic aperiam earum amet totam! Animi nihil quaerat a molestiae nulla cumque fugiat atque perspiciatis, iure error iusto. Ipsum distinctio quos maiores ut nemo consequatur cumque, dignissimos debitis nesciunt obcaecati illum harum fuga repellat consequuntur nam natus delectus itaque voluptates repudiandae, rerum commodi quis aliquid voluptatem! Vero possimus dolor architecto aperiam molestiae libero quo adipisci quibusdam hic. Nobis ex earum repellat harum magni impedit rerum aperiam, sapiente alias nisi culpa repudiandae sit aliquam nesciunt esse reprehenderit. Error natus molestiae eaque? Perferendis reprehenderit quis esse commodi delectus dicta eum nulla magni. Cum eveniet nam, totam ab unde impedit, voluptate sit tempore qui adipisci labore facere sequi atque quis! Ex explicabo rem perferendis sunt, doloribus consequuntur eveniet laudantium ea aut, eligendi porro ad molestiae voluptatem dolor quaerat eos? Pariatur labore aliquam accusantium, nihil reiciendis dignissimos eligendi tempore dicta quam debitis aperiam, delectus expedita adipisci dolore, hic nam amet dolorem quia blanditiis laborum voluptatem exercitationem! Unde eveniet reprehenderit dolores aliquid, deserunt magnam fugiat voluptate sit, quis quaerat suscipit autem nulla ipsum et veritatis odit eum id necessitatibus, eos maxime? At ad nam quidem quibusdam odio recusandae sint officia quo reiciendis minus laudantium incidunt ipsum corporis impedit velit, aliquid architecto illo. Deserunt nostrum quisquam praesentium inventore molestiae. Expedita tempore aliquid perspiciatis nobis facere impedit amet perferendis omnis, corporis similique totam error facilis voluptates, voluptatem repellendus maiores qui obcaecati, unde id veniam quaerat. Est laudantium delectus eum nisi. Voluptate nisi tempore dolorem? Ab excepturi necessitatibus similique deserunt sit possimus provident voluptas odio est unde, dolores, et explicabo, dolorem debitis quaerat ut illo reiciendis adipisci accusamus laboriosam quos exercitationem. Dolor, accusantium! Ratione nobis quos tempore et? Minus veritatis laborum voluptates molestiae perspiciatis dolore iste mollitia, error sint, atque quod rem ipsam beatae quam. Modi labore voluptatibus consectetur adipisci cum dolore excepturi reprehenderit et inventore? Quos sed placeat illum quisquam! Nihil accusantium dolore nesciunt quis fugit voluptatum iure ipsam cum earum, ducimus eveniet asperiores voluptates fuga molestiae quae velit quasi id doloremque rem atque, consectetur facilis? Iste eos molestias ratione quos, vitae beatae alias doloribus ullam ab ad. Enim soluta ex asperiores fugit, ipsam impedit facilis quae temporibus labore modi iusto nulla accusantium quo commodi dolores mollitia voluptatum fuga iure dolorem sunt beatae nesciunt delectus? Neque, doloribus. Qui illum quas voluptatem corrupti temporibus vitae dicta quo consectetur ut dolorem, rem velit consequatur, natus explicabo. Nisi perspiciatis voluptatem, facere eius odit earum a, ab qui quos magnam blanditiis quasi maxime rerum, dignissimos cum. Necessitatibus minima facilis, veniam dolor vel deleniti consequuntur ex incidunt temporibus excepturi soluta quis.</div>
-  )
-}
+    <div className="dashboard__research">
+      <div className="dashboard__research__container">
+        <div className="dashboard__research__list">
+          <Page>
+            <Container>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={5}
+              >
+                <Typography variant="h4" gutterBottom>
+                  Research Worsks
+                </Typography>
+              </Stack>
 
-export default DashboardCommunity
+              <Card>
+                {/* <Scrollbar> */}
+                  <TableContainer sx={{ minWidth: 900 }}>
+                    <Table>
+                      <WebinarListHead
+                        headLabel={TABLE_HEAD}
+                        rowCount={RESEARCHLIST.length}
+                      />
+                      <TableBody>
+                        {RESEARCHLIST.map((row, id) => {
+                          const {
+                            name,
+                            userId,
+                            status,
+                            category,
+                            paperLink,
+                            date,
+                          } = row;
+                          return (
+                            <TableRow hover key={id} tabIndex={-1}>
+                              <TableCell
+                                component="th"
+                                scope="row"
+                                padding="10px"
+                              >
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={2}
+                                >
+                                  <Typography variant="subtitle2" noWrap>
+                                    {name}
+                                  </Typography>
+                                </Stack>
+                              </TableCell>
+                              <TableCell align="left">{userId}</TableCell>
+                              <TableCell align="left">{category}</TableCell>
+                              <TableCell align="left">{date}</TableCell>
+                              <TableCell align="left">
+                                {" "}
+                                <a
+                                  href={paperLink}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  Open Webinar
+                                </a>
+                              </TableCell>
+                              <TableCell align="left">{status}</TableCell>
+                              <TableCell align="right">
+                                <Box component="div" sx={{ display: "inline" }}>
+                                  <CancelIcon color="action" />
+                                </Box>
+                                <Box component="div" sx={{ display: "inline" }}>
+                                  <DoneIcon color="primary" />
+                                </Box>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                {/* </Scrollbar> */}
+              </Card>
+            </Container>
+          </Page>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardCommunity;

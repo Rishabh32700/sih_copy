@@ -81,7 +81,7 @@ export default function DashboardMainMenu() {
           disablePadding
           onClick={() => {
             myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "Webinar"
+              "webinar"
             );
           }}
         >
