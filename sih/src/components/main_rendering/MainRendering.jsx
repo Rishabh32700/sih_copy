@@ -9,6 +9,7 @@ import Webinars from '../../portals/webinars/Webinars'
 import ThemeLanguageSwitcher from '../theme_language_switcher/ThemeLanguageSwitcher'
 import PortalsMenu from '../portals_menu/PortalsMenu'
 import ResearchWork from '../../portals/research_work/ResearchWork'
+import Dashboard from '../../pages/dashboard/Dashboard'
 
 
 const MainRendering = () => {
@@ -23,6 +24,7 @@ const MainRendering = () => {
                 {myData.state===2?<SocialMedia />:null}
                 {myData.state===3?<Webinars />:null}
                 {myData.state===4? <ResearchWork />:null}
+                {myData.state===7? <Dashboard />:null}
             </div>
         </div>
     </>

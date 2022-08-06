@@ -2,10 +2,11 @@ import PastWebinarCard from "../WebinarCard/PastWebinarCard";
 import PresentWebinarCard from "../WebinarCard/PresentWebinarCard";
 import FutureWebinarCard from "../WebinarCard/FutureWebinarCard";
 import Button from "@mui/material/Button";
-
+import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const navigate=useNavigate();
   const futureWebinar = [
     {
       imageUrl:
@@ -130,6 +131,7 @@ const HomePage = () => {
         <div className="webinar__sections">
 
           <div className="past__webinars webinar__section">
+            <button onClick={()=>navigate('dash')}>Click me</button>
             <div className="past__webinars--heading webinar__section--heading">
               <h4>Past Webinars</h4>
             </div>
