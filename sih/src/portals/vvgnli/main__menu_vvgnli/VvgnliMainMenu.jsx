@@ -57,7 +57,7 @@ export default function VvgnliMainMenu() {
           disablePadding
           onClick={() => {
             myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "about__us"
+              "about_us"
             );
           }}
         >

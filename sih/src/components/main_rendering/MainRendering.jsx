@@ -8,6 +8,7 @@ import SocialMedia from '../../portals/social_media/SocialMedia'
 import Webinars from '../../portals/webinars/Webinars'
 import ThemeLanguageSwitcher from '../theme_language_switcher/ThemeLanguageSwitcher'
 import PortalsMenu from '../portals_menu/PortalsMenu'
+import ResearchWork from '../../portals/research_work/ResearchWork'
 
 
 const MainRendering = () => {
@@ -18,10 +19,10 @@ const MainRendering = () => {
             <div className="main__rendering__container">
             <ThemeLanguageSwitcher />
             <PortalsMenu />
-                {myData.state===1?<Vvgnli />:''}
-                {myData.state===2?<SocialMedia />:''}
-                {myData.state===3?<Webinars />:''}
-                {myData.state===4?'Btn 4':''}
+                {myData.state===1?<Vvgnli />:null}
+                {myData.state===2?<SocialMedia />:null}
+                {myData.state===3?<Webinars />:null}
+                {myData.state===4? <ResearchWork />:null}
             </div>
         </div>
     </>

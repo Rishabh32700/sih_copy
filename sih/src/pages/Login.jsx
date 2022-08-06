@@ -151,7 +151,7 @@ const Login = () => {
               <p className="links">
                 <Link to="/signup">Do not have an account ?</Link>
                 <p>OR</p>
-                <Link to="/home">Use as guest</Link>
+                <Link to="/">Use as guest</Link>
               </p>
             </div>
           </div>

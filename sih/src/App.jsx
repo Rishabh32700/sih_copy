@@ -6,9 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 
 import MainRendering from './components/main_rendering/MainRendering';
-import CallPage from "./portals/webinars/components/CallPage/CallPage";
 import HomePage from "./portals/webinars/components/HomePage/HomePage";
-import NoMatch from "./portals/webinars/components/NoMatch/NoMatch";
 
 export let gData = createContext()
 
@@ -37,12 +35,10 @@ const App = () => {
             }}
           >
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/home" element={<MainRendering />} />
-            <Route path="/:id" element={<CallPage />} />
+            <Route path="/" element={<MainRendering />} />
             <Route path="/webinar/homepage" element={<HomePage />} />
-            <Route path="*" element={<NoMatch />} />
           </Routes>
           </gData.Provider>
         </div>
