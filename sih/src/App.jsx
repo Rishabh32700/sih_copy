@@ -31,7 +31,8 @@ const App = () => {
               set_vvgnli_main_menu_state,
               vvgnli_about_submenu_state,
               set_vvgnli_about_submenu_state,
-              
+              vvgnli_research_submenu_state,
+              set_vvgnli_research_submenu_state
             }}
           >
           <Routes>

@@ -126,9 +126,9 @@ class  Slider extends React.Component {
             >
               Next
               {theme.direction === "rtl" ? (
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft style={{color: "#1976d2"}}/>
               ) : (
-                <KeyboardArrowRight />
+                <KeyboardArrowRight style={{color: "#1976d2"}}/>
               )}
             </Button>
           }
@@ -139,9 +139,9 @@ class  Slider extends React.Component {
               disabled={activeStep === 0}
             >
               {theme.direction === "rtl" ? (
-                <KeyboardArrowRight />
+                <KeyboardArrowRight style={{color: "#1976d2"}}/>
               ) : (
-                <KeyboardArrowLeft />
+                <KeyboardArrowLeft style={{color: "#1976d2"}}/>
               )}
               Back
             </Button>

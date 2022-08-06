@@ -2,6 +2,8 @@ import React from 'react'
 import ResearchRendering from './components/research__rendering/ResearchRendering'
 import ResearchSubmenu from './components/reserach__submenu/ResearchSubmenu'
 
+import SubContentRendering from '../../sub__content__rendering/SubContentRendering'
+
 import './research.css'
 
 const Research = () => {
