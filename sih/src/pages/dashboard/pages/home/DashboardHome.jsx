@@ -2,7 +2,6 @@ import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { Grid, Container, Typography } from "@mui/material";
 import AppWidgetSummary from "./AppWidgetSummary";
-import Page from "./Page";
 import './DashboardHome.css'
 
 // components
@@ -25,7 +24,7 @@ const DashboardHome = () => {
                   <AppWidgetSummary
                     title="Regstered user"
                     total={714000}
-                    icon={"ant-design:android-filled"}
+                    icon={"ant-design:UserAddOutLined"}
                   />
                 </Grid>
 
@@ -34,7 +33,7 @@ const DashboardHome = () => {
                     title="Images Uploaded"
                     total={1352831}
                     color="info"
-                    icon={"ant-design:apple-filled"}
+                    icon={"ant-design:user-filled"}
                   />
                 </Grid>
 
@@ -43,7 +42,7 @@ const DashboardHome = () => {
                     title="videos uploaded"
                     total={1723315}
                     color="warning"
-                    icon={"ant-design:windows-filled"}
+                    icon={"ant-design:video-filled"}
                   />
                 </Grid>
 

@@ -146,7 +146,7 @@ const TABLE_HEAD = [
   { id: "action", label: "Action", alignRight: false },
 ];
 
-const DashboardCommunityVideos = () => {
+const DashboardCommunityImages = () => {
   
   return (
     <div className="dashboard__research">
@@ -161,7 +161,7 @@ const DashboardCommunityVideos = () => {
                 mb={5}
               >
                 <Typography variant="h4" gutterBottom>
-                  Uploaded Videos
+                  Uploaded Images
                 </Typography>
               </Stack>
 
@@ -210,7 +210,7 @@ const DashboardCommunityVideos = () => {
                                   target="_blank"
                                   rel="noreferrer"
                                 >
-                                  Open Video
+                                  Open Image
                                 </a>
                               </TableCell>
                               <TableCell align="left">{status ? "Yes":"NO"}</TableCell>
@@ -238,4 +238,4 @@ const DashboardCommunityVideos = () => {
   );
 };
 
-export default DashboardCommunityVideos;
+export default DashboardCommunityImages;
