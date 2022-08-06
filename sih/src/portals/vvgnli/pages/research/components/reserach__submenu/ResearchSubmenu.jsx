@@ -9,11 +9,16 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
+import { gData } from "../../../../../../App";
 
 // import "./portalsMenu.css";
 
 
+
 const ResearchSubmenu = () => {
+
+  let my__data__from__vvgnli__research__submenu = useContext(gData)
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -58,12 +63,20 @@ const ResearchSubmenu = () => {
                   display: { xs: "block", md: "block" },
                 }}
               >
-                <MenuItem>
+                <MenuItem onClick={() => {
+                    my__data__from__vvgnli__research__submenu.set_vvgnli_research_submenu_state(
+                      "research"
+                    );
+                  }}>
                   <Typography textAlign="center">
                     Centre for International Networking
                   </Typography>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={() => {
+                    my__data__from__vvgnli__research__submenu.set_vvgnli_research_submenu_state(
+                      "research"
+                    );
+                  }}>
                   <Typography textAlign="center">
                     Centre for Labour Market Studies
                   </Typography>

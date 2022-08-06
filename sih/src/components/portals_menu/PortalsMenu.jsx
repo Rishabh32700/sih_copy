@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { useNavigate } from "react-router-dom";
 
 import "./portalsMenu.css";
 
@@ -21,6 +22,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const PortalsMenu = () => {
   let myData = useContext(gData);
+  const navigate=useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -199,9 +201,9 @@ const PortalsMenu = () => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    {settings.map((setting) => (
+                    {settings.map((setting,index) => (
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
+                        <Typography textAlign="center" onClick={()=>myData.setState(index+5)}>{setting}</Typography>
                       </MenuItem>
                     ))}
                   </Menu>

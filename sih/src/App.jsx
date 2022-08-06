@@ -14,7 +14,8 @@ const App = () => {
 
 
   let [state,setState] =useState(1)
-  let [vvgnli_main_menu_state, set_vvgnli_main_menu_state] = useState("home")
+  let [vvgnli_main_menu_state, set_vvgnli_main_menu_state] = useState("home");
+  let [dashboard_main_menu_state, set_dashboard_main_menu_state] = useState("home");
   let [vvgnli_about_submenu_state, set_vvgnli_about_submenu_state] = useState("about_us")
   let [vvgnli_research_submenu_state, set_vvgnli_research_submenu_state] = useState("research")
   
@@ -31,14 +32,16 @@ const App = () => {
               set_vvgnli_main_menu_state,
               vvgnli_about_submenu_state,
               set_vvgnli_about_submenu_state,
-              
+              vvgnli_research_submenu_state,
+              set_vvgnli_research_submenu_state,
+              dashboard_main_menu_state,
+              set_dashboard_main_menu_state,
             }}
           >
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<MainRendering />} />
-            <Route path="/webinar/homepage" element={<HomePage />} />
           </Routes>
           </gData.Provider>
         </div>

@@ -1,14 +1,17 @@
 import React, { useContext } from 'react'
+
 import { gData } from '../../../App'
+
+
 import DirectorGeneralDesk from '../pages/about_us/components/director__general__desk/DirectorGeneralDesk'
 import GoverningBodies from '../pages/about_us/components/governing__bodies/GoverningBodies'
 import History from '../pages/about_us/components/history/History'
 import Infrastructure from '../pages/about_us/components/infrastructure/Infrastructure'
-
 import MainContentAboutUs from '../pages/about_us/components/main__content__about__us/MainContentAboutUs'
 import Networking from '../pages/about_us/components/networking/Networking'
 import VisionAndMission from '../pages/about_us/components/vision__and__mission/VisionAndMission'
 import WhosWho from '../pages/about_us/components/whos__who/WhosWho'
+import Research from '../pages/research/Research'
 
 
 
@@ -19,6 +22,7 @@ import './subContentRendering.css'
 const SubContentRendering = () => {
 
     let my__data__from__vvgnli__about_us__submenu = useContext(gData)
+
 
     return (
         <>

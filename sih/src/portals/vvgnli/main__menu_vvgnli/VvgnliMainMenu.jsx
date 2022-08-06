@@ -104,9 +104,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "library"
-            );
+            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("library");
           }}
         >
           <ListItemButton>
@@ -116,9 +114,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "people"
-            );
+            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("people");
           }}
         >
           <ListItemButton>
@@ -152,9 +148,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "mou"
-            );
+            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("mou");
           }}
         >
           <ListItemButton>
@@ -167,11 +161,21 @@ export default function VvgnliMainMenu() {
   );
 
   return (
-    <div  style={{ height:"fit-content", position:"fixed", backgroundColor:"black", display:"flex", justifyContent:"flex-end", padding:"0 1rem", width:"100%"}} >
+    <div
+      style={{
+        height: "fit-content",
+        position: "fixed",
+        backgroundColor: "black",
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "0 1rem",
+        width: "100%",
+      }}
+    >
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
-            <MenuIcon style={{ color:"white", alignSelf:"right" }}/>
+            <MenuIcon style={{  color: "white", alignSelf: "right" }} />
           </Button>
           <SwipeableDrawer
             anchor={anchor}
