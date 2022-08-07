@@ -11,7 +11,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Grid } from "@mui/material";
-const ImageCard = ({ post }) => {
+const ImageCard = ({ post, isAdmin }) => {
   return (
     <div className="webinar__card">
       <div className="webinar__card__container">
@@ -27,8 +27,9 @@ const ImageCard = ({ post }) => {
           <div className="webinar__card__webinar_info">
             <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
               <Typography gutterBottom variant="p" component="div">
-                Name : {post.name} <br />
-                User Id :{post.userId} <br />
+                {isAdmin ? `Name : ${post.name}` : ""} {isAdmin && <br />}
+                {isAdmin ? `User Id : ${post.userId}` : ""}
+                {isAdmin && <br />}
                 When : {post.date} <br />
                 Category : {post.category} <br />
                 Verified : {post.status ? "Yes" : "No"} <br />
@@ -36,18 +37,25 @@ const ImageCard = ({ post }) => {
               </Typography>
             </CardContent>
           </div>
-          <div className="webinar__card__button__container">
-            <CardActions style={{ justifyContent: "center" }}>
-              <div className="webinar__viewRecoding__button">
+          {isAdmin && (
+            <div className="webinar__card__button__container">
+              <CardActions style={{ justifyContent: "center" }}>
+                <div className="webinar__viewRecoding__button">
                   <Box component="div" sx={{ display: "inline" }}>
                     <CancelIcon color="action" />
                   </Box>
                   <Box component="div" sx={{ display: "inline" }}>
                     <DoneIcon color="primary" />
                   </Box>
-              </div>
-            </CardActions>
-          </div>
+                </div>
+              </CardActions>
+            </div>
+          )}
+          {!isAdmin && (
+            <div className="webinar__card__button__delete">
+              <Button>Delete</Button>
+            </div>
+          )}
         </Card>
       </div>
     </div>

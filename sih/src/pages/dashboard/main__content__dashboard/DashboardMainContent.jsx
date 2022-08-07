@@ -13,18 +13,19 @@ import DashboardModalImages from '../pages/community/DashboardModalImages'
 const DashboardMainContent = () => {
 
   const myGlobalDataForDashboardMainMenu = useContext(gData);
+  const isAdmin=false;
 
   return (
     <>
             <div className="dashboard__main__content">
                 <div className="dashboard__main__content__container">
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'home'?<DashboardHome />:''}
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'images'?<DashboardCommunityImages />:''}
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'videos'?<DashboardCommunityVideos />:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'home'?<DashboardHome  isAdmin={isAdmin}/>:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'images'?<DashboardCommunityImages  isAdmin={isAdmin}/>:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'videos'?<DashboardCommunityVideos  isAdmin={isAdmin}/>:''}
                   {/* {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'community'?<DashboardCommunity />:''} */}
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'research'?<DashboardResearch />:''}
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'webinar'?<DashboardWebinar />:''}
-                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'imageModal'?<DashboardModalImages />:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'research'?<DashboardResearch  isAdmin={isAdmin}/>:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'webinar'?<DashboardWebinar  isAdmin={isAdmin}/>:''}
+                  {myGlobalDataForDashboardMainMenu.dashboard_main_menu_state === 'imageModal'?<DashboardModalImages  isAdmin={isAdmin}/>:''}
                 </div>
             </div>
         </>

@@ -11,7 +11,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import {  Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 
@@ -190,7 +190,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const DashboardWebinar = () => {
+const DashboardWebinar = ({ isAdmin }) => {
   return (
     <div className="dashboard__research">
       <div className="dashboard__research__container">
@@ -210,38 +210,48 @@ const DashboardWebinar = () => {
                   <StyledTableCell align="right">Host</StyledTableCell>
                   <StyledTableCell align="right">Webinar Link</StyledTableCell>
                   <StyledTableCell align="right">Status</StyledTableCell>
-                  <StyledTableCell align="right">Registers Users</StyledTableCell>
-                  <StyledTableCell align="right">Action</StyledTableCell>
+                  {isAdmin && (
+                    <StyledTableCell align="right">
+                      Registers Users
+                    </StyledTableCell>
+                  )}
+                  {isAdmin && (
+                    <StyledTableCell align="right">Action</StyledTableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {WEBINARLIST.map((row) => (
-                  <StyledTableRow key={row.name}>
+                {WEBINARLIST.map((row, id) => (
+                  <StyledTableRow key={id}>
                     <StyledTableCell component="th" scope="row">
                       {row.name}
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.department}</StyledTableCell>
-                    <StyledTableCell align="left">{row.date}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.host}
+                      {row.department}
                     </StyledTableCell>
+                    <StyledTableCell align="left">{row.date}</StyledTableCell>
+                    <StyledTableCell align="left">{row.host}</StyledTableCell>
                     <StyledTableCell align="left">
                       <a href={row.webinarLink}>Webinar Link</a>
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {row.status ? "Scheduled" : "Completed"}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={row.usersLink}>Users Link</a>
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <CancelIcon color="action" />
-                      </Box>
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <DoneIcon color="primary" />
-                      </Box>
-                    </StyledTableCell>
+                    {isAdmin && (
+                      <StyledTableCell align="left">
+                        <a href={row.usersLink}>Users Link</a>
+                      </StyledTableCell>
+                    )}
+                    {isAdmin && (
+                      <StyledTableCell align="right">
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <CancelIcon color="action" />
+                        </Box>
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <DoneIcon color="primary" />
+                        </Box>
+                      </StyledTableCell>
+                    )}
                   </StyledTableRow>
                 ))}
               </TableBody>

@@ -17,6 +17,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import Page from "../home/Page";
 import WebinarListHead from "../webinars/components/WebinarListHead";
+import { Button } from "@material-ui/core";
 
 const RESEARCHLIST = [
   {
@@ -133,7 +134,6 @@ const RESEARCHLIST = [
   },
 ];
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -154,13 +154,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const DashboardResearch = () => {
+const DashboardResearch = ({ isAdmin }) => {
   return (
     <div className="dashboard__research">
       <div className="dashboard__research__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Webinars Section
+            Research Section
           </Typography>
         </div>
         <div className="dashboard__research__table">
@@ -168,40 +168,62 @@ const DashboardResearch = () => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>User Name</StyledTableCell>
-                  <StyledTableCell align="right">User Id</StyledTableCell>
-                  <StyledTableCell align="right">Category</StyledTableCell>
-                  <StyledTableCell align="right">Date</StyledTableCell>
-                  <StyledTableCell align="right">Paper Link</StyledTableCell>
-                  <StyledTableCell align="right">Status</StyledTableCell>
-                  <StyledTableCell align="right">Action</StyledTableCell>
+                  {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
+                  {isAdmin && (
+                    <StyledTableCell align="left">User Id</StyledTableCell>
+                  )}
+                  <StyledTableCell align="left">Category</StyledTableCell>
+                  <StyledTableCell align="left">Date</StyledTableCell>
+                  <StyledTableCell align="left">Paper Link</StyledTableCell>
+                  <StyledTableCell align="left">Verified</StyledTableCell>
+                  {isAdmin && (
+                    <StyledTableCell align="left">Action</StyledTableCell>
+                  )}
+                  {!isAdmin && (
+                    <StyledTableCell align="left">Delete</StyledTableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.userId}</StyledTableCell>
-                    <StyledTableCell align="left">{row.date}</StyledTableCell>
+                {RESEARCHLIST.map((row, id) => (
+                  <StyledTableRow key={id}>
+                    {isAdmin && (
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                    )}
+                    {isAdmin && (
+                      <StyledTableCell align="left">
+                        {row.userId}
+                      </StyledTableCell>
+                    )}
                     <StyledTableCell align="left">
                       {row.category}
                     </StyledTableCell>
+                    <StyledTableCell align="left">{row.date}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.paperLink}
+                      <a href={row.paperLink} target="_blank" rel="noreferrer">
+                        See Paper
+                      </a>
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {row.status ? "Yes" : "No"}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <CancelIcon color="action" />
-                      </Box>
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <DoneIcon color="primary" />
-                      </Box>
-                    </StyledTableCell>
+                    {isAdmin && (
+                      <StyledTableCell align="right">
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <CancelIcon color="action" />
+                        </Box>
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <DoneIcon color="primary" />
+                        </Box>
+                      </StyledTableCell>
+                    )}
+                    {!isAdmin && (
+                      <StyledTableCell align="left">
+                        <Button>Delete</Button>
+                      </StyledTableCell>
+                    )}
                   </StyledTableRow>
                 ))}
               </TableBody>

@@ -12,7 +12,7 @@ import TableHead from "@mui/material/TableHead";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography} from "@mui/material";
+import { Card, Stack, Container, Typography, Button } from "@mui/material";
 // import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 
@@ -171,58 +171,74 @@ const TABLE_HEAD = [
   { id: "action", label: "Action", alignRight: false },
 ];
 
-const DashboardCommunityVideos = () => {
-  
+const DashboardCommunityVideos = ({ isAdmin }) => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
-      <div className="dashboard__research__heading">
+        <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
             Videos Section
           </Typography>
         </div>
         <div className="dashboard__community__list">
-        <TableContainer component={Paper}>
+          <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>User Name</StyledTableCell>
-                  <StyledTableCell align="right">User Id</StyledTableCell>
-                  <StyledTableCell align="right">Category</StyledTableCell>
-                  <StyledTableCell align="right">Date</StyledTableCell>
-                  <StyledTableCell align="right">Post Link</StyledTableCell>
-                  <StyledTableCell align="right">Status</StyledTableCell>
-                  <StyledTableCell align="right">Action</StyledTableCell>
+                  {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
+                  {isAdmin && (
+                    <StyledTableCell align="left">User Id</StyledTableCell>
+                  )}
+                  <StyledTableCell align="left">Category</StyledTableCell>
+                  <StyledTableCell align="left">Date</StyledTableCell>
+                  <StyledTableCell align="left">Post Link</StyledTableCell>
+                  <StyledTableCell align="left">Status</StyledTableCell>
+                  {isAdmin && (
+                    <StyledTableCell align="left">Action</StyledTableCell>
+                  )}
+                  {!isAdmin && (
+                    <StyledTableCell align="left">Delete</StyledTableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.userId}</StyledTableCell>
+                {RESEARCHLIST.map((row, id) => (
+                  <StyledTableRow key={id}>
+                    {isAdmin && (
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                    )}
+                    {isAdmin && (
+                      <StyledTableCell align="left">
+                        {row.userId}
+                      </StyledTableCell>
+                    )}
                     <StyledTableCell align="left">
                       {row.category}
                     </StyledTableCell>
                     <StyledTableCell align="left">{row.date}</StyledTableCell>
                     <StyledTableCell align="left">
-                    <a href={row.postLink}>
-
-                      See Post
-                    </a>
+                      <a href={row.postLink}>See Post</a>
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {row.status ? "Yes" : "No"}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <CancelIcon color="action" />
-                      </Box>
-                      <Box component="div" sx={{ display: "inline" }}>
-                        <DoneIcon color="primary" />
-                      </Box>
-                    </StyledTableCell>
+                    {isAdmin && (
+                      <StyledTableCell align="right">
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <CancelIcon color="action" />
+                        </Box>
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <DoneIcon color="primary" />
+                        </Box>
+                      </StyledTableCell>
+                    )}
+                    {!isAdmin && (
+                      <StyledTableCell align="left">
+                        <Button>Delete</Button>
+                      </StyledTableCell>
+                    )}
                   </StyledTableRow>
                 ))}
               </TableBody>

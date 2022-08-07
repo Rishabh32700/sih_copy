@@ -139,14 +139,14 @@ const IMAGELIST = [
   },
 ];
 
-const DashboardModalImages = () => {
+const DashboardModalImages = ({isAdmin}) => {
   return (
     <div className="dashboard__community__modal">
       <div className="dashboard__community__modal__container">
         <div className="dashboard__community__modal__list">
           <Grid container spacing={3}>
             {IMAGELIST.map((post, id) => (
-              <ImageCard post={post} key={id} />
+              <ImageCard post={post} key={id} isAdmin={isAdmin} />
             ))}
           </Grid>
         </div>
