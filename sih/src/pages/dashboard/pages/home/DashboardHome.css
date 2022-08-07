@@ -1,0 +1,4 @@
+.dashboard__home__container {
+    height: 100%;
+    overflow: scroll;
+}

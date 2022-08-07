@@ -1,12 +1,15 @@
 import PastWebinarCard from "../WebinarCard/PastWebinarCard";
 import PresentWebinarCard from "../WebinarCard/PresentWebinarCard";
 import FutureWebinarCard from "../WebinarCard/FutureWebinarCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import { useState } from "react";
 
 const HomePage = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   const futureWebinar = [
     {
       imageUrl:
@@ -35,24 +38,24 @@ const HomePage = () => {
       host: "Sh Nittin Gadkari",
       registered: false,
     },
-    {
-      imageUrl:
-        "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
-      name: "Increasing Pollution",
-      department: "Ministry of Environment",
-      date: "8:30 AM SEPT 18 2022",
-      host: "Sh Nittin Gadkari",
-      registered: false,
-    },
-    {
-      imageUrl:
-        "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
-      name: "Increasing Pollution",
-      department: "Ministry of Environment",
-      date: "8:30 AM SEPT 18 2022",
-      host: "Sh Nittin Gadkari",
-      registered: false,
-    },
+    // {
+    //   imageUrl:
+    //     "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
+    //   name: "Increasing Pollution",
+    //   department: "Ministry of Environment",
+    //   date: "8:30 AM SEPT 18 2022",
+    //   host: "Sh Nittin Gadkari",
+    //   registered: false,
+    // },
+    // {
+    //   imageUrl:
+    //     "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
+    //   name: "Increasing Pollution",
+    //   department: "Ministry of Environment",
+    //   date: "8:30 AM SEPT 18 2022",
+    //   host: "Sh Nittin Gadkari",
+    //   registered: false,
+    // },
   ];
   const presentWebinar = [
     {
@@ -108,82 +111,84 @@ const HomePage = () => {
       date: "8:30 AM SEPT 18 2022",
       host: "Sh Nittin Gadkari",
     },
-    {
-      imageUrl:
-        "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
-      name: "Increasing Pollution",
-      department: "Ministry of Environment",
-      date: "8:30 AM SEPT 18 2022",
-      host: "Sh Nittin Gadkari",
-    },
-    {
-      imageUrl:
-        "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
-      name: "Increasing Pollution",
-      department: "Ministry of Environment",
-      date: "8:30 AM SEPT 18 2022",
-      host: "Sh Nittin Gadkari",
-    },
+    // {
+    //   imageUrl:
+    //     "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
+    //   name: "Increasing Pollution",
+    //   department: "Ministry of Environment",
+    //   date: "8:30 AM SEPT 18 2022",
+    //   host: "Sh Nittin Gadkari",
+    // },
+    // {
+    //   imageUrl:
+    //     "https://images.hindustantimes.com/img/2021/11/02/1600x900/aicte-office-chanderlok-janpath-seventh-floor-building_9ed7f172-e9be-11e9-8d06-17233a3ef1ac_1635840330780.jpg",
+    //   name: "Increasing Pollution",
+    //   department: "Ministry of Environment",
+    //   date: "8:30 AM SEPT 18 2022",
+    //   host: "Sh Nittin Gadkari",
+    // },
   ];
+  const [infinitePastWebinar, setInfinitePastWebinar] = useState(pastWebinar);
+  const [infinitePresentWebinar, setInfinitePresentWebinar] = useState(presentWebinar);
+  const [infiniteFutureWebinar, setInfiniteFutureWebinar] = useState(futureWebinar);
+  const handlePastSeeMore=()=>{
+    setInfinitePastWebinar([...infinitePastWebinar,...pastWebinar])
+  }
+  const handleFutureSeeMore=()=>{
+    setInfiniteFutureWebinar([...infiniteFutureWebinar,...futureWebinar]);
+  }
+  const handlePresentSeeMore=()=>{
+    setInfinitePresentWebinar([...infinitePresentWebinar,...presentWebinar])
+  }
+
   return (
     <div className="webinar__home__page">
       <div className="webinar__home__page__container">
         <div className="webinar__sections">
-
           <div className="past__webinars webinar__section">
-            <button onClick={()=>navigate('dash')}>Click me</button>
             <div className="past__webinars--heading webinar__section--heading">
               <h4>Past Webinars</h4>
             </div>
             <div className="webinars__list">
-              {pastWebinar &&
-                pastWebinar.map((webinar,index) => (
+              {infinitePastWebinar &&
+                infinitePastWebinar.map((webinar, index) => (
                   <PastWebinarCard key={index} webinar={webinar} />
                 ))}
               <div className="past__webinars__list--footer webinars__list--footer">
-                <Button variant="outlined">see more</Button>
+                <Button variant="outlined" onClick={handlePastSeeMore}>see more</Button>
               </div>
             </div>
           </div>
-
 
           <div className="ongoing__webinars webinar__section">
             <div className="ongoing__webinars--heading webinar__section--heading">
               <h4>Live Webinars</h4>
             </div>
             <div className="webinars__list">
-              {presentWebinar &&
-                presentWebinar.map((webinar, index) => (
+              {infinitePresentWebinar &&
+                infinitePresentWebinar.map((webinar, index) => (
                   <PresentWebinarCard key={index} webinar={webinar} />
                 ))}
               <div className="ongoing__webinars__list--footer webinars__list--footer">
-                <Button variant="outlined">see more</Button>
+                <Button variant="outlined" onClick={handlePresentSeeMore}>see more</Button>
               </div>
             </div>
           </div>
-
-
 
           <div className="future__webinars webinar__section">
             <div className="future__webinars--heading webinar__section--heading">
               <h4>Future Webinars</h4>
             </div>
             <div className="webinars__list">
-              {futureWebinar.map((webinar,index) => (
+              {infiniteFutureWebinar.map((webinar, index) => (
                 <FutureWebinarCard key={index} webinar={webinar} />
               ))}
 
               <div className="future__webinars__list--footer webinars__list--footer">
-                <Button variant="outlined">see more</Button>
+                <Button variant="outlined" onClick={handleFutureSeeMore}>see more</Button>
               </div>
             </div>
           </div>
-
-
-
-
-
-
         </div>
       </div>
     </div>

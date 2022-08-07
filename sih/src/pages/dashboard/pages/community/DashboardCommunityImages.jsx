@@ -12,12 +12,10 @@ import TableHead from "@mui/material/TableHead";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 // import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 
-import Page from "../home/Page";
-import WebinarListHead from "../webinars/components/WebinarListHead";
 import { tableCellClasses } from "@mui/material/TableCell";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -161,30 +159,21 @@ const RESEARCHLIST = [
     status: true,
   },
 ];
-const TABLE_HEAD = [
-  { id: "userName", label: "User Name", alignRight: false },
-  { id: "userId", label: "User Id", alignRight: false },
-  { id: "category", label: "Category", alignRight: false },
-  { id: "date", label: "Date", alignRight: false },
-  { id: "postLink", label: "Post link", alignRight: false },
-  { id: "status", label: "Verified", alignRight: false },
-  { id: "action", label: "Action", alignRight: false },
-];
 
-const DashboardCommunityVideos = ({ isAdmin }) => {
+const DashboardCommunityImages = ({isAdmin}) => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
-        <div className="dashboard__research__heading">
+      <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Videos Section
+            Images Section
           </Typography>
         </div>
         <div className="dashboard__community__list">
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
-                <TableRow>
+              <TableRow>
                   {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
@@ -250,4 +239,4 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
   );
 };
 
-export default DashboardCommunityVideos;
+export default DashboardCommunityImages;
