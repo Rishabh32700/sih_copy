@@ -181,7 +181,7 @@ const DashboardCommunityImages = ({isAdmin}) => {
                   <StyledTableCell align="left">Category</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  <StyledTableCell align="left">Status</StyledTableCell>
+                  <StyledTableCell align="left">Verified</StyledTableCell>
                   {isAdmin && (
                     <StyledTableCell align="left">Action</StyledTableCell>
                   )}

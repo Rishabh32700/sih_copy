@@ -13,7 +13,7 @@ import DashboardModalImages from '../pages/community/DashboardModalImages'
 const DashboardMainContent = () => {
 
   const myGlobalDataForDashboardMainMenu = useContext(gData);
-  const isAdmin=false;
+  const isAdmin=true;
 
   return (
     <>
