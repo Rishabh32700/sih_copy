@@ -11,22 +11,22 @@ import {
   FormHelperText,
   FormGroup,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
-import MuiPhoneNumber from "material-ui-phone-number";
 import AddressInput from "material-ui-address-input";
 import { useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";
-
 import "./authentication.css";
 import PhoneInput from "react-phone-input-2";
 import axios from "axios";
-import config from "../ApiConfig/Config";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // address class component srart
 export class ControlledAddressInput extends Component {
@@ -83,6 +83,7 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("hello");
@@ -104,9 +105,6 @@ const Signup = () => {
         state: userAddress.region,
         country: userAddress.country,
         zipCode: userAddress.zip,
-        // dialCode: dialCode,
-        // countryCode: countryCode,
-        // countryName: countryName,
       };
       console.log(userSignIn);
       try {
@@ -116,9 +114,28 @@ const Signup = () => {
             ...userSignIn,
           }
         );
-        console.log(response);
-        console.log(await response.json(), "json");
+        if (response.data.success) {
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          navigate("/login");
+        }
       } catch (error) {
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
         console.log("error", error);
       }
     }
@@ -201,6 +218,7 @@ const Signup = () => {
     }
     return true;
   };
+  const notify = () => toast("Wow so easy!");
 
   return (
     <>
@@ -554,13 +572,12 @@ const Signup = () => {
             <div className="authentication__links__signup">
               <p className="links">
                 <Link to="/login">Already have an account ?</Link>
-                <p>OR</p>
-                <Link to="/">Use as guest</Link>
               </p>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
