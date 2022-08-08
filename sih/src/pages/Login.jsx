@@ -5,20 +5,21 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-  Typography,
   InputLabel,
   Select,
   MenuItem,
-  Box,
+  FormHelperText,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./authentication.css";
 import { useForm } from "react-hook-form";
-import { FormControl } from "react-bootstrap";
+
 import axios from "axios";
+import FormControl from "@mui/material/FormControl";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const {
@@ -26,18 +27,47 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
-    console.log(data);
-    const response = await axios.post(
-      "https://demoapisih.herokuapp.com/api/vvgnli/loginValidate",
-      { ...JSON.stringify({ data }) }
-    );
-    console.log(response);
-  };
-  const [age, setAge] = React.useState("");
+    const loginData = {
+      email: data.email,
+      password: data.password,
+      loginType: "2",
+    };
+    console.log(loginData);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+    try {
+      const response = await axios.post(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/login",
+        { ...loginData }
+      );
+      console.log(response);
+      console.log("data", response.data);
+      if (response.data.success) {
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -100,25 +130,25 @@ const Login = () => {
                 />
               </div>
               <div>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  fullWidth
-                  variant="outlined"
-                  defaultValue="Role"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Type"
-                  {...register("role", {
-                    required: "Type is required",
-                  })}
-                  error={errors.type}
-                  helperText={errors.type ? errors.type.message : ""}
-                >
-                  <MenuItem value={"Admin"}>Admin</MenuItem>
-                  <MenuItem value={"Regular"}>Regular</MenuItem>
-                </Select>
-
-                {console.log(errors)}
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <Select
+                    fullWidth
+                    defaultValue="Role"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Type"
+                    variant="outlined"
+                    {...register("role", {
+                      required: "Type is required",
+                    })}
+                    error={errors.type}
+                    helperText={errors.type ? errors.type.message : ""}
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>Regular</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
             <div className="terms__and__button__container">
@@ -146,17 +176,10 @@ const Login = () => {
                 </Button>
               </div>
             </div>
-
-            <div className="authentication__links">
-              <p className="links">
-                <Link to="/signup">Do not have an account ?</Link>
-                <p>OR</p>
-                <Link to="/">Use as guest</Link>
-              </p>
-            </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

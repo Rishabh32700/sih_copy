@@ -11,22 +11,22 @@ import {
   FormHelperText,
   FormGroup,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
-import MuiPhoneNumber from "material-ui-phone-number";
 import AddressInput from "material-ui-address-input";
 import { useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";
-
 import "./authentication.css";
 import PhoneInput from "react-phone-input-2";
 import axios from "axios";
-import config from "../ApiConfig/Config";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // address class component srart
 export class ControlledAddressInput extends Component {
@@ -83,6 +83,7 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("hello");
@@ -92,43 +93,52 @@ const Signup = () => {
         name: data.firstName + " " + data.lastName,
         fatherName: data.fathersName,
         gender: data.gender,
-        dob: data.dob,
+        dateOfBirth: data.dob,
         religion: data.religion,
-        phone: phoneNumber,
-        username: data.userName,
-        email: data.email,
+        phoneNumber: phoneNumber,
+        userName: data.userName,
+        emailAddress: data.email,
         password: data.password,
-        address: userAddress.addressLine1 + " " + userAddress.addressLine2,
+        addressL1: userAddress.addressLine1,
+        addressL2: userAddress.addressLine2,
         city: userAddress.city,
         state: userAddress.region,
         country: userAddress.country,
-        zipcode: userAddress.zip,
-        dialCode: dialCode,
-        countryCode: countryCode,
-        countryName: countryName,
+        zipCode: userAddress.zip,
       };
       console.log(userSignIn);
-      const response = await axios.post(
-        "https://demoapisih.herokuapp.com/api/vvgnli/signup",
-        { ...JSON.stringify({ userSignIn }) }
-      );
+      try {
+        const response = await axios.post(
+          "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/signup",
+          {
+            ...userSignIn,
+          }
+        );
+        if (response.data.success) {
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          navigate("/login");
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+        console.log("error", error);
+      }
     }
-
-    // data["phoneNumber"] = phone;
-    // data["email"] = data.email;
-    // data["name"] = data.firstName + " " + data.lastName;
-
-    // const user = { user: data };
-    // console.log(data);
-
-    // axios
-    //   .post(config.server.path + config.server.port1 + config.api.signUp, user)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phone, setPhone] = useState("+91");
@@ -208,6 +218,7 @@ const Signup = () => {
     }
     return true;
   };
+  const notify = () => toast("Wow so easy!");
 
   return (
     <>
@@ -414,30 +425,22 @@ const Signup = () => {
                   />
                 </div>
                 <div className="ph-no__container">
-                  {/* <MuiPhoneNumber
-                    defaultCountry={"in"}
-                    onChange={(e) => handlePhnChange(e)}
-                    value={phone}
-                    error={phoneError.state}
-                    required
-                    helperText={phoneError.state ? phoneError.message : ""}
-                  /> */}
-                  <PhoneInput
-                    style={{ width: "100%", height: "100%", outline: "none" }}
-                    id="phonenumber"
-                    country={"in"}
-                    value={phoneNumber}
-                    onChange={(value, country) => {
-                      // setPhone(e)
-                      setPhoneNumber(value);
-                      // setError({ ...error, phoneError: "" });
-                      console.log("values::", value);
-                      console.log("country ====>", country);
-                      setDialCode(country.dialCode);
-                      setCountryName(country.name);
-                      setCountryCode(country.countryCode);
-                    }}
-                  />
+                  <div>
+                    <PhoneInput
+                      style={{ width: "90%", height: "100%", outline: "none" }}
+                      id="phonenumber"
+                      country={"in"}
+                      value={phoneNumber}
+                      onChange={(value, country) => {
+                        setPhoneNumber(value);
+                        console.log("values::", value);
+                        console.log("country ====>", country);
+                        setDialCode(country.dialCode);
+                        setCountryName(country.name);
+                        setCountryCode(country.countryCode);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="email__password__conatiner">
@@ -569,13 +572,12 @@ const Signup = () => {
             <div className="authentication__links__signup">
               <p className="links">
                 <Link to="/login">Already have an account ?</Link>
-                <p>OR</p>
-                <Link to="/">Use as guest</Link>
               </p>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
