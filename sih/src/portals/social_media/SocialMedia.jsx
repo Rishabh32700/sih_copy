@@ -1,21 +1,70 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ImagesPost from "./images__post/ImagesPost";
-
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
-
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import UploadSocialMediaContent from "./uploadContent/UploadSocialMediaContent";
+import axios from "axios";
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
+  const [approvedPhotos, setApprovedPhotos] = useState([]);
+
+
+  const handleFileSelected = (e) => {};
+
+  const [image, setImage] = useState({ preview: "", data: "" });
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("file", image.data);
+    console.log(formData.get("file"));
+
+    const res = await axios.post(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/upload",
+      formData
+    );
+    console.log("Res1", res);
+
+    const res2 = await axios.post(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/postHandle",
+      {
+        userId: "ea94a7bbc4f238e0",
+        mediaIdArray: res.data.mediaIdArray,
+      }
+    );
+    console.log("Res2", res2);
+  };
+
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    setImage(img);
+  };
+
+  const getApprovedPhotos = async () => {
+    const res = await axios.get(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+    );
+    setApprovedPhotos(res.data.approvedPhotosArray)
+    console.log(res);
+  };
+
+
+  useEffect(() => {
+    getApprovedPhotos();
+  }, []);
+
   return (
     <>
       <div className="socialMedia">
         <div className="socialMedia__container">
           <div className="social__media__buttons">
-
             <Button
               variant="contained"
               style={{
@@ -27,24 +76,25 @@ const SocialMedia = () => {
                 fontSize: ".8rem",
               }}
               onClick={() => {
-                setImagesOrVideos(<ImagesPost />);
+                setImagesOrVideos(<ImagesPost approvedPhotos={approvedPhotos}/>);
               }}
             >
               Images
             </Button>
 
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                id="contained-button-file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Upload
-                </Button>
-              </label>
+            <div className="App">
+              {/* {image.preview && (
+                <img src={image.preview} width="100" height="100" />
+              )} */}
+              <hr></hr>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="file"
+                  name="file"
+                  onChange={handleFileChange}
+                ></input>
+                <button type="submit">Upload</button>
+              </form>
             </div>
 
             <Button
