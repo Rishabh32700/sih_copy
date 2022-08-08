@@ -5,11 +5,10 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-  Typography,
   InputLabel,
   Select,
   MenuItem,
-  Box,
+  FormHelperText,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
@@ -17,8 +16,9 @@ import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./authentication.css";
 import { useForm } from "react-hook-form";
-import { FormControl } from "react-bootstrap";
+
 import axios from "axios";
+import FormControl from "@mui/material/FormControl";
 
 const Login = () => {
   const {
@@ -27,17 +27,23 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-    const response = await axios.post(
-      "https://demoapisih.herokuapp.com/api/vvgnli/loginValidate",
-      { ...JSON.stringify({ data }) }
-    );
-    console.log(response);
-  };
-  const [age, setAge] = React.useState("");
+    const loginData = {
+      email: data.email,
+      password: data.password,
+      loginType: "2",
+    };
+    console.log(loginData);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+    try {
+      const response = await axios.post(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/login",
+        { ...loginData }
+      );
+      alert("User Login");
+      sessionStorage.setItem("userID", response.data.user.userId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -100,25 +106,25 @@ const Login = () => {
                 />
               </div>
               <div>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  fullWidth
-                  variant="outlined"
-                  defaultValue="Role"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Type"
-                  {...register("role", {
-                    required: "Type is required",
-                  })}
-                  error={errors.type}
-                  helperText={errors.type ? errors.type.message : ""}
-                >
-                  <MenuItem value={"Admin"}>Admin</MenuItem>
-                  <MenuItem value={"Regular"}>Regular</MenuItem>
-                </Select>
-
-                {console.log(errors)}
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <Select
+                    fullWidth
+                    defaultValue="Role"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Type"
+                    variant="outlined"
+                    {...register("role", {
+                      required: "Type is required",
+                    })}
+                    error={errors.type}
+                    helperText={errors.type ? errors.type.message : ""}
+                  >
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>Regular</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
             <div className="terms__and__button__container">
