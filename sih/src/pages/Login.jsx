@@ -10,7 +10,7 @@ import {
   MenuItem,
   FormHelperText,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const {
@@ -26,6 +27,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     const loginData = {
       email: data.email,
@@ -39,10 +41,32 @@ const Login = () => {
         "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/login",
         { ...loginData }
       );
-      alert("User Login");
-      sessionStorage.setItem("userID", response.data.user.userId);
+      console.log(response);
+      console.log("data", response.data);
+      if (response.data.success) {
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
   };
 
@@ -152,17 +176,10 @@ const Login = () => {
                 </Button>
               </div>
             </div>
-
-            <div className="authentication__links">
-              <p className="links">
-                <Link to="/signup">Do not have an account ?</Link>
-                <p>OR</p>
-                <Link to="/">Use as guest</Link>
-              </p>
-            </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
