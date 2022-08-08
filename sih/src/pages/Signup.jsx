@@ -92,43 +92,36 @@ const Signup = () => {
         name: data.firstName + " " + data.lastName,
         fatherName: data.fathersName,
         gender: data.gender,
-        dob: data.dob,
+        dateOfBirth: data.dob,
         religion: data.religion,
-        phone: phoneNumber,
-        username: data.userName,
-        email: data.email,
+        phoneNumber: phoneNumber,
+        userName: data.userName,
+        emailAddress: data.email,
         password: data.password,
-        address: userAddress.addressLine1 + " " + userAddress.addressLine2,
+        addressL1: userAddress.addressLine1,
+        addressL2: userAddress.addressLine2,
         city: userAddress.city,
         state: userAddress.region,
         country: userAddress.country,
-        zipcode: userAddress.zip,
-        dialCode: dialCode,
-        countryCode: countryCode,
-        countryName: countryName,
+        zipCode: userAddress.zip,
+        // dialCode: dialCode,
+        // countryCode: countryCode,
+        // countryName: countryName,
       };
       console.log(userSignIn);
-      const response = await axios.post(
-        "https://demoapisih.herokuapp.com/api/vvgnli/signup",
-        { ...JSON.stringify({ userSignIn }) }
-      );
+      try {
+        const response = await axios.post(
+          "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/signup",
+          {
+            ...userSignIn,
+          }
+        );
+        console.log(response);
+        console.log(await response.json(), "json");
+      } catch (error) {
+        console.log("error", error);
+      }
     }
-
-    // data["phoneNumber"] = phone;
-    // data["email"] = data.email;
-    // data["name"] = data.firstName + " " + data.lastName;
-
-    // const user = { user: data };
-    // console.log(data);
-
-    // axios
-    //   .post(config.server.path + config.server.port1 + config.api.signUp, user)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phone, setPhone] = useState("+91");
@@ -414,30 +407,22 @@ const Signup = () => {
                   />
                 </div>
                 <div className="ph-no__container">
-                  {/* <MuiPhoneNumber
-                    defaultCountry={"in"}
-                    onChange={(e) => handlePhnChange(e)}
-                    value={phone}
-                    error={phoneError.state}
-                    required
-                    helperText={phoneError.state ? phoneError.message : ""}
-                  /> */}
-                  <PhoneInput
-                    style={{ width: "100%", height: "100%", outline: "none" }}
-                    id="phonenumber"
-                    country={"in"}
-                    value={phoneNumber}
-                    onChange={(value, country) => {
-                      // setPhone(e)
-                      setPhoneNumber(value);
-                      // setError({ ...error, phoneError: "" });
-                      console.log("values::", value);
-                      console.log("country ====>", country);
-                      setDialCode(country.dialCode);
-                      setCountryName(country.name);
-                      setCountryCode(country.countryCode);
-                    }}
-                  />
+                  <div>
+                    <PhoneInput
+                      style={{ width: "90%", height: "100%", outline: "none" }}
+                      id="phonenumber"
+                      country={"in"}
+                      value={phoneNumber}
+                      onChange={(value, country) => {
+                        setPhoneNumber(value);
+                        console.log("values::", value);
+                        console.log("country ====>", country);
+                        setDialCode(country.dialCode);
+                        setCountryName(country.name);
+                        setCountryCode(country.countryCode);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="email__password__conatiner">
