@@ -1,21 +1,71 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ImagesPost from "./images__post/ImagesPost";
-
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
-
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import UploadSocialMediaContent from "./uploadContent/UploadSocialMediaContent";
+import axios from "axios";
+import config from "../../ApiConfig/Config";
+
+
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
+  const [approvedPhotos, setApprovedPhotos] = useState([]);
+
+
+
+  const [image, setImage] = useState({ preview: "", data: "" });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("file", image.data);
+    console.log(formData.get("file"));
+
+    const res = await axios.post(
+      config.server.path + config.api.uploadMedia,
+      formData
+    );
+    console.log("Res1", res);
+    var userFromSession = JSON.parse(sessionStorage.getItem("user"))
+    console.log(userFromSession.userId);
+    const res2 = await axios.post(
+      config.server.path +  config.api.handlePost,
+      {
+        userId: userFromSession.userId,
+        mediaIdArray: res.data.mediaIdArray,
+      }
+    );
+    console.log("Res2", res2);
+    console.log("session session",sessionStorage.getItem("user"));
+  };
+
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    setImage(img);
+  };
+
+  const getApprovedPhotos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getApprovedPhotos
+    );
+    setApprovedPhotos(res.data.approvedPhotosArray)
+    console.log(res);
+  };
+
+
+  useEffect(() => {
+    getApprovedPhotos();
+  }, []);
+
   return (
     <>
       <div className="socialMedia">
         <div className="socialMedia__container">
           <div className="social__media__buttons">
-
             <Button
               variant="contained"
               style={{
@@ -27,24 +77,25 @@ const SocialMedia = () => {
                 fontSize: ".8rem",
               }}
               onClick={() => {
-                setImagesOrVideos(<ImagesPost />);
+                setImagesOrVideos(<ImagesPost approvedPhotos={approvedPhotos}/>);
               }}
             >
               Images
             </Button>
 
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                id="contained-button-file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Upload
-                </Button>
-              </label>
+            <div className="App">
+              {/* {image.preview && (
+                <img src={image.preview} width="100" height="100" />
+              )} */}
+              <hr></hr>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="file"
+                  name="file"
+                  onChange={handleFileChange}
+                ></input>
+                <button type="submit">Upload</button>
+              </form>
             </div>
 
             <Button

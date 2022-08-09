@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,6 +17,12 @@ import { Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import { tableCellClasses } from "@mui/material/TableCell";
+import axios from "axios";
+
+import config from "../../../../ApiConfig/Config";
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -26,6 +32,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
+
+
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -37,134 +45,52 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-];
+const DashboardCommunityImages = ({ isAdmin }) => {
+  const [photos, setPhotos] = useState([]);
 
-const DashboardCommunityImages = ({isAdmin}) => {
+  const getPhotos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getPendingPhotos
+    );
+    setPhotos(res.data.pendingPhotosArray);
+    console.log(res);
+  };
+
+  const handleCancelClick = async (id) => {
+    console.log("Cancel", id);
+    const obj = {
+      mediaId: id,
+      postStatus: "2",
+    };
+    const res = await axios.get(
+      config.server.path + config.api.getPendingPhotos,
+      {
+        ...obj,
+      }
+    );
+  };
+
+  const handleDoneClick = async (id) => {
+    console.log("Done");
+    const obj = {
+      mediaId: id,
+      postStatus: "1",
+    };
+    const res = await axios.post(
+      config.server.path + config.api.updatePostStatus,
+      {
+        ...obj,
+      }
+    );
+  };
+
+  useEffect(() => {
+    getPhotos();
+  }, []);
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
-      <div className="dashboard__research__heading">
+        <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
             Images Section
           </Typography>
@@ -173,15 +99,13 @@ const DashboardCommunityImages = ({isAdmin}) => {
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
-              <TableRow>
-                  {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
+                <TableRow>
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
                   )}
-                  <StyledTableCell align="left">Category</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
+                  <StyledTableCell align="left">Media Id</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  <StyledTableCell align="left">Verified</StyledTableCell>
                   {isAdmin && (
                     <StyledTableCell align="left">Action</StyledTableCell>
                   )}
@@ -191,45 +115,50 @@ const DashboardCommunityImages = ({isAdmin}) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST.map((row, id) => (
-                  <StyledTableRow key={id}>
-                    {isAdmin && (
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                    )}
-                    {isAdmin && (
+                {photos &&
+                  photos.map((photo, id) => (
+                    <StyledTableRow key={id}>
+                      {isAdmin && (
+                        <StyledTableCell align="left">{id}</StyledTableCell>
+                      )}
                       <StyledTableCell align="left">
-                        {row.userId}
+                        2 Aptil 2020
                       </StyledTableCell>
-                    )}
-                    <StyledTableCell align="left">
-                      {row.category}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.date}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={row.postLink}>See Post</a>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.status ? "Yes" : "No"}
-                    </StyledTableCell>
-                    {isAdmin && (
-                      <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon color="action" />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon color="primary" />
-                        </Box>
-                      </StyledTableCell>
-                    )}
-                    {!isAdmin && (
                       <StyledTableCell align="left">
-                        <Button>Delete</Button>
+                        {photo.mediaId}
                       </StyledTableCell>
-                    )}
-                  </StyledTableRow>
-                ))}
+                      <StyledTableCell align="left">
+                        <a href={photo.mediaURL} target="_blank">
+                          See Post
+                        </a>
+                      </StyledTableCell>
+                      {isAdmin && (
+                        <StyledTableCell align="right">
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <CancelIcon
+                              color="action"
+                              onClick={() => {
+                                handleCancelClick(photo.mediaId);
+                              }}
+                            />
+                          </Box>
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <DoneIcon
+                              color="primary"
+                              onClick={() => {
+                                handleDoneClick(photo.mediaId);
+                              }}
+                            />
+                          </Box>
+                        </StyledTableCell>
+                      )}
+                      {!isAdmin && (
+                        <StyledTableCell align="left">
+                          <Button>Delete</Button>
+                        </StyledTableCell>
+                      )}
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

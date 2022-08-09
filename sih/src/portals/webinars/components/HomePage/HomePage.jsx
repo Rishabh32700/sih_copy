@@ -1,7 +1,6 @@
 import PastWebinarCard from "../WebinarCard/PastWebinarCard";
 import PresentWebinarCard from "../WebinarCard/PresentWebinarCard";
 import FutureWebinarCard from "../WebinarCard/FutureWebinarCard";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";

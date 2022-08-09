@@ -19,6 +19,10 @@ import { toast, ToastContainer } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
+import config from "../ApiConfig/Config";
+
+
+
 const Login = () => {
   const {
     register,
@@ -36,7 +40,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/login",
+        config.server.path + config.api.login ,
         { ...loginData }
       );
       console.log(response);
