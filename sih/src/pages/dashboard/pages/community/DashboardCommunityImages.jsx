@@ -18,6 +18,11 @@ import { styled } from "@mui/material/styles";
 
 import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
+
+import config from "../../../../ApiConfig/Config";
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -27,6 +32,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
+
+
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -38,135 +45,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-];
-
 const DashboardCommunityImages = ({ isAdmin }) => {
   const [photos, setPhotos] = useState([]);
 
   const getPhotos = async () => {
     const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
+      config.server.path + config.api.getPendingPhotos
     );
     setPhotos(res.data.pendingPhotosArray);
     console.log(res);
@@ -176,10 +60,10 @@ const DashboardCommunityImages = ({ isAdmin }) => {
     console.log("Cancel", id);
     const obj = {
       mediaId: id,
-      postStatus: "2",
+      postStatus: "2",z
     };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+    const res = await axios.get(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
       {
         ...obj,
       }
@@ -193,7 +77,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       postStatus: "1",
     };
     const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+      config.server.path + config.api.updatePostStatus,
       {
         ...obj,
       }

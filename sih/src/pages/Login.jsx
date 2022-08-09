@@ -21,6 +21,10 @@ import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import { toast, ToastContainer } from "react-toastify";
 
+import config from "../ApiConfig/Config";
+
+
+
 const Login = () => {
   const {
     register,
@@ -38,7 +42,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/login",
+        config.server.path + config.api.login ,
         { ...loginData }
       );
       console.log(response);

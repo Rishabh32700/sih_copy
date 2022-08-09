@@ -3,18 +3,22 @@ import ImagesPost from "./images__post/ImagesPost";
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import UploadSocialMediaContent from "./uploadContent/UploadSocialMediaContent";
 import axios from "axios";
+import config from "../../ApiConfig/Config";
+
+
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
   const [approvedPhotos, setApprovedPhotos] = useState([]);
 
+<<<<<<< HEAD
   const handleFileSelected = (e) => {};
+=======
+
+>>>>>>> main
 
   const [image, setImage] = useState({ preview: "", data: "" });
-  const [status, setStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,20 +27,30 @@ const SocialMedia = () => {
     console.log(formData.get("file"));
 
     const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/upload",
+      config.server.path + config.api.uploadMedia,
       formData
     );
     console.log("Res1", res);
+<<<<<<< HEAD
     const user = JSON.parse(sessionStorage.getItem("user"));
     console.log("Session user", user);
+=======
+    var userFromSession = JSON.parse(sessionStorage.getItem("user"))
+    console.log(userFromSession.userId);
+>>>>>>> main
     const res2 = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/postHandle",
+      config.server.path +  config.api.handlePost,
       {
+<<<<<<< HEAD
         userId: user.userId,
+=======
+        userId: userFromSession.userId,
+>>>>>>> main
         mediaIdArray: res.data.mediaIdArray,
       }
     );
     console.log("Res2", res2);
+    console.log("session session",sessionStorage.getItem("user"));
   };
 
   const handleFileChange = (e) => {
@@ -47,6 +61,7 @@ const SocialMedia = () => {
     setImage(img);
   };
 
+<<<<<<< HEAD
   // const getApprovedPhotos = async () => {
   //   const res = await axios.get(
   //     "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
@@ -54,6 +69,15 @@ const SocialMedia = () => {
   //   setApprovedPhotos(res.data.approvedPhotosArray)
   //   console.log(res);
   // };
+=======
+  const getApprovedPhotos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getApprovedPhotos
+    );
+    setApprovedPhotos(res.data.approvedPhotosArray)
+    console.log(res);
+  };
+>>>>>>> main
 
   // useEffect(() => {
   //   getApprovedPhotos();

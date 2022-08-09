@@ -27,6 +27,9 @@ import axios from "axios";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import config from "../ApiConfig/Config";
+
+
 
 // address class component srart
 export class ControlledAddressInput extends Component {
@@ -109,7 +112,7 @@ const Signup = () => {
       console.log(userSignIn);
       try {
         const response = await axios.post(
-          "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/signup",
+          config.server.path + config.api.signUp,
           {
             ...userSignIn,
           }
