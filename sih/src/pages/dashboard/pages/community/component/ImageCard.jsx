@@ -27,12 +27,10 @@ const ImageCard = ({ post, isAdmin }) => {
           <div className="webinar__card__webinar_info">
             <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
               <Typography gutterBottom variant="p" component="div">
-                {isAdmin ? `Name : ${post.name}` : ""} {isAdmin && <br />}
                 {isAdmin ? `User Id : ${post.userId}` : ""}
+                {isAdmin ? `User Id : ${post.mediaId}` : ""}
                 {isAdmin && <br />}
                 When : {post.date} <br />
-                Category : {post.category} <br />
-                Verified : {post.status ? "Yes" : "No"} <br />
                 <br />
               </Typography>
             </CardContent>
