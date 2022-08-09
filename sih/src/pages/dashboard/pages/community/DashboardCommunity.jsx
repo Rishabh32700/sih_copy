@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,13 +12,11 @@ import TableHead from "@mui/material/TableHead";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography, Button } from "@mui/material";
-// import Scrollbar from "./components/ScrollBar";
+import { Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import Page from "../home/Page";
-import WebinarListHead from "../webinars/components/WebinarListHead";
 import { tableCellClasses } from "@mui/material/TableCell";
+import axios from "axios";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -161,17 +159,58 @@ const RESEARCHLIST = [
     status: true,
   },
 ];
-const TABLE_HEAD = [
-  { id: "userName", label: "User Name", alignRight: false },
-  { id: "userId", label: "User Id", alignRight: false },
-  { id: "category", label: "Category", alignRight: false },
-  { id: "date", label: "Date", alignRight: false },
-  { id: "postLink", label: "Post link", alignRight: false },
-  { id: "status", label: "Verified", alignRight: false },
-  { id: "action", label: "Action", alignRight: false },
-];
 
 const DashboardCommunityVideos = ({ isAdmin }) => {
+  const [pendingVideos, setPendingVideos] = useState([]);
+  const getPendingVideos = async () => {
+    try {
+      const res = await axios.get(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingVideos"
+      );
+      setPendingVideos(res.data.pendingVideosArray);
+      console.log("Videos", res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCancelClick = async (id) => {
+    console.log("Cancel", id);
+    const obj = {
+      mediaId: id,
+      postStatus: "2",
+    };
+    try {
+      const res = await axios.post(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+        {
+          ...obj,
+        }
+      );
+      getPendingVideos();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDoneClick = async (id) => {
+    console.log("Done");
+    const obj = {
+      mediaId: id,
+      postStatus: "1",
+    };
+    const res = await axios.post(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+      {
+        ...obj,
+      }
+    );
+    getPendingVideos();
+  };
+
+  useEffect(() => {
+    getPendingVideos();
+  }, []);
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
@@ -185,14 +224,12 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
                   )}
-                  <StyledTableCell align="left">Category</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
+                  <StyledTableCell align="left">Medid Id</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  <StyledTableCell align="left">Verified</StyledTableCell>
                   {isAdmin && (
                     <StyledTableCell align="left">Action</StyledTableCell>
                   )}
@@ -202,35 +239,33 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST.map((row, id) => (
-                  <StyledTableRow key={id}>
-                    {isAdmin && (
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                    )}
+                {pendingVideos.map((video) => (
+                  <StyledTableRow key={video.mediaId}>
                     {isAdmin && (
                       <StyledTableCell align="left">
-                        {row.userId}
+                        {video.userId}
                       </StyledTableCell>
                     )}
+                    <StyledTableCell align="left">{video.date}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.category}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.date}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={row.postLink}>See Post</a>
+                      {video.mediaId}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.status ? "Yes" : "No"}
+                      <a href={video.mediaURL}>See Post</a>
                     </StyledTableCell>
                     {isAdmin && (
                       <StyledTableCell align="right">
                         <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon color="action" />
+                          <CancelIcon
+                            color="action"
+                            onClick={() => handleCancelClick(video.mediaId)}
+                          />
                         </Box>
                         <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon color="primary" />
+                          <DoneIcon
+                            color="primary"
+                            onClick={() => handleDoneClick(video.mediaId)}
+                          />
                         </Box>
                       </StyledTableCell>
                     )}

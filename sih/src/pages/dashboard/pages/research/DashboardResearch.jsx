@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,13 +11,12 @@ import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Card, Stack, Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 // import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
-import Page from "../home/Page";
-import WebinarListHead from "../webinars/components/WebinarListHead";
 import { Button } from "@material-ui/core";
+import axios from "axios";
 
 const RESEARCHLIST = [
   {
@@ -155,6 +154,58 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const DashboardResearch = ({ isAdmin }) => {
+  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
+
+  const getPendingResearchPapers = async () => {
+    try {
+      const res = await axios.get(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
+      );
+      setPendingResearchPapers(res.data.pendingResearchArray);
+      console.log("Videos", res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCancelClick = async (id) => {
+    console.log("Cancel", id);
+    const obj = {
+      mediaId: id,
+      postStatus: "2",
+    };
+    try {
+      const res = await axios.post(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+        {
+          ...obj,
+        }
+      );
+      getPendingResearchPapers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDoneClick = async (id) => {
+    console.log("Done");
+    const obj = {
+      mediaId: id,
+      postStatus: "1",
+    };
+    const res = await axios.post(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+      {
+        ...obj,
+      }
+    );
+    getPendingResearchPapers();
+  };
+
+  useEffect(() => {
+    getPendingResearchPapers();
+  }, []);
+
   return (
     <div className="dashboard__research">
       <div className="dashboard__research__container">
@@ -168,14 +219,12 @@ const DashboardResearch = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && <StyledTableCell>User Name</StyledTableCell>}
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
                   )}
-                  <StyledTableCell align="left">Category</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
+                  <StyledTableCell align="left">Media ID</StyledTableCell>
                   <StyledTableCell align="left">Paper Link</StyledTableCell>
-                  <StyledTableCell align="left">Verified</StyledTableCell>
                   {isAdmin && (
                     <StyledTableCell align="left">Action</StyledTableCell>
                   )}
@@ -185,29 +234,27 @@ const DashboardResearch = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST.map((row, id) => (
+                {pendingResearchPapers.map((pendingResearchPaper, id) => (
                   <StyledTableRow key={id}>
                     {isAdmin && (
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                    )}
-                    {isAdmin && (
                       <StyledTableCell align="left">
-                        {row.userId}
+                        {pendingResearchPaper.userId}
                       </StyledTableCell>
                     )}
                     <StyledTableCell align="left">
-                      {row.category}
+                      {pendingResearchPaper.date}
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.date}</StyledTableCell>
                     <StyledTableCell align="left">
-                      <a href={row.paperLink} target="_blank" rel="noreferrer">
+                      {pendingResearchPaper.mediaId}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <a
+                        href={pendingResearchPaper.paperLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         See Paper
                       </a>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.status ? "Yes" : "No"}
                     </StyledTableCell>
                     {isAdmin && (
                       <StyledTableCell align="right">

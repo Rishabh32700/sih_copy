@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ImagesPost from "./images__post/ImagesPost";
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
@@ -10,7 +10,6 @@ import axios from "axios";
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
   const [approvedPhotos, setApprovedPhotos] = useState([]);
-
 
   const handleFileSelected = (e) => {};
 
@@ -28,11 +27,12 @@ const SocialMedia = () => {
       formData
     );
     console.log("Res1", res);
-
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    console.log("Session user", user);
     const res2 = await axios.post(
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/postHandle",
       {
-        userId: "ea94a7bbc4f238e0",
+        userId: user.userId,
         mediaIdArray: res.data.mediaIdArray,
       }
     );
@@ -47,18 +47,17 @@ const SocialMedia = () => {
     setImage(img);
   };
 
-  const getApprovedPhotos = async () => {
-    const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
-    );
-    setApprovedPhotos(res.data.approvedPhotosArray)
-    console.log(res);
-  };
+  // const getApprovedPhotos = async () => {
+  //   const res = await axios.get(
+  //     "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+  //   );
+  //   setApprovedPhotos(res.data.approvedPhotosArray)
+  //   console.log(res);
+  // };
 
-
-  useEffect(() => {
-    getApprovedPhotos();
-  }, []);
+  // useEffect(() => {
+  //   getApprovedPhotos();
+  // }, []);
 
   return (
     <>
@@ -76,7 +75,7 @@ const SocialMedia = () => {
                 fontSize: ".8rem",
               }}
               onClick={() => {
-                setImagesOrVideos(<ImagesPost approvedPhotos={approvedPhotos}/>);
+                setImagesOrVideos(<ImagesPost />);
               }}
             >
               Images
