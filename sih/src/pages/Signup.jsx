@@ -27,8 +27,10 @@ import axios from "axios";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 // address class component srart
+
 export class ControlledAddressInput extends Component {
   constructor(props) {
     super(props);
@@ -84,6 +86,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     console.log("hello");
@@ -564,7 +567,7 @@ const Signup = () => {
                   fullWidth
                   onClick={handleSubmit(onSubmit)}
                 >
-                  Create Account
+                  {t("Create_Account_Button")}
                 </Button>
               </div>
             </div>
@@ -578,6 +581,13 @@ const Signup = () => {
         </div>
       </div>
       <ToastContainer />
+      <Button
+        onClick={() => {
+          i18next.changeLanguage("en");
+        }}
+      >
+        Change Language
+      </Button>
     </>
   );
 };

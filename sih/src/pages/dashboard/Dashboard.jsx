@@ -1,6 +1,5 @@
-import React from 'react'
-import DashboardMainContent from './main__content__dashboard/DashboardMainContent'
-import DashboardMainMenu from './main__menu__dashboard/DashboardMainMenu'
+import DashboardMainContent from "./main__content__dashboard/DashboardMainContent";
+import DashboardMainMenu from "./main__menu__dashboard/DashboardMainMenu";
 
 const Dashboard = () => {
   return (
@@ -12,7 +11,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
