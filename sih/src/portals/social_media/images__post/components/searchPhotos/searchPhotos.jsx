@@ -25,16 +25,7 @@ const SearchPhotos = ({ approvedPhotos }) => {
     setShow(false);
   };
 
-  const fetchFirst = async () => {
-    unsplash.photos.list({ perPage: 50 }).then((json) => {
-      setInitialData(json.response.results);
-      console.log(json.response.results);
-    });
-  };
 
-  useEffect(() => {
-    fetchFirst();
-  }, []);
 
   useEffect(() => {
     (async () => {

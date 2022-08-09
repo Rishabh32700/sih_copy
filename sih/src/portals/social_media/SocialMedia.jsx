@@ -3,19 +3,18 @@ import ImagesPost from "./images__post/ImagesPost";
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import UploadSocialMediaContent from "./uploadContent/UploadSocialMediaContent";
 import axios from "axios";
+import config from "../../ApiConfig/Config";
+
+
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
   const [approvedPhotos, setApprovedPhotos] = useState([]);
 
 
-  const handleFileSelected = (e) => {};
 
   const [image, setImage] = useState({ preview: "", data: "" });
-  const [status, setStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,19 +23,21 @@ const SocialMedia = () => {
     console.log(formData.get("file"));
 
     const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/upload",
+      config.server.path + config.api.uploadMedia,
       formData
     );
     console.log("Res1", res);
-
+    var userFromSession = JSON.parse(sessionStorage.getItem("user"))
+    console.log(userFromSession.userId);
     const res2 = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/postHandle",
+      config.server.path +  config.api.handlePost,
       {
-        userId: "ea94a7bbc4f238e0",
+        userId: userFromSession.userId,
         mediaIdArray: res.data.mediaIdArray,
       }
     );
     console.log("Res2", res2);
+    console.log("session session",sessionStorage.getItem("user"));
   };
 
   const handleFileChange = (e) => {
@@ -49,7 +50,7 @@ const SocialMedia = () => {
 
   const getApprovedPhotos = async () => {
     const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+      config.server.path + config.api.getApprovedPhotos
     );
     setApprovedPhotos(res.data.approvedPhotosArray)
     console.log(res);

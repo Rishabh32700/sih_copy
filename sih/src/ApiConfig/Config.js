@@ -1,17 +1,21 @@
 const config = {
     server: {
-        path: 'http://34.214.61.86',
-        port: ':5000',
-        port1: ':8085'  // login Api port
+        path: 'https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/',
+        port: ''
     },
     api: {
-        login: '/login',
-        signUp: '/user/signup',
-        getOtp: '/user/sendotp',
-        verifyOtp: '/user/verify?phoneNumber',
-        getFeature: '/features',
-        setOperator: '/operator/all',
-        forgotpassword : '/forgotpassword'
+        login: 'login',
+        signUp: 'signup',
+        
+        // getOtp: '/user/sendotp',
+        // verifyOtp: '/user/verify?phoneNumber',
+        // forgotpassword : '/forgotpassword',
+
+        uploadMedia: 'upload',
+        handlePost: 'postHandle',
+        getApprovedPhotos: 'getApprovedPhotos',
+        getPendingPhotos: 'getPendingPhotos',
+        updatePostStatus: 'updatePostStatus'
     }
 }
 export default config
