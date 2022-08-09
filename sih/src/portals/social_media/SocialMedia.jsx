@@ -10,13 +10,6 @@ import config from "../../ApiConfig/Config";
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
-  const [approvedPhotos, setApprovedPhotos] = useState([]);
-
-<<<<<<< HEAD
-  const handleFileSelected = (e) => {};
-=======
-
->>>>>>> main
 
   const [image, setImage] = useState({ preview: "", data: "" });
 
@@ -31,21 +24,14 @@ const SocialMedia = () => {
       formData
     );
     console.log("Res1", res);
-<<<<<<< HEAD
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    console.log("Session user", user);
-=======
+   
     var userFromSession = JSON.parse(sessionStorage.getItem("user"))
     console.log(userFromSession.userId);
->>>>>>> main
+
     const res2 = await axios.post(
       config.server.path +  config.api.handlePost,
       {
-<<<<<<< HEAD
-        userId: user.userId,
-=======
         userId: userFromSession.userId,
->>>>>>> main
         mediaIdArray: res.data.mediaIdArray,
       }
     );
@@ -61,27 +47,6 @@ const SocialMedia = () => {
     setImage(img);
   };
 
-<<<<<<< HEAD
-  // const getApprovedPhotos = async () => {
-  //   const res = await axios.get(
-  //     "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
-  //   );
-  //   setApprovedPhotos(res.data.approvedPhotosArray)
-  //   console.log(res);
-  // };
-=======
-  const getApprovedPhotos = async () => {
-    const res = await axios.get(
-      config.server.path + config.api.getApprovedPhotos
-    );
-    setApprovedPhotos(res.data.approvedPhotosArray)
-    console.log(res);
-  };
->>>>>>> main
-
-  // useEffect(() => {
-  //   getApprovedPhotos();
-  // }, []);
 
   return (
     <>

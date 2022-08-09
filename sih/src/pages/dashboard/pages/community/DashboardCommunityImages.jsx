@@ -60,7 +60,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
     console.log("Cancel", id);
     const obj = {
       mediaId: id,
-      postStatus: "2",z
+      postStatus: "2",
     };
     const res = await axios.get(
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
