@@ -32,7 +32,7 @@ const Login = () => {
     const loginData = {
       email: data.email,
       password: data.password,
-      loginType: "2",
+      loginType: data.role,
     };
     console.log(loginData);
 
