@@ -12,12 +12,12 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import { faShare } from '@fortawesome/free-solid-svg-icons'
 import SearchPhotos from './components/searchPhotos/searchPhotos';
 
-const ImagesPost = ({approvedPhotos}) => {
+const ImagesPost = () => {
   return (
     <>
       <div className="images__posts">
         <div className="images__posts__container">
-        <SearchPhotos approvedPhotos={approvedPhotos} />
+        <SearchPhotos  />
         </div>
       </div>
     </>

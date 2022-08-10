@@ -63,7 +63,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       postStatus: "2",
     };
     const res = await axios.get(
-      config.server.path + config.api.getPendingPhotos,
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
       {
         ...obj,
       }

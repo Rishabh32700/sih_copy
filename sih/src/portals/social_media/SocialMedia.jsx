@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ImagesPost from "./images__post/ImagesPost";
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
@@ -10,9 +10,6 @@ import config from "../../ApiConfig/Config";
 
 const SocialMedia = () => {
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
-  const [approvedPhotos, setApprovedPhotos] = useState([]);
-
-
 
   const [image, setImage] = useState({ preview: "", data: "" });
 
@@ -27,8 +24,10 @@ const SocialMedia = () => {
       formData
     );
     console.log("Res1", res);
+   
     var userFromSession = JSON.parse(sessionStorage.getItem("user"))
     console.log(userFromSession.userId);
+
     const res2 = await axios.post(
       config.server.path +  config.api.handlePost,
       {
@@ -48,18 +47,6 @@ const SocialMedia = () => {
     setImage(img);
   };
 
-  const getApprovedPhotos = async () => {
-    const res = await axios.get(
-      config.server.path + config.api.getApprovedPhotos
-    );
-    setApprovedPhotos(res.data.approvedPhotosArray)
-    console.log(res);
-  };
-
-
-  useEffect(() => {
-    getApprovedPhotos();
-  }, []);
 
   return (
     <>
@@ -77,7 +64,7 @@ const SocialMedia = () => {
                 fontSize: ".8rem",
               }}
               onClick={() => {
-                setImagesOrVideos(<ImagesPost approvedPhotos={approvedPhotos}/>);
+                setImagesOrVideos(<ImagesPost />);
               }}
             >
               Images

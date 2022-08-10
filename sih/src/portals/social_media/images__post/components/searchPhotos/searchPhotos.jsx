@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { createApi } from "unsplash-js";
 import ImageModal from "../imageModal/imageModal";
 import "./searchPhotos.css";
+import axios from "axios";
 
 const unsplash = createApi({
   accessKey: "Qy5FzE7XDnvR2rmmWz3v5wk06KoXw-DAbvNvaR6oVmw",
   // apiUrl: 'https://api.unsplash.com',
 });
 
-const SearchPhotos = ({ approvedPhotos }) => {
+const SearchPhotos = () => {
   const [query, setQuery] = useState("");
   const [pics, setPics] = useState([]);
   const [show, setShow] = useState(false);
   const [index, setindex] = useState(0);
   const [ImageCount, SetCount] = useState(15);
   const [initialData, setInitialData] = useState([]);
+  const [approvedPhotos, setApprovedPhotos] = useState([]);
 
   const showModal = (index) => {
     setindex(index);
@@ -36,6 +38,20 @@ const SearchPhotos = ({ approvedPhotos }) => {
       }
     })();
   }, [query, ImageCount, initialData]);
+
+  const getApprovedPhotos = async () => {
+    const res = await axios.get(
+      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+    );
+    setApprovedPhotos(res.data.approvedPhotosArray)
+    console.log(res);
+  };
+
+
+  useEffect(() => {
+    getApprovedPhotos();
+  }, []);
+
 
   return (
     <div className="searchPhotos">
@@ -78,7 +94,7 @@ const SearchPhotos = ({ approvedPhotos }) => {
         { approvedPhotos&& approvedPhotos.map((approvedPhoto, index) => (
           <div
             className="card"
-            key={approvedPhoto.mediaURL}
+            key={index}
             onClick={() => showModal(index)}
           >
             <img src={approvedPhoto.mediaURL} />
