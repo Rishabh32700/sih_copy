@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 
 import "./index.css";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes,useLocation, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 
 import MainRendering from "./components/main_rendering/MainRendering";
@@ -27,9 +27,9 @@ const App = () => {
   let [vvgnli_research_submenu_state, set_vvgnli_research_submenu_state] =
     useState("research");
 
-  const do_Not_Show_Menu_Bar =
-    window.location.pathname === "/login" ||
-    window.location.pathname === "/signup";
+
+    const { pathname } = useLocation();
+
   return (
     <>
       <div className="app">
@@ -48,14 +48,10 @@ const App = () => {
               set_dashboard_main_menu_state,
             }}
           >
-            {do_Not_Show_Menu_Bar ? (
-              <></>
-            ) : (
-              <>
-                <ThemeLanguageSwitcher />
-                <PortalsMenu />
-              </>
-            )}
+
+{(pathname !== "/signup" && pathname !== "/login") && <ThemeLanguageSwitcher />}
+{(pathname !== "/signup" && pathname !== "/login") && <PortalsMenu />}
+
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

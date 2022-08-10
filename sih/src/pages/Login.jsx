@@ -7,7 +7,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -29,10 +29,11 @@ const Login = () => {
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = async (data) => {
+    console.log("data", data);
     const loginData = {
       email: data.email,
       password: data.password,
-      loginType: "2",
+      loginType: `${data.role}`,
     };
     console.log(loginData);
 
@@ -80,16 +81,16 @@ const Login = () => {
               <div className="icon__class">
                 <PersonIcon />
               </div>
-              <div className="text">Sign in</div>
+              <div className="text">{t("Log_in_main_heading")}</div>
             </div>
 
             <div className="mailid__and__password__conatiner signin__mailid__and__password__conatiner">
-              <div className="email">
+              <div className="email" style={{marginTop:"1rem"}}>
                 <TextField
                   id="email"
                   type="email"
                   variant="outlined"
-                  label="Enter Email"
+                  label={t("Log_in_Enter_email")}
                   fullWidth
                   required
                   error={!!errors?.email}
@@ -104,12 +105,12 @@ const Login = () => {
                   })}
                 />
               </div>
-              <div className="password">
+              <div className="password" style={{marginTop:"1rem"}}>
                 <TextField
                   id="password"
                   type="password"
                   variant="outlined"
-                  label="Enter password"
+                  label={t("Log_in_Enter_password")}
                   fullWidth
                   error={errors.password}
                   {...register("password", {
@@ -129,12 +130,12 @@ const Login = () => {
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              <div>
+              <div style={{marginTop:"1rem"}}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t("Log_in_Role")}</InputLabel>
                   <Select
                     fullWidth
-                    defaultValue="Role"
+                    defaultValue={t("Log_in_Role")}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Type"
@@ -145,8 +146,8 @@ const Login = () => {
                     error={errors.type}
                     helperText={errors.type ? errors.type.message : ""}
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
-                    <MenuItem value={2}>Regular</MenuItem>
+                    <MenuItem value={1}>{t("Log_in_page_admin_type")}</MenuItem>
+                    <MenuItem value={2}>{t("Log_in_page_regular_type")}</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -161,9 +162,10 @@ const Login = () => {
                       name="checkedI"
                     />
                   }
-                  label="Remember me"
+                  label={t("Log_in_Remember_me")}
                 />
               </div>
+              
               <div className="create__account__button button">
                 <Button
                   variant="contained"
@@ -175,6 +177,11 @@ const Login = () => {
                   {t("Log_in_Button")}
                 </Button>
               </div>
+              <div className="authentication__links__signup">
+              <p className="links">
+                <Link to="/signup">{t("Log_in_Do_not_have_accnt")} ?</Link>
+              </p>
+            </div>
             </div>
           </div>
         </div>
