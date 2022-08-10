@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
-
 import {
   TextField,
   Button,
@@ -8,22 +6,20 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  FormHelperText,
 } from "@material-ui/core";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./authentication.css";
 import { useForm } from "react-hook-form";
-
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import { toast, ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 import config from "../ApiConfig/Config";
-
-
 
 const Login = () => {
   const {
@@ -41,10 +37,9 @@ const Login = () => {
     console.log(loginData);
 
     try {
-      const response = await axios.post(
-        config.server.path + config.api.login ,
-        { ...loginData }
-      );
+      const response = await axios.post(config.server.path + config.api.login, {
+        ...loginData,
+      });
       console.log(response);
       console.log("data", response.data);
       if (response.data.success) {
@@ -73,6 +68,7 @@ const Login = () => {
       });
     }
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -176,7 +172,7 @@ const Login = () => {
                   type="submit"
                   onClick={handleSubmit(onSubmit)}
                 >
-                  Log in
+                  {t("Log_in_Button")}
                 </Button>
               </div>
             </div>
@@ -184,6 +180,13 @@ const Login = () => {
         </div>
       </div>
       <ToastContainer />
+      <Button
+        onClick={() => {
+          i18next.changeLanguage("hi");
+        }}
+      >
+        Change Language
+      </Button>
     </>
   );
 };

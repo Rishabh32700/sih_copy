@@ -27,6 +27,9 @@ const App = () => {
   let [vvgnli_research_submenu_state, set_vvgnli_research_submenu_state] =
     useState("research");
 
+  const do_Not_Show_Menu_Bar =
+    window.location.pathname === "/login" ||
+    window.location.pathname === "/signup";
   return (
     <>
       <div className="app">
@@ -45,8 +48,14 @@ const App = () => {
               set_dashboard_main_menu_state,
             }}
           >
-            <ThemeLanguageSwitcher />
-            <PortalsMenu />
+            {do_Not_Show_Menu_Bar ? (
+              <></>
+            ) : (
+              <>
+                <ThemeLanguageSwitcher />
+                <PortalsMenu />
+              </>
+            )}
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
