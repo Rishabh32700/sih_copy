@@ -21,8 +21,6 @@ import i18next from "i18next";
 
 import config from "../ApiConfig/Config";
 
-
-
 const Login = () => {
   const {
     register,
@@ -39,10 +37,9 @@ const Login = () => {
     console.log(loginData);
 
     try {
-      const response = await axios.post(
-        config.server.path + config.api.login ,
-        { ...loginData }
-      );
+      const response = await axios.post(config.server.path + config.api.login, {
+        ...loginData,
+      });
       console.log(response);
       console.log("data", response.data);
       if (response.data.success) {
