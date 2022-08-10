@@ -12,8 +12,9 @@ import DashboardModalImages from "../pages/community/DashboardModalImages";
 const DashboardMainContent = () => {
   const myGlobalDataForDashboardMainMenu = useContext(gData);
   const user = JSON.parse(sessionStorage.getItem("user"));
-  console.log(user.role);
-  const isAdmin = user.role === 1 ? true : false;
+  // console.log(user.role);
+  // const isAdmin = user.role === 1 ? true : false;
+  const isAdmin =true;
 
   return (
     <>

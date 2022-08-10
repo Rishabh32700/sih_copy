@@ -234,45 +234,46 @@ const DashboardResearch = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingResearchPapers.map((pendingResearchPaper, id) => (
-                  <StyledTableRow key={id}>
-                    {isAdmin && (
+                {pendingResearchPapers &&
+                  pendingResearchPapers.map((pendingResearchPaper, id) => (
+                    <StyledTableRow key={id}>
+                      {isAdmin && (
+                        <StyledTableCell align="left">
+                          {pendingResearchPaper.userId}
+                        </StyledTableCell>
+                      )}
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.userId}
+                        {pendingResearchPaper.date}
                       </StyledTableCell>
-                    )}
-                    <StyledTableCell align="left">
-                      {pendingResearchPaper.date}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {pendingResearchPaper.mediaId}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a
-                        href={pendingResearchPaper.paperLink}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        See Paper
-                      </a>
-                    </StyledTableCell>
-                    {isAdmin && (
-                      <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon color="action" />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon color="primary" />
-                        </Box>
-                      </StyledTableCell>
-                    )}
-                    {!isAdmin && (
                       <StyledTableCell align="left">
-                        <Button>Delete</Button>
+                        {pendingResearchPaper.mediaId}
                       </StyledTableCell>
-                    )}
-                  </StyledTableRow>
-                ))}
+                      <StyledTableCell align="left">
+                        <a
+                          href={pendingResearchPaper.paperLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          See Paper
+                        </a>
+                      </StyledTableCell>
+                      {isAdmin && (
+                        <StyledTableCell align="right">
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <CancelIcon color="action" />
+                          </Box>
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <DoneIcon color="primary" />
+                          </Box>
+                        </StyledTableCell>
+                      )}
+                      {!isAdmin && (
+                        <StyledTableCell align="left">
+                          <Button>Delete</Button>
+                        </StyledTableCell>
+                      )}
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
