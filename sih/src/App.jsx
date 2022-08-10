@@ -48,8 +48,6 @@ const App = () => {
               set_dashboard_main_menu_state,
             }}
           >
-            {console.log(window.location.pathname, do_Not_Show_Menu_Bar)}
-
             {do_Not_Show_Menu_Bar ? (
               <></>
             ) : (
