@@ -7,8 +7,9 @@ import TableRow from "@mui/material/TableRow";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import Paper from "@mui/material/Paper";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
+
 import TableHead from "@mui/material/TableHead";
+import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
@@ -160,7 +161,7 @@ const RESEARCHLIST = [
   },
 ];
 
-const DashboardCommunityVideos = ({ isAdmin }) => {
+const UploadedVideos = () => {
   const [pendingVideos, setPendingVideos] = useState([]);
   const getPendingVideos = async () => {
     try {
@@ -224,28 +225,20 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && (
-                    <StyledTableCell align="left">User Id</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Medid Id</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  {isAdmin && (
-                    <StyledTableCell align="left">Action</StyledTableCell>
-                  )}
-                  {!isAdmin && (
-                    <StyledTableCell align="left">Delete</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">Action</StyledTableCell>
+                  <StyledTableCell align="left">Delete</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {pendingVideos.map((video) => (
                   <StyledTableRow key={video.mediaId}>
-                    {isAdmin && (
-                      <StyledTableCell align="left">
-                        {video.userId}
-                      </StyledTableCell>
-                    )}
+                    <StyledTableCell align="left">
+                      {video.userId}
+                    </StyledTableCell>
                     <StyledTableCell align="left">{video.date}</StyledTableCell>
                     <StyledTableCell align="left">
                       {video.mediaId}
@@ -253,27 +246,23 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
                     <StyledTableCell align="left">
                       <a href={video.mediaURL}>See Post</a>
                     </StyledTableCell>
-                    {isAdmin && (
-                      <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon
-                            color="action"
-                            onClick={() => handleCancelClick(video.mediaId)}
-                          />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon
-                            color="primary"
-                            onClick={() => handleDoneClick(video.mediaId)}
-                          />
-                        </Box>
-                      </StyledTableCell>
-                    )}
-                    {!isAdmin && (
-                      <StyledTableCell align="left">
-                        <Button>Delete</Button>
-                      </StyledTableCell>
-                    )}
+                    <StyledTableCell align="right">
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <CancelIcon
+                          color="action"
+                          onClick={() => handleCancelClick(video.mediaId)}
+                        />
+                      </Box>
+                      <Box component="div" sx={{ display: "inline" }}>
+                        <DoneIcon
+                          color="primary"
+                          onClick={() => handleDoneClick(video.mediaId)}
+                        />
+                      </Box>
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <Button>Delete</Button>
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -285,4 +274,4 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
   );
 };
 
-export default DashboardCommunityVideos;
+export default UploadedVideos;

@@ -145,7 +145,7 @@ const Login = () => {
                     })}
                     error={errors.type}
                     helperText={errors.type ? errors.type.message : ""}
-                  >
+                  >              
                     <MenuItem value={1}>{t("Log_in_page_admin_type")}</MenuItem>
                     <MenuItem value={2}>{t("Log_in_page_regular_type")}</MenuItem>
                   </Select>

@@ -18,10 +18,9 @@ import { styled } from "@mui/material/styles";
 
 import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
-import config from "../../../../ApiConfig/Config";
 
-
+import config from "../../../../../../ApiConfig/Config";
+import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,19 +32,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-
-
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
 }));
 
-const DashboardCommunityImages = ({ isAdmin }) => {
+const UploadedImages = () => {
   const [photos, setPhotos] = useState([]);
 
   const getPhotos = async () => {
@@ -100,27 +93,19 @@ const DashboardCommunityImages = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && (
-                    <StyledTableCell align="left">User Id</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Media Id</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  {isAdmin && (
-                    <StyledTableCell align="left">Action</StyledTableCell>
-                  )}
-                  {!isAdmin && (
-                    <StyledTableCell align="left">Delete</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">Action</StyledTableCell>
+                  <StyledTableCell align="left">Delete</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {photos &&
                   photos.map((photo, id) => (
                     <StyledTableRow key={id}>
-                      {isAdmin && (
-                        <StyledTableCell align="left">{id}</StyledTableCell>
-                      )}
+                      <StyledTableCell align="left">{id}</StyledTableCell>
                       <StyledTableCell align="left">
                         2 Aptil 2020
                       </StyledTableCell>
@@ -132,31 +117,27 @@ const DashboardCommunityImages = ({ isAdmin }) => {
                           See Post
                         </a>
                       </StyledTableCell>
-                      {isAdmin && (
-                        <StyledTableCell align="right">
-                          <Box component="div" sx={{ display: "inline" }}>
-                            <CancelIcon
-                              color="action"
-                              onClick={() => {
-                                handleCancelClick(photo.mediaId);
-                              }}
-                            />
-                          </Box>
-                          <Box component="div" sx={{ display: "inline" }}>
-                            <DoneIcon
-                              color="primary"
-                              onClick={() => {
-                                handleDoneClick(photo.mediaId);
-                              }}
-                            />
-                          </Box>
-                        </StyledTableCell>
-                      )}
-                      {!isAdmin && (
-                        <StyledTableCell align="left">
-                          <Button>Delete</Button>
-                        </StyledTableCell>
-                      )}
+                      <StyledTableCell align="right">
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <CancelIcon
+                            color="action"
+                            onClick={() => {
+                              handleCancelClick(photo.mediaId);
+                            }}
+                          />
+                        </Box>
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <DoneIcon
+                            color="primary"
+                            onClick={() => {
+                              handleDoneClick(photo.mediaId);
+                            }}
+                          />
+                        </Box>
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        <Button>Delete</Button>
+                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
               </TableBody>
@@ -168,4 +149,4 @@ const DashboardCommunityImages = ({ isAdmin }) => {
   );
 };
 
-export default DashboardCommunityImages;
+export default UploadedImages;
