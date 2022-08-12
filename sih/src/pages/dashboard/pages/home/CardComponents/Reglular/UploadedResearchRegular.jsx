@@ -3,7 +3,6 @@ import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMe
 
 const UploadedResearchRegular = () => {
   return <div>
-        <DashboardMainMenu/>
     
     UploadedResearchRegular UploadedResearchRegular</div>;
 };

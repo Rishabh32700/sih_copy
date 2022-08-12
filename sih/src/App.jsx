@@ -32,6 +32,7 @@ import DashboardResearch from "./pages/dashboard/pages/research/DashboardResearc
 import DashboardWebinar from "./pages/dashboard/pages/webinars/DashboardWebinar";
 import DashboardModalImages from "./pages/dashboard/pages/community/DashboardModalImages";
 import DashboardHome from "./pages/dashboard/pages/home/DashboardHome";
+import RegisteredUserDetails from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserDetails";
 
 export let gData = createContext();
 
@@ -83,8 +84,6 @@ const App = () => {
               <Route path="/webinar" element={<Webinars />} />
               <Route path="/research-section" element={<ResearchWork />} />
 
-
-
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="" element={<DashboardHome />} />
                 <Route path="images" element={<DashboardCommunityImages />} />
@@ -93,56 +92,60 @@ const App = () => {
                 <Route path="research" element={<DashboardResearch />} />
                 <Route path="webinars" element={<DashboardWebinar />} />
                 <Route path="imagesModal" element={<DashboardModalImages />} />
+                <Route
+                  path="home/uploadedImagesRegular"
+                  element={<UploadedImagesRegular />}
+                />
+                <Route
+                  path="home/uploadedVideosRegular"
+                  element={<UploadedVideosRegular />}
+                />
+                <Route
+                  path="home/uploadedResearchRegular"
+                  element={<UploadedResearchRegular />}
+                />
+                <Route
+                  path="home/webinarsAttendedRegular"
+                  element={<WebinarsAttendedRegular />}
+                />
+                <Route
+                  path="home/registeredWebinarsRegular"
+                  element={<RegisteredWebinarsRegular />}
+                />
+                <Route
+                  exact
+                  path="home/registerdUsers"
+                  element={<RegisteredUsers />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId"
+                  element={<RegisteredUserDetails />}
+                />
+                <Route
+                  path="home/uploadedImages"
+                  element={<UploadedImages />}
+                />
+                <Route
+                  path="home/uploadedVideos"
+                  element={<UploadedVideos />}
+                />
+                <Route
+                  path="home/uploadedResearch"
+                  element={<UploadedResearchWork />}
+                />
+                <Route
+                  path="home/webinarTillNow"
+                  element={<WebinarsTillNow />}
+                />
+                <Route
+                  path="home/activeWebinars"
+                  element={<ActiveWebinars />}
+                />
+                <Route
+                  path="home/scheduledWebinars"
+                  element={<ScheduledWebinars />}
+                />
               </Route>
-
-              <Route
-                path="/dashboard/uploadedImagesRegular"
-                element={<UploadedImagesRegular />}
-              />
-              <Route
-                path="/dashboard/uploadedVideosRegular"
-                element={<UploadedVideosRegular />}
-              />
-              <Route
-                path="/dashboard/uploadedResearchRegular"
-                element={<UploadedResearchRegular />}
-              />
-              <Route
-                path="/dashboard/webinarsAttendedRegular"
-                element={<WebinarsAttendedRegular />}
-              />
-              <Route
-                path="/dashboard/registeredWebinarsRegular"
-                element={<RegisteredWebinarsRegular />}
-              />
-              <Route
-                path="/dashboard/registerdUsers"
-                element={<RegisteredUsers />}
-              />
-              <Route
-                path="/dashboard/uploadedImages"
-                element={<UploadedImages />}
-              />
-              <Route
-                path="/dashboard/uploadedVideos"
-                element={<UploadedVideos />}
-              />
-              <Route
-                path="/dashboard/uploadedResearch"
-                element={<UploadedResearchWork />}
-              />
-              <Route
-                path="/dashboard/webinarTillNow"
-                element={<WebinarsTillNow />}
-              />
-              <Route
-                path="/dashboard/activeWebinars"
-                element={<ActiveWebinars />}
-              />
-              <Route
-                path="/dashboard/scheduledWebinars"
-                element={<ScheduledWebinars />}
-              />
             </Routes>
           </gData.Provider>
         </div>

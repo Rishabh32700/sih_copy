@@ -6,7 +6,7 @@ import "./DashboardHome.css";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
 // components
-const DashboardHome = ({ isAdmin }) => {
+const DashboardHome = ({ isAdmin=true }) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -23,13 +23,13 @@ const DashboardHome = ({ isAdmin }) => {
               </div>
               <div className="dashboard__home__card__container">
                 <div className="dashboard__home__card__list">
-                  <Grid container spacing={8}>
+                  <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} md={3}>
                       <AppWidgetSummary
                         title="Registered users"
                         total={714000}
                         icon={"ant-design:UserAddOutLined"}
-                        onClick={() => navigate("/dashboard/registerdUsers")}
+                        onClick={() => navigate("/dashboard/home/registerdUsers")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -40,7 +40,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:user-filled"}
-                        onClick={() => navigate("/dashboard/uploadedImages")}
+                        onClick={() => navigate("/dashboard/home/uploadedImages")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -51,7 +51,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1723315}
                         color="warning"
                         icon={"ant-design:video-filled"}
-                        onClick={() => navigate("/dashboard/uploadedVideos")}
+                        onClick={() => navigate("/dashboard/home/uploadedVideos")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -62,7 +62,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={234}
                         color="error"
                         icon={"ant-design:bug-filled"}
-                        onClick={() => navigate("/dashboard/uploadedResearch")}
+                        onClick={() => navigate("/dashboard/home/uploadedResearch")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -71,7 +71,7 @@ const DashboardHome = ({ isAdmin }) => {
                         title="Webinar Till Now"
                         total={714000}
                         icon={"ant-design:android-filled"}
-                        onClick={() => navigate("/dashboard/webinarTillNow")}
+                        onClick={() => navigate("/dashboard/home/webinarTillNow")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -82,7 +82,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:apple-filled"}
-                        onClick={() => navigate("/dashboard/activeWebinars")}
+                        onClick={() => navigate("/dashboard/home/activeWebinars")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -93,7 +93,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1723315}
                         color="warning"
                         icon={"ant-design:windows-filled"}
-                        onClick={() => navigate("/dashboard/scheduledWebinars")}
+                        onClick={() => navigate("/dashboard/home/scheduledWebinars")}
                         style={{ cursor: "pointer" }}
                       />
                     </Grid>
@@ -119,7 +119,7 @@ const DashboardHome = ({ isAdmin }) => {
                         total={714000}
                         icon={"ant-design:UserAddOutLined"}
                         onClick={() =>
-                          navigate("/dashboard/uploadedImagesRegular")
+                          navigate("/dashboard/home/uploadedImagesRegular")
                         }
                         style={{ cursor: "pointer" }}
                       />
@@ -132,7 +132,7 @@ const DashboardHome = ({ isAdmin }) => {
                         color="info"
                         icon={"ant-design:user-filled"}
                         onClick={() =>
-                          navigate("/dashboard/uploadedVideosRegular")
+                          navigate("/dashboard/home/uploadedVideosRegular")
                         }
                         style={{ cursor: "pointer" }}
                       />
@@ -144,7 +144,7 @@ const DashboardHome = ({ isAdmin }) => {
                         color="error"
                         icon={"ant-design:bug-filled"}
                         onClick={() =>
-                          navigate("/dashboard/uploadedResearchRegular")
+                          navigate("/dashboard/home/uploadedResearchRegular")
                         }
                         style={{ cursor: "pointer" }}
                       />
@@ -156,7 +156,7 @@ const DashboardHome = ({ isAdmin }) => {
                         color="info"
                         icon={"ant-design:apple-filled"}
                         onClick={() =>
-                          navigate("/dashboard/registeredWebinarsRegular")
+                          navigate("/dashboard/home/registeredWebinarsRegular")
                         }
                         style={{ cursor: "pointer" }}
                       />
@@ -169,7 +169,7 @@ const DashboardHome = ({ isAdmin }) => {
                         color="warning"
                         icon={"ant-design:windows-filled"}
                         onClick={() =>
-                          navigate("/dashboard/webinarsAttendedRegular")
+                          navigate("/dashboard/home/webinarsAttendedRegular")
                         }
                         style={{ cursor: "pointer" }}
                       />

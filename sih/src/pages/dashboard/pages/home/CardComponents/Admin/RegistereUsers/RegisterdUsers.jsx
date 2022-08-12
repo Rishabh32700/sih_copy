@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 import { Switch } from "antd";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -15,8 +15,8 @@ import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./registeredUser.css";
-import DashboardMainMenu from "../../../../../main__menu__dashboard/DashboardMainMenu";
 
+import { useNavigate } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,6 +37,7 @@ const ITEM_HEIGHT = 25;
 
 const RegisterdUsers = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
   const user = {
     userId: 1,
     userEmail: "abc@gmail.com",
@@ -54,7 +55,6 @@ const RegisterdUsers = () => {
   };
   return (
     <div className="dashboard__community__registered__users">
-      <DashboardMainMenu/>
       <div className="dashboard__community__list">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -170,7 +170,16 @@ const RegisterdUsers = () => {
                         },
                       }}
                     >
-                      <MenuItem onClick={handleClose}>More Info</MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          handleClose();
+                          navigate(
+                            `${user.userId}`
+                          );
+                        }}
+                      >
+                        More Info
+                      </MenuItem>
                       <MenuItem onClick={handleClose}>Delete</MenuItem>
                     </Menu>
                   </div>

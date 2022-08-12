@@ -5,7 +5,6 @@ const WebinarsAttendedRegular = () => {
   return (
     <div>
       WebinarsAttendedRegular
-      <DashboardMainMenu/>
 
     </div>
   )

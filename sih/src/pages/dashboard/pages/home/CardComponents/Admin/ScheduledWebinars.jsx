@@ -4,7 +4,6 @@ import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMe
 const ScheduledWebinars = () => {
   return (
     <div>
-        <DashboardMainMenu/>
 
       ScheduledWebinars
 ScheduledWebinars

@@ -4,7 +4,6 @@ import DashboardMainMenu from "../../../../main__menu__dashboard/DashboardMainMe
 const ActiveWebinars = () => {
   return (
     <div className="active__">
-      <DashboardMainMenu />
       ActiveWebinars ActiveWebinars webinar name departmnt starting time no of
       person in meeting
     </div>

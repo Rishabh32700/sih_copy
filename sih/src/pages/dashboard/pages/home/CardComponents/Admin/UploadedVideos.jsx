@@ -215,8 +215,6 @@ const UploadedVideos = () => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
-      <DashboardMainMenu/>
-
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
             Videos Section

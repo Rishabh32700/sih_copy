@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DashboardMainContent from "./main__content__dashboard/DashboardMainContent";
 import DashboardMainMenu from "./main__menu__dashboard/DashboardMainMenu";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,6 @@ const Dashboard = () => {
       <DashboardMainMenu />
       <div className="dashboard">
         <div className="dashboard__container">
-          {/* <DashboardMainContent /> */}
           <Outlet />
         </div>
       </div>

@@ -4,7 +4,6 @@ import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMe
 const UploadedImagesRegular = () => {
   return (
     <div>
-        <DashboardMainMenu/>
 
       Uploaded Images
     </div>
