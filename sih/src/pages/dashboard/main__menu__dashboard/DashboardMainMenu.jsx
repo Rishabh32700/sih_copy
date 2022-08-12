@@ -56,9 +56,6 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-            //   "home"
-            // );
             navigate("/dashboard");
           }}
         >
@@ -74,9 +71,6 @@ export default function DashboardMainMenu() {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              //   "images"
-              // );
             navigate("/dashboard/images");
 
             }}
@@ -86,9 +80,6 @@ export default function DashboardMainMenu() {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              //   "videos"
-              // );
             navigate("/dashboard/videos");
 
             }}
@@ -100,9 +91,6 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-            //   "research"
-            // );
             navigate("/dashboard/research");
 
           }}
@@ -114,9 +102,6 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-            //   "webinar"
-            // );
             navigate("/dashboard/webinars");
 
           }}
@@ -128,9 +113,6 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-            //   "imageModal"
-            // );
             navigate("/dashboard/imagesModal");
 
           }}
