@@ -32,7 +32,7 @@ const Login = () => {
     const loginData = {
       email: data.email,
       password: data.password,
-      loginType: "2",
+      loginType: data.role,
     };
     console.log(loginData);
 
@@ -145,8 +145,8 @@ const Login = () => {
                     error={errors.type}
                     helperText={errors.type ? errors.type.message : ""}
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
-                    <MenuItem value={2}>Regular</MenuItem>
+                    <MenuItem value="1">Admin</MenuItem>
+                    <MenuItem value="2">Regular</MenuItem>
                   </Select>
                 </FormControl>
               </div>

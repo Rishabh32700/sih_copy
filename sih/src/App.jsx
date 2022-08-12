@@ -15,18 +15,23 @@ import Webinars from "./portals/webinars/Webinars";
 import ResearchWork from "./portals/research_work/ResearchWork";
 import Dashboard from "./pages/dashboard/Dashboard";
 import UploadedImagesRegular from "./pages/dashboard/pages/home/CardComponents/Reglular/UploadedImagesRegular";
-import UploadedResearchRegular from './pages/dashboard/pages/home/CardComponents/Reglular/UploadedResearchRegular';
-import UploadedVideosRegular from './pages/dashboard/pages/home/CardComponents/Reglular/UploadedVideosRegular';
+import UploadedResearchRegular from "./pages/dashboard/pages/home/CardComponents/Reglular/UploadedResearchRegular";
+import UploadedVideosRegular from "./pages/dashboard/pages/home/CardComponents/Reglular/UploadedVideosRegular";
 import RegisteredWebinarsRegular from "./pages/dashboard/pages/home/CardComponents/Reglular/RegisteredWebinarsRegular";
 import WebinarsAttendedRegular from "./pages/dashboard/pages/home/CardComponents/Reglular/WebinarsAttendedRegular";
-import RegisteredUsers from './pages/dashboard/pages/home/CardComponents/Admin/RegisterdUsers'
+import RegisteredUsers from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisterdUsers";
 import ScheduledWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/ScheduledWebinars";
 import ActiveWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/ActiveWebinars";
 import WebinarsTillNow from "./pages/dashboard/pages/home/CardComponents/Admin/WebinarsTillNow";
 import UploadedImages from "./pages/dashboard/pages/home/CardComponents/Admin/UploadedImages";
 import UploadedVideos from "./pages/dashboard/pages/home/CardComponents/Admin/UploadedVideos";
 import UploadedResearchWork from "./pages/dashboard/pages/home/CardComponents/Admin/UploadedResearchWork";
-
+import DashboardCommunityImages from "./pages/dashboard/pages/community/DashboardCommunityImages";
+import DashboardCommunityVideos from "./pages/dashboard/pages/community/DashboardCommunity";
+import DashboardResearch from "./pages/dashboard/pages/research/DashboardResearch";
+import DashboardWebinar from "./pages/dashboard/pages/webinars/DashboardWebinar";
+import DashboardModalImages from "./pages/dashboard/pages/community/DashboardModalImages";
+import DashboardHome from "./pages/dashboard/pages/home/DashboardHome";
 
 export let gData = createContext();
 
@@ -77,19 +82,67 @@ const App = () => {
               <Route path="/community" element={<SocialMedia />} />
               <Route path="/webinar" element={<Webinars />} />
               <Route path="/research-section" element={<ResearchWork />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/dashboard/uploadedImagesRegular" element={<UploadedImagesRegular />} />
-              <Route path="/dashboard/uploadedVideosRegular" element={<UploadedVideosRegular />} />
-              <Route path="/dashboard/uploadedResearchRegular" element={<UploadedResearchRegular />} />
-              <Route path="/dashboard/webinarsAttendedRegular" element={<WebinarsAttendedRegular />} />
-              <Route path="/dashboard/registeredWebinarsRegular" element={<RegisteredWebinarsRegular />} />
-              <Route path="/dashboard/registerdUsers" element={<RegisteredUsers />} />
-              <Route path="/dashboard/uploadedImages" element={<UploadedImages />} />
-              <Route path="/dashboard/uploadedVideos" element={<UploadedVideos />} />
-              <Route path="/dashboard/uploadedResearch" element={<UploadedResearchWork />} />
-              <Route path="/dashboard/webinarTillNow" element={<WebinarsTillNow />} />
-              <Route path="/dashboard/activeWebinars" element={<ActiveWebinars/>} />
-              <Route path="/dashboard/scheduledWebinars" element={<ScheduledWebinars />} />
+
+
+
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="" element={<DashboardHome />} />
+                <Route path="images" element={<DashboardCommunityImages />} />
+                <Route path="videos" element={<DashboardCommunityVideos />} />
+                <Route path="videos" element={<DashboardCommunityVideos />} />
+                <Route path="research" element={<DashboardResearch />} />
+                <Route path="webinars" element={<DashboardWebinar />} />
+                <Route path="imagesModal" element={<DashboardModalImages />} />
+              </Route>
+
+              <Route
+                path="/dashboard/uploadedImagesRegular"
+                element={<UploadedImagesRegular />}
+              />
+              <Route
+                path="/dashboard/uploadedVideosRegular"
+                element={<UploadedVideosRegular />}
+              />
+              <Route
+                path="/dashboard/uploadedResearchRegular"
+                element={<UploadedResearchRegular />}
+              />
+              <Route
+                path="/dashboard/webinarsAttendedRegular"
+                element={<WebinarsAttendedRegular />}
+              />
+              <Route
+                path="/dashboard/registeredWebinarsRegular"
+                element={<RegisteredWebinarsRegular />}
+              />
+              <Route
+                path="/dashboard/registerdUsers"
+                element={<RegisteredUsers />}
+              />
+              <Route
+                path="/dashboard/uploadedImages"
+                element={<UploadedImages />}
+              />
+              <Route
+                path="/dashboard/uploadedVideos"
+                element={<UploadedVideos />}
+              />
+              <Route
+                path="/dashboard/uploadedResearch"
+                element={<UploadedResearchWork />}
+              />
+              <Route
+                path="/dashboard/webinarTillNow"
+                element={<WebinarsTillNow />}
+              />
+              <Route
+                path="/dashboard/activeWebinars"
+                element={<ActiveWebinars />}
+              />
+              <Route
+                path="/dashboard/scheduledWebinars"
+                element={<ScheduledWebinars />}
+              />
             </Routes>
           </gData.Provider>
         </div>

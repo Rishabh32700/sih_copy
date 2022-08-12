@@ -17,10 +17,11 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
 import { gData } from "../../../App";
-
+import { useNavigate } from "react-router-dom";
 import "./DashboardMainMenu.css";
 
 export default function DashboardMainMenu() {
+  const navigate = useNavigate();
   const myGlobalDataForDashboardMainMenu = useContext(gData);
   const [open, setOpen] = useState(true);
 
@@ -55,36 +56,17 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "home"
-            );
+            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+            //   "home"
+            // );
+            navigate("/dashboard");
           }}
         >
           <ListItemButton>
             <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
-        {/* <ListItem
-          disablePadding
-          onClick={() => {
-            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "community"
-            );
-          }}
-        >
-          <ListItemButton>
-            <ListItemText primary="Community" />
-          </ListItemButton>
-          <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="Images" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="Videos" />
-          </ListItemButton>
-        </List>
-        </ListItem> */}
-
+        
         <ListItemButton>
           <ListItemText primary="Community" />
         </ListItemButton>
@@ -92,9 +74,11 @@ export default function DashboardMainMenu() {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-                "images"
-              );
+              // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+              //   "images"
+              // );
+            navigate("/dashboard/images");
+
             }}
           >
             <ListItemText primary="Images" />
@@ -102,9 +86,11 @@ export default function DashboardMainMenu() {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-                "videos"
-              );
+              // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+              //   "videos"
+              // );
+            navigate("/dashboard/videos");
+
             }}
           >
             <ListItemText primary="Videos" />
@@ -114,9 +100,11 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "research"
-            );
+            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+            //   "research"
+            // );
+            navigate("/dashboard/research");
+
           }}
         >
           <ListItemButton>
@@ -126,9 +114,11 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "webinar"
-            );
+            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+            //   "webinar"
+            // );
+            navigate("/dashboard/webinars");
+
           }}
         >
           <ListItemButton>
@@ -138,9 +128,11 @@ export default function DashboardMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
-              "imageModal"
-            );
+            // myGlobalDataForDashboardMainMenu.set_dashboard_main_menu_state(
+            //   "imageModal"
+            // );
+            navigate("/dashboard/imagesModal");
+
           }}
         >
           <ListItemButton>

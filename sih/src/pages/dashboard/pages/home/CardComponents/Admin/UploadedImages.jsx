@@ -20,6 +20,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
 
 import config from "../../../../../../ApiConfig/Config";
+import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,10 +35,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
   },
 }));
 
@@ -86,6 +83,7 @@ const UploadedImages = () => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
+        <DashboardMainMenu/>
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
             Images Section

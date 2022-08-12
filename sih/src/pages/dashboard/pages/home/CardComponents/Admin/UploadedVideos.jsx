@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import Paper from "@mui/material/Paper";
 
 import TableHead from "@mui/material/TableHead";
+import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
@@ -214,6 +215,8 @@ const UploadedVideos = () => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
+      <DashboardMainMenu/>
+
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
             Videos Section

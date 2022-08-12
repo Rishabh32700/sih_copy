@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import "./DashboardCommunity.css";
 import ImageCard from "./component/ImageCard";
 import axios from "axios";
+import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
 const IMAGELIST = [
   {
     name: "Frozen yoghurt",
