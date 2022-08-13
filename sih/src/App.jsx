@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 
 import "./index.css";
 
-import { Routes,useLocation, Route } from "react-router-dom";
+import { Routes, useLocation, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 
 import MainRendering from "./components/main_rendering/MainRendering";
@@ -37,6 +37,8 @@ import RegisteredUserDetails from "./pages/dashboard/pages/home/CardComponents/A
 export let gData = createContext();
 
 const App = () => {
+  const location = useLocation();
+  console.log(location);
   let [state, setState] = useState(1);
   let [vvgnli_main_menu_state, set_vvgnli_main_menu_state] = useState("home");
   let [dashboard_main_menu_state, set_dashboard_main_menu_state] =
@@ -46,8 +48,7 @@ const App = () => {
   let [vvgnli_research_submenu_state, set_vvgnli_research_submenu_state] =
     useState("research");
 
-
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -67,9 +68,10 @@ const App = () => {
               set_dashboard_main_menu_state,
             }}
           >
-
-{(pathname !== "/signup" && pathname !== "/login") && <ThemeLanguageSwitcher />}
-{(pathname !== "/signup" && pathname !== "/login") && <PortalsMenu />}
+            {pathname !== "/signup" && pathname !== "/login" && (
+              <ThemeLanguageSwitcher />
+            )}
+            {pathname !== "/signup" && pathname !== "/login" && <PortalsMenu />}
 
             <Routes>
               <Route path="/login" element={<Login />} />

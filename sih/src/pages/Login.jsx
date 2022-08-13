@@ -7,7 +7,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -58,7 +58,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message, {
+      toast.error(error.response.data.message || error.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -85,7 +85,7 @@ const Login = () => {
             </div>
 
             <div className="mailid__and__password__conatiner signin__mailid__and__password__conatiner">
-              <div className="email" style={{marginTop:"1rem"}}>
+              <div className="email" style={{ marginTop: "1rem" }}>
                 <TextField
                   id="email"
                   type="email"
@@ -105,7 +105,7 @@ const Login = () => {
                   })}
                 />
               </div>
-              <div className="password" style={{marginTop:"1rem"}}>
+              <div className="password" style={{ marginTop: "1rem" }}>
                 <TextField
                   id="password"
                   type="password"
@@ -130,9 +130,11 @@ const Login = () => {
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              <div style={{marginTop:"1rem"}}>
+              <div style={{ marginTop: "1rem" }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">{t("Log_in_Role")}</InputLabel>
+                  <InputLabel id="demo-simple-select-label">
+                    {t("Log_in_Role")}
+                  </InputLabel>
                   <Select
                     fullWidth
                     defaultValue={t("Log_in_Role")}
@@ -145,9 +147,11 @@ const Login = () => {
                     })}
                     error={errors.type}
                     helperText={errors.type ? errors.type.message : ""}
-                  >              
+                  >
                     <MenuItem value={1}>{t("Log_in_page_admin_type")}</MenuItem>
-                    <MenuItem value={2}>{t("Log_in_page_regular_type")}</MenuItem>
+                    <MenuItem value={2}>
+                      {t("Log_in_page_regular_type")}
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -165,7 +169,7 @@ const Login = () => {
                   label={t("Log_in_Remember_me")}
                 />
               </div>
-              
+
               <div className="create__account__button button">
                 <Button
                   variant="contained"
@@ -178,22 +182,15 @@ const Login = () => {
                 </Button>
               </div>
               <div className="authentication__links__signup">
-              <p className="links">
-                <Link to="/signup">{t("Log_in_Do_not_have_accnt")} ?</Link>
-              </p>
-            </div>
+                <p className="links">
+                  <Link to="/signup">{t("Log_in_Do_not_have_accnt")} ?</Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <ToastContainer />
-      <Button
-        onClick={() => {
-          i18next.changeLanguage("hi");
-        }}
-      >
-        Change Language
-      </Button>
     </>
   );
 };

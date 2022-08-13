@@ -15,16 +15,7 @@ i18n
   .init({
     fallbackLng: "en",
     detection: {
-      order: [
-        "cookie",
-        // "querystring",
-        // "localStorage",
-        // "sessionStorage",
-        // "navigator",
-        // "htmlTag",
-        // "path",
-        // "subdomain",
-      ],
+      order: ["cookie"],
       caches: ["cookie"],
     },
     backend: {

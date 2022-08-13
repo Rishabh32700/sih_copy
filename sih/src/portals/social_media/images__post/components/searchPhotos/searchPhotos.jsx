@@ -3,6 +3,7 @@ import { createApi } from "unsplash-js";
 import ImageModal from "../imageModal/imageModal";
 import "./searchPhotos.css";
 import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
 
 const unsplash = createApi({
   accessKey: "Qy5FzE7XDnvR2rmmWz3v5wk06KoXw-DAbvNvaR6oVmw",
@@ -26,8 +27,7 @@ const SearchPhotos = () => {
   const hideModal = () => {
     setShow(false);
   };
-
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -40,19 +40,20 @@ const SearchPhotos = () => {
   }, [query, ImageCount, initialData]);
 
   const getApprovedPhotos = async () => {
+    setLoading(true);
     const res = await axios.get(
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
     );
-    setApprovedPhotos(res.data.approvedPhotosArray)
+    setApprovedPhotos(res.data.approvedPhotosArray);
     console.log(res);
+    setLoading(false);
   };
-
 
   useEffect(() => {
     getApprovedPhotos();
   }, []);
 
-
+  console.log(loading);
   return (
     <div className="searchPhotos">
       {/* <ImageModal show={show} handleClose={hideModal}>
@@ -89,18 +90,19 @@ const SearchPhotos = () => {
           </div>
         )}
       </ImageModal> */}
-
-      <div className="card-list">
-        { approvedPhotos&& approvedPhotos.map((approvedPhoto, index) => (
-          <div
-            className="card"
-            key={index}
-            onClick={() => showModal(index)}
-          >
-            <img src={approvedPhoto.mediaURL} />
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <div className="loaderContainer">
+          <CircularProgress />
+        </div>
+      ) : (
+        <div className="card-list">
+          {approvedPhotos.map((approvedPhoto, index) => (
+            <div className="card" key={index} onClick={() => showModal(index)}>
+              <img src={approvedPhoto.mediaURL} alt="images" />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

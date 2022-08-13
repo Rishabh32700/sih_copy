@@ -583,13 +583,6 @@ const Signup = () => {
         </div>
       </div>
       <ToastContainer />
-      <Button
-        onClick={() => {
-          i18next.changeLanguage("en");
-        }}
-      >
-        Change Language
-      </Button>
     </>
   );
 };
