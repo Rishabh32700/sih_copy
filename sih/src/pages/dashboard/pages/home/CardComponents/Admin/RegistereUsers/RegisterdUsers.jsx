@@ -173,9 +173,7 @@ const RegisterdUsers = () => {
                       <MenuItem
                         onClick={() => {
                           handleClose();
-                          navigate(
-                            `${user.userId}`
-                          );
+                          navigate(`${user.userId}`);
                         }}
                       >
                         More Info
