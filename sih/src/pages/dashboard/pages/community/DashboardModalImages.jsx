@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import "./DashboardCommunity.css";
-import ImageCard from "./component/ImageCard";
+import ImageCard from "./components/ImageCard";
 import axios from "axios";
 import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
 const IMAGELIST = [

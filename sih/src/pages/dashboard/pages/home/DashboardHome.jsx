@@ -6,8 +6,9 @@ import "./DashboardHome.css";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
 // components
-const DashboardHome = ({ isAdmin=true }) => {
+const DashboardHome = ({  }) => {
   const theme = useTheme();
+  const isAdmin=true;
   const navigate = useNavigate();
 
   return (

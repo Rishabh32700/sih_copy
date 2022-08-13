@@ -1,148 +1,210 @@
 import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import DoneIcon from "@mui/icons-material/Done";
-import Box from "@material-ui/core/Box";
-import Paper from "@mui/material/Paper";
-
-import TableHead from "@mui/material/TableHead";
-
-import CancelIcon from "@mui/icons-material/Cancel";
-// material
+import { Grid } from "@mui/material";
+import ImageCard from "./ImageCard";
 import { Typography, Button } from "@mui/material";
-// import Scrollbar from "./components/ScrollBar";
-import { styled } from "@mui/material/styles";
-
-import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
+import AppWidgetSummary from "../../AppWidgetSummary";
 
-import config from "../../../../../../ApiConfig/Config";
-import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+const IMAGELIST = [
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
   },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
   },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: false,
   },
-}));
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    postLink:
+      "https://www.constructionweekonline.in/cloud/2021/11/24/Kl6SWhqw-IIT-ISM-Dhanbad-1.png",
+    status: true,
+  },
+];
 
 const UploadedImages = () => {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState(IMAGELIST);
 
-  const getPhotos = async () => {
-    const res = await axios.get(
-      config.server.path + config.api.getPendingPhotos
-    );
-    setPhotos(res.data.pendingPhotosArray);
-    console.log(res);
-  };
-
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
-      {
-        ...obj,
-      }
-    );
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      config.server.path + config.api.updatePostStatus,
-      {
-        ...obj,
-      }
-    );
-  };
+  // const getPhotos = async () => {
+  //   const res = await axios.get(
+  //     config.server.path + config.api.getPendingPhotos
+  //   );
+  //   setPhotos(res.data.pendingPhotosArray);
+  //   console.log(res);
+  // };
 
   useEffect(() => {
-    getPhotos();
+    // getPhotos();
   }, []);
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Images Section
+            Images Section Modal
           </Typography>
         </div>
-        <div className="dashboard__community__list">
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="left">User Id</StyledTableCell>
-                  <StyledTableCell align="left">Date</StyledTableCell>
-                  <StyledTableCell align="left">Media Id</StyledTableCell>
-                  <StyledTableCell align="left">Post Link</StyledTableCell>
-                  <StyledTableCell align="left">Action</StyledTableCell>
-                  <StyledTableCell align="left">Delete</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {photos &&
-                  photos.map((photo, id) => (
-                    <StyledTableRow key={id}>
-                      <StyledTableCell align="left">{id}</StyledTableCell>
-                      <StyledTableCell align="left">
-                        2 Aptil 2020
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {photo.mediaId}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        <a href={photo.mediaURL} target="_blank">
-                          See Post
-                        </a>
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon
-                            color="action"
-                            onClick={() => {
-                              handleCancelClick(photo.mediaId);
-                            }}
-                          />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon
-                            color="primary"
-                            onClick={() => {
-                              handleDoneClick(photo.mediaId);
-                            }}
-                          />
-                        </Box>
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        <Button>Delete</Button>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+        <div className="uploaded__images__count">
+          <Grid container spacing={6}>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Total Images Uploaded"
+                total={714000}
+                icon={"ant-design:UserAddOutLined"}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Approved Images"
+                total={1352831}
+                color="info"
+                icon={"ant-design:user-filled"}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Rejected Images"
+                total={1723315}
+                color="warning"
+                icon={"ant-design:video-filled"}
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className="uploaded__images__card">
+          <Grid container spacing={3}>
+            {photos &&
+              photos.map((post, id) => (
+                <Grid item xs={12} sm={6} md={4}>
+                  <ImageCard post={post} key={id} />
+                </Grid>
+              ))}
+          </Grid>
         </div>
       </div>
     </div>
