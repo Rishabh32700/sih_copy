@@ -3,9 +3,6 @@
     width: 100%;
 }
 .dashboard__webinar__list{
-    /* height: 100%;
-    display: flex;
-    overflow: scroll; */
     padding-bottom: 10px;
 }
 .dashboard__webinar__container{

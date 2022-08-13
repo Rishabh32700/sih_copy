@@ -3,10 +3,12 @@ import { useTheme } from "@mui/material/styles";
 import { Grid, Container, Typography } from "@mui/material";
 import AppWidgetSummary from "./AppWidgetSummary";
 import "./DashboardHome.css";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 
 // components
-const DashboardHome = ({ isAdmin }) => {
+const DashboardHome = ({ isAdmin=true }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <div className="dashboard__home">
@@ -21,12 +23,14 @@ const DashboardHome = ({ isAdmin }) => {
               </div>
               <div className="dashboard__home__card__container">
                 <div className="dashboard__home__card__list">
-                  <Grid container spacing={8}>
+                  <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} md={3}>
                       <AppWidgetSummary
-                        title="Regstered user"
+                        title="Registered users"
                         total={714000}
                         icon={"ant-design:UserAddOutLined"}
+                        onClick={() => navigate("/dashboard/home/registerdUsers")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -36,6 +40,8 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:user-filled"}
+                        onClick={() => navigate("/dashboard/home/uploadedImages")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -45,6 +51,8 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1723315}
                         color="warning"
                         icon={"ant-design:video-filled"}
+                        onClick={() => navigate("/dashboard/home/uploadedVideos")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -54,6 +62,8 @@ const DashboardHome = ({ isAdmin }) => {
                         total={234}
                         color="error"
                         icon={"ant-design:bug-filled"}
+                        onClick={() => navigate("/dashboard/home/uploadedResearch")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
@@ -61,6 +71,8 @@ const DashboardHome = ({ isAdmin }) => {
                         title="Webinar Till Now"
                         total={714000}
                         icon={"ant-design:android-filled"}
+                        onClick={() => navigate("/dashboard/home/webinarTillNow")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -70,6 +82,8 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:apple-filled"}
+                        onClick={() => navigate("/dashboard/home/activeWebinars")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -79,6 +93,8 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1723315}
                         color="warning"
                         icon={"ant-design:windows-filled"}
+                        onClick={() => navigate("/dashboard/home/scheduledWebinars")}
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
                   </Grid>
@@ -86,6 +102,7 @@ const DashboardHome = ({ isAdmin }) => {
               </div>
             </div>
           )}
+
           {!isAdmin && (
             <div className="dashboard__home__container__regular">
               <div className="dashboard__home--heading">
@@ -101,6 +118,10 @@ const DashboardHome = ({ isAdmin }) => {
                         title="Images Uploaded"
                         total={714000}
                         icon={"ant-design:UserAddOutLined"}
+                        onClick={() =>
+                          navigate("/dashboard/home/uploadedImagesRegular")
+                        }
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
@@ -110,6 +131,10 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:user-filled"}
+                        onClick={() =>
+                          navigate("/dashboard/home/uploadedVideosRegular")
+                        }
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
@@ -118,6 +143,10 @@ const DashboardHome = ({ isAdmin }) => {
                         total={234}
                         color="error"
                         icon={"ant-design:bug-filled"}
+                        onClick={() =>
+                          navigate("/dashboard/home/uploadedResearchRegular")
+                        }
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
@@ -126,15 +155,23 @@ const DashboardHome = ({ isAdmin }) => {
                         total={1352831}
                         color="info"
                         icon={"ant-design:apple-filled"}
+                        onClick={() =>
+                          navigate("/dashboard/home/registeredWebinarsRegular")
+                        }
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
                       <AppWidgetSummary
-                        title="Scheduled Webinars"
+                        title="Webinars Attended"
                         total={1723315}
                         color="warning"
                         icon={"ant-design:windows-filled"}
+                        onClick={() =>
+                          navigate("/dashboard/home/webinarsAttendedRegular")
+                        }
+                        style={{ cursor: "pointer" }}
                       />
                     </Grid>
                   </Grid>

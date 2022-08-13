@@ -4,19 +4,136 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
+import TableHead from "@mui/material/TableHead";
+import Paper from "@mui/material/Paper";
+// import "./DashboardResearch.css";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
-import Paper from "@mui/material/Paper";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
-import TableHead from "@mui/material/TableHead";
-
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Typography, Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
-
+import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
+// import Scrollbar from "./components/ScrollBar";
+import { styled } from "@mui/material/styles";
+import { Button } from "@material-ui/core";
 import axios from "axios";
+import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
+
+const RESEARCHLIST = [
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: false,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+  {
+    name: "Frozen yoghurt",
+    userId: "aasd-fghj-asd",
+    date: "Thu Sep 03 2020 08:21:14",
+    category: "Ashley Jacobson",
+    paperLink: "https://google.com",
+    status: true,
+  },
+];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,137 +154,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    postLink: "https://google.com",
-    status: true,
-  },
-];
+const UploadedResearchWork = () => {
+  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
 
-const DashboardCommunityVideos = ({ isAdmin }) => {
-  const [pendingVideos, setPendingVideos] = useState([]);
-  const getPendingVideos = async () => {
+  const getPendingResearchPapers = async () => {
     try {
       const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingVideos"
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
       );
-      setPendingVideos(res.data.pendingVideosArray);
+      setPendingResearchPapers(res.data.pendingResearchArray);
       console.log("Videos", res);
     } catch (error) {
       console.log(error);
@@ -187,7 +182,7 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
           ...obj,
         }
       );
-      getPendingVideos();
+      getPendingResearchPapers();
     } catch (error) {
       console.log(error);
     }
@@ -205,77 +200,65 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
         ...obj,
       }
     );
-    getPendingVideos();
+    getPendingResearchPapers();
   };
 
   useEffect(() => {
-    getPendingVideos();
+    getPendingResearchPapers();
   }, []);
+
   return (
-    <div className="dashboard__community">
-      <div className="dashboard__community__container">
+    <div className="dashboard__research">
+      <div className="dashboard__research__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Videos Section
+            Research Section
           </Typography>
         </div>
-        <div className="dashboard__community__list">
+        <div className="dashboard__research__table">
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && (
-                    <StyledTableCell align="left">User Id</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
-                  <StyledTableCell align="left">Medid Id</StyledTableCell>
-                  <StyledTableCell align="left">Post Link</StyledTableCell>
-                  {isAdmin && (
-                    <StyledTableCell align="left">Action</StyledTableCell>
-                  )}
-                  {!isAdmin && (
-                    <StyledTableCell align="left">Delete</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">Media ID</StyledTableCell>
+                  <StyledTableCell align="left">Paper Link</StyledTableCell>
+                  <StyledTableCell align="left">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingVideos.map((video) => (
-                  <StyledTableRow key={video.mediaId}>
-                    {isAdmin && (
+                {pendingResearchPapers &&
+                  pendingResearchPapers.map((pendingResearchPaper, id) => (
+                    <StyledTableRow key={id}>
                       <StyledTableCell align="left">
-                        {video.userId}
+                        {pendingResearchPaper.userId}
                       </StyledTableCell>
-                    )}
-                    <StyledTableCell align="left">{video.date}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {video.mediaId}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={video.mediaURL}>See Post</a>
-                    </StyledTableCell>
-                    {isAdmin && (
+                      <StyledTableCell align="left">
+                        {pendingResearchPaper.date}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {pendingResearchPaper.mediaId}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        <a
+                          href={pendingResearchPaper.paperLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          See Paper
+                        </a>
+                      </StyledTableCell>
                       <StyledTableCell align="right">
                         <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon
-                            color="action"
-                            onClick={() => handleCancelClick(video.mediaId)}
-                          />
+                          <CancelIcon color="action" />
                         </Box>
                         <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon
-                            color="primary"
-                            onClick={() => handleDoneClick(video.mediaId)}
-                          />
+                          <DoneIcon color="primary" />
                         </Box>
                       </StyledTableCell>
-                    )}
-                    {!isAdmin && (
-                      <StyledTableCell align="left">
-                        <Button>Delete</Button>
-                      </StyledTableCell>
-                    )}
-                  </StyledTableRow>
-                ))}
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -285,4 +268,4 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
   );
 };
 
-export default DashboardCommunityVideos;
+export default UploadedResearchWork;
