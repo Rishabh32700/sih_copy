@@ -6,24 +6,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-// import "./DashboardResearch.css";
-import DoneIcon from "@mui/icons-material/Done";
-import Box from "@material-ui/core/Box";
-import CancelIcon from "@mui/icons-material/Cancel";
-// material
 import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
-// import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
 
 const RESEARCHLIST = [
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -32,6 +26,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -41,6 +37,8 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
@@ -48,6 +46,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -56,6 +56,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -65,12 +67,16 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
+    mediaId: "adasfffsaddda.jpg",
+
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
@@ -80,6 +86,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -228,8 +236,8 @@ const UploadedResearchWork = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingResearchPapers &&
-                  pendingResearchPapers.map((pendingResearchPaper, id) => (
+                {RESEARCHLIST &&
+                  RESEARCHLIST.map((pendingResearchPaper, id) => (
                     <StyledTableRow key={id}>
                       <StyledTableCell align="left">
                         {pendingResearchPaper.userId}
@@ -250,12 +258,7 @@ const UploadedResearchWork = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon color="action" />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon color="primary" />
-                        </Box>
+                        <Button>Delete</Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

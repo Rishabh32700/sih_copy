@@ -5,12 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Grid } from "@mui/material";
 const ImageCard = ({ post, isAdmin }) => {
   return (
     <div className="webinar__card">

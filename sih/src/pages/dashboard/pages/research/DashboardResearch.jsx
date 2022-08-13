@@ -147,10 +147,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
 }));
 
 const DashboardResearch = ({ isAdmin }) => {
@@ -162,7 +158,7 @@ const DashboardResearch = ({ isAdmin }) => {
         "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
       );
       setPendingResearchPapers(res.data.pendingResearchArray);
-      console.log("Videos", res);
+      console.log("Research", res);
     } catch (error) {
       console.log(error);
     }

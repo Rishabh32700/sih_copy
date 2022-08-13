@@ -239,7 +239,7 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingVideos.map((video) => (
+                {pendingVideos && pendingVideos.map((video) => (
                   <StyledTableRow key={video.mediaId}>
                     {isAdmin && (
                       <StyledTableCell align="left">
