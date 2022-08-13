@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 
 import "./index.css";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Signup from "./pages/Signup";
 
 import MainRendering from "./components/main_rendering/MainRendering";
@@ -18,6 +18,8 @@ import Dashboard from "./pages/dashboard/Dashboard";
 export let gData = createContext();
 
 const App = () => {
+  const location = useLocation();
+  console.log(location);
   let [state, setState] = useState(1);
   let [vvgnli_main_menu_state, set_vvgnli_main_menu_state] = useState("home");
   let [dashboard_main_menu_state, set_dashboard_main_menu_state] =
@@ -28,8 +30,7 @@ const App = () => {
     useState("research");
 
   const do_Not_Show_Menu_Bar =
-    window.location.pathname === "/login" ||
-    window.location.pathname === "/signup";
+    location.pathname === "/login" || location.pathname === "/signup";
   return (
     <>
       <div className="app">

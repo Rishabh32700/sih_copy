@@ -12,7 +12,7 @@ import TableHead from "@mui/material/TableHead";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 // material
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, CircularProgress } from "@mui/material";
 // import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 
@@ -20,8 +20,6 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
 
 import config from "../../../../ApiConfig/Config";
-
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,8 +30,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
-
-
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -47,13 +43,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const DashboardCommunityImages = ({ isAdmin }) => {
   const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getPhotos = async () => {
+    setLoading(true);
     const res = await axios.get(
       config.server.path + config.api.getPendingPhotos
     );
     setPhotos(res.data.pendingPhotosArray);
     console.log(res);
+    setLoading(false);
   };
 
   const handleCancelClick = async (id) => {
@@ -115,7 +114,9 @@ const DashboardCommunityImages = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {photos &&
+                {loading ? (
+                  <CircularProgress />
+                ) : (
                   photos.map((photo, id) => (
                     <StyledTableRow key={id}>
                       {isAdmin && (
@@ -158,7 +159,8 @@ const DashboardCommunityImages = ({ isAdmin }) => {
                         </StyledTableCell>
                       )}
                     </StyledTableRow>
-                  ))}
+                  ))
+                )}
               </TableBody>
             </Table>
           </TableContainer>

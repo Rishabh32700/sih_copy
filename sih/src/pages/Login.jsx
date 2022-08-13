@@ -57,7 +57,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message, {
+      toast.error(error.response.data.message || error.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -145,8 +145,8 @@ const Login = () => {
                     error={errors.type}
                     helperText={errors.type ? errors.type.message : ""}
                   >
-                    <MenuItem value={1}>Admin</MenuItem>
-                    <MenuItem value={2}>Regular</MenuItem>
+                    <MenuItem value="1">Admin</MenuItem>
+                    <MenuItem value="2">Regular</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -180,13 +180,6 @@ const Login = () => {
         </div>
       </div>
       <ToastContainer />
-      <Button
-        onClick={() => {
-          i18next.changeLanguage("hi");
-        }}
-      >
-        Change Language
-      </Button>
     </>
   );
 };
