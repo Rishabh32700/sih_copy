@@ -3,9 +3,10 @@ import { useTheme } from "@mui/material/styles";
 import { Grid, Container, Typography } from "@mui/material";
 import AppWidgetSummary from "../../../AppWidgetSummary";
 import "../../../DashboardHome.css";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate,useParams } from "react-router-dom";
 
 const RegisteredUserDetails = () => {
+  const { userId} = useParams()
   const theme = useTheme();
   const navigate = useNavigate();
   return (
@@ -25,7 +26,7 @@ const RegisteredUserDetails = () => {
                   total={1352831}
                   color="info"
                   icon={"ant-design:user-filled"}
-                  onClick={() => navigate("/dashboard/home/uploadedImages")}
+                  onClick={() => navigate(`/dashboard/home/registerdUsers/${userId}/uploadedImages`)}
                   style={{ cursor: "pointer" }}
                 />
               </Grid>
@@ -36,7 +37,7 @@ const RegisteredUserDetails = () => {
                   total={1723315}
                   color="warning"
                   icon={"ant-design:video-filled"}
-                  onClick={() => navigate("/dashboard/home/uploadedVideos")}
+                  onClick={() => navigate(`/dashboard/home/registerdUsers/${userId}/uploadedVideos`)}
                   style={{ cursor: "pointer" }}
                 />
               </Grid>
@@ -47,7 +48,7 @@ const RegisteredUserDetails = () => {
                   total={234}
                   color="error"
                   icon={"ant-design:bug-filled"}
-                  onClick={() => navigate("/dashboard/home/uploadedResearch")}
+                  onClick={() => navigate(`/dashboard/home/registerdUsers/${userId}/uploadedResearch`)}
                   style={{ cursor: "pointer" }}
                 />
               </Grid>
@@ -57,7 +58,7 @@ const RegisteredUserDetails = () => {
                   total={1352831}
                   color="info"
                   icon={"ant-design:apple-filled"}
-                  onClick={() => navigate("/dashboard/home/activeWebinars")}
+                  onClick={() => navigate(`/dashboard/home/registerdUsers/${userId}/registeredWebinars`)}
                   style={{ cursor: "pointer" }}
                 />
               </Grid>
@@ -68,7 +69,7 @@ const RegisteredUserDetails = () => {
                   total={1723315}
                   color="warning"
                   icon={"ant-design:windows-filled"}
-                  onClick={() => navigate("/dashboard/home/scheduledWebinars")}
+                  onClick={() => navigate(`/dashboard/home/registerdUsers/${userId}/scheduledWebinars`)}
                   style={{ cursor: "pointer" }}
                 />
               </Grid>
