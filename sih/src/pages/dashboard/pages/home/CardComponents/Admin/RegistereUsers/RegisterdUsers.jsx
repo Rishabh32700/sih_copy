@@ -67,26 +67,6 @@ const RegisterdUsers = () => {
                 <StyledTableCell align="left">Action</StyledTableCell>
               </TableRow>
             </TableHead>
-            {/* <TableBody>
-              {photos &&
-                photos.map((photo, id) => (
-                  <StyledTableRow key={id}>
-                    <StyledTableCell align="left">{id}</StyledTableCell>
-                    <StyledTableCell align="left">2 Aptil 2020</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {photo.mediaId}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={photo.mediaURL} target="_blank">
-                        See Post
-                      </a>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <Button>Delete</Button>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody> */}
             <TableBody>
               <StyledTableRow key={user.userId}>
                 <StyledTableCell align="left">{user.userId}</StyledTableCell>
