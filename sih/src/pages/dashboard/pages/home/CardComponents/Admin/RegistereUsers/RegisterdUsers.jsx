@@ -93,7 +93,8 @@ const RegisterdUsers = () => {
                 <StyledTableCell align="left">{user.userEmail}</StyledTableCell>
                 <StyledTableCell align="left">{user.userName}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <Switch
+                  <Switch 
+                  style={{ width:"80px"}}
                     checkedChildren="Admin"
                     unCheckedChildren="Regular"
                     defaultChecked
@@ -138,6 +139,7 @@ const RegisterdUsers = () => {
                 <StyledTableCell align="left">{user.userName}</StyledTableCell>
                 <StyledTableCell align="left">
                   <Switch
+                  style={{ width:"80px"}}
                     checkedChildren="Admin"
                     unCheckedChildren="Regular"
                     defaultChecked

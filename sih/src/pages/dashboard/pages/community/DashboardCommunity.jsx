@@ -158,9 +158,21 @@ const RESEARCHLIST = [
     postLink: "https://google.com",
     status: true,
   },
-];
+]
 
 const DashboardCommunityVideos = ({ isAdmin }) => {
+
+  var isAdmin = false
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userRoleFromSession.role);
+    if(userRoleFromSession.role === 1){
+      isAdmin = true
+    }else if(userRoleFromSession.role ===2){
+      isAdmin = false
+    }
+    console.log(isAdmin);
+
+
   const [pendingVideos, setPendingVideos] = useState([]);
   const getPendingVideos = async () => {
     try {

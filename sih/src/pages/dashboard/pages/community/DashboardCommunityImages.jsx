@@ -45,6 +45,17 @@ const DashboardCommunityImages = ({ isAdmin }) => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  var isAdmin = false
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userRoleFromSession.role);
+    if(userRoleFromSession.role === 1){
+      isAdmin = true
+    }else if(userRoleFromSession.role ===2){
+      isAdmin = false
+    }
+    console.log(isAdmin);
+  
+
   const getPhotos = async () => {
     setLoading(true);
     const res = await axios.get(
@@ -86,6 +97,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
   useEffect(() => {
     getPhotos();
   }, []);
+  debugger
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
@@ -99,6 +111,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
+                 
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
                   )}

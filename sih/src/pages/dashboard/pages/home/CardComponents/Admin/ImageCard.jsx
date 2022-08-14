@@ -4,17 +4,19 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
+import './Imagecard.css'
+
 const ImageCard = ({ post }) => {
   return (
     <div className="webinar__card">
       <div className="webinar__card__container">
-        <Card sx={{ maxWidth: 345 }}>
           <div className="webinar__card__image">
             <CardMedia
               component="img"
-              height="125"
+              height="115"
               image={post.postLink}
               alt="org image"
+              className="img"              
             />
           </div>
           <div className="webinar__card__webinar_info">
@@ -28,7 +30,6 @@ const ImageCard = ({ post }) => {
               </Typography>
             </CardContent>
           </div>
-        </Card>
       </div>
     </div>
   );

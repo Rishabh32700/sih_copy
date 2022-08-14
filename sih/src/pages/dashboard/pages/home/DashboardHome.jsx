@@ -4,101 +4,147 @@ import { Grid, Container, Typography } from "@mui/material";
 import AppWidgetSummary from "./AppWidgetSummary";
 import "./DashboardHome.css";
 import { Link, useNavigate, Navigate } from "react-router-dom";
+import { useState } from "react";
 
 // components
-const DashboardHome = ({  }) => {
+const DashboardHome = ({}) => {
   const theme = useTheme();
-  const isAdmin=true;
+  var isAdmin = false
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userRoleFromSession.role);
+    if(userRoleFromSession.role === 1){
+      isAdmin = true
+    }else if(userRoleFromSession.role ===2){
+      isAdmin = false
+    }
+    console.log(isAdmin);
   const navigate = useNavigate();
 
+  debugger
   return (
     <div className="dashboard__home">
       <div className="dashboard__home__container">
-        <Container maxWidth="xl">
           {isAdmin && (
             <div className="dashboard__home__container__admin">
               <div className="dashboard__home--heading">
-                <Typography variant="h4" sx={{ mb: 5 }}>
+                {/* <Typography variant="h4" sx={{ mb: 5 }}> */}
+                  <h1>
+
                   Hi, Welcome Admin
-                </Typography>
+                  </h1>
+                {/* </Typography> */}
               </div>
               <div className="dashboard__home__card__container">
                 <div className="dashboard__home__card__list">
-                  <Grid container spacing={6}>
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Registered users"
-                        total={714000}
-                        icon={"ant-design:UserAddOutLined"}
-                        onClick={() => navigate("/dashboard/home/registerdUsers")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Registered users"
+                          total={714000}
+                          icon={"ant-design:UserAddOutLined"}
+                          onClick={() =>
+                            navigate("/dashboard/home/registerdUsers")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
 
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Images Uploaded"
-                        total={1352831}
-                        color="info"
-                        icon={"ant-design:user-filled"}
-                        onClick={() => navigate("/dashboard/home/uploadedImages")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Images Uploaded"
+                          total={1352831}
+                          color="info"
+                          icon={"ant-design:user-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/uploadedImages")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
 
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="videos uploaded"
-                        total={1723315}
-                        color="warning"
-                        icon={"ant-design:video-filled"}
-                        onClick={() => navigate("/dashboard/home/uploadedVideos")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="videos uploaded"
+                          total={1723315}
+                          color="warning"
+                          icon={"ant-design:video-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/uploadedVideos")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
+                    
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Research Work Uploaded"
+                          total={234}
+                          color="error"
+                          icon={"ant-design:bug-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/uploadedResearch")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
 
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Research Work Uploaded"
-                        total={234}
-                        color="error"
-                        icon={"ant-design:bug-filled"}
-                        onClick={() => navigate("/dashboard/home/uploadedResearch")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Webinar Till Now"
-                        total={714000}
-                        icon={"ant-design:android-filled"}
-                        onClick={() => navigate("/dashboard/home/webinarTillNow")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Webinar Till Now"
+                          total={714000}
+                          icon={"ant-design:android-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/webinarTillNow")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
 
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Active Webinar"
-                        total={1352831}
-                        color="info"
-                        icon={"ant-design:apple-filled"}
-                        onClick={() => navigate("/dashboard/home/activeWebinars")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Active Webinar"
+                          total={1352831}
+                          color="info"
+                          icon={"ant-design:apple-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/activeWebinars")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
 
-                    <Grid item xs={12} sm={6} md={3}>
-                      <AppWidgetSummary
-                        title="Scheduled Webinars"
-                        total={1723315}
-                        color="warning"
-                        icon={"ant-design:windows-filled"}
-                        onClick={() => navigate("/dashboard/home/scheduledWebinars")}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </Grid>
-                  </Grid>
+                    <div className="dashboard__card wrapper">
+                      <div className="card">
+                        <AppWidgetSummary
+                          title="Scheduled Webinars"
+                          total={1723315}
+                          color="warning"
+                          icon={"ant-design:windows-filled"}
+                          onClick={() =>
+                            navigate("/dashboard/home/scheduledWebinars")
+                          }
+                          className="dashboard__card__inner__div"
+                          style={{ cursor: "pointer", fontSize:".5rem" }}
+                        />
+                     </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -180,7 +226,7 @@ const DashboardHome = ({  }) => {
               </div>
             </div>
           )}
-        </Container>
+        {/* </Container> */}
         {/* </Page> */}
       </div>
     </div>

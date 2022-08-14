@@ -7,6 +7,8 @@ import { Typography, Button } from "@mui/material";
 import axios from "axios";
 import AppWidgetSummary from "../../AppWidgetSummary";
 
+import './uploadedImages.css'
+
 const IMAGELIST = [
   {
     name: "Frozen yoghurt",
@@ -162,49 +164,56 @@ const UploadedImages = () => {
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
-        <div className="dashboard__research__heading">
-          <Typography variant="h3" gutterBottom component="div">
-            Images Section Modal
-          </Typography>
+        <div className="dashboard__home--heading dashboard__research__heading">
+          {/* <Typography variant="h3" gutterBottom component="div"> */}
+          <h1>Images Section Modal</h1>
+          {/* </Typography> */}
         </div>
         <div className="uploaded__images__count">
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Total Images Uploaded"
-                total={714000}
-                icon={"ant-design:UserAddOutLined"}
-              />
-            </Grid>
+          <div className="dashboard__home__card__list">
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                className="dashboard__card__inner__div"
+                  title="Total Images Uploaded"
+                  total={714000}
+                  icon={"ant-design:UserAddOutLined"}
+                />
+              </div>
+            </div>
 
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Approved Images"
-                total={1352831}
-                color="info"
-                icon={"ant-design:user-filled"}
-              />
-            </Grid>
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                className="dashboard__card__inner__div"
+                  title="Approved Images"
+                  total={1352831}
+                  color="info"
+                  icon={"ant-design:user-filled"}
+                />
+              </div>
+            </div>
 
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Rejected Images"
-                total={1723315}
-                color="warning"
-                icon={"ant-design:video-filled"}
-              />
-            </Grid>
-          </Grid>
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                className="dashboard__card__inner__div"
+                  title="Rejected Images"
+                  total={1723315}
+                  color="warning"
+                  icon={"ant-design:video-filled"}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="uploaded__images__card">
-          <Grid container spacing={3}>
+        <div className="uploaded__images__card__container">
             {photos &&
               photos.map((post, id) => (
-                <Grid item xs={12} sm={6} md={4}>
+                <div className="uploaded__images__card">
                   <ImageCard post={post} key={id} />
-                </Grid>
+                </div>
               ))}
-          </Grid>
         </div>
       </div>
     </div>
