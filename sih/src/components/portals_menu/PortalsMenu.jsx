@@ -58,6 +58,9 @@ const PortalsMenu = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  console.log(user);
   return (
     <>
       <AppBar position="static">
@@ -216,7 +219,7 @@ const PortalsMenu = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="R" src="/static/images/avatar/2.jpg" />
+                  <Avatar>{user?.email[0]}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
