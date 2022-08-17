@@ -163,56 +163,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const RegisteredUserUploadedResearch = () => {
-  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
+  const [researchWorks, setResearchWorks] = useState([]);
+  const { userId } = useParams();
 
-  const getPendingResearchPapers = async () => {
-    try {
-      const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
-      );
-      setPendingResearchPapers(res.data.pendingResearchArray);
-      console.log("Videos", res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    try {
-      const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-        {
-          ...obj,
-        }
-      );
-      getPendingResearchPapers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
+  const getUserResearchWork = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getResearchWorkForUserId + `?userId=${userId}`
     );
-    getPendingResearchPapers();
+    console.log(res.data);
+    setResearchWorks(res.data.photosArray);
   };
 
   useEffect(() => {
-    getPendingResearchPapers();
+    getUserResearchWork();
   }, []);
 
   return (
@@ -236,21 +199,21 @@ const RegisteredUserUploadedResearch = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST &&
-                  RESEARCHLIST.map((pendingResearchPaper, id) => (
+                {researchWorks &&
+                  researchWorks.map((researchWork, id) => (
                     <StyledTableRow key={id}>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.userId}
+                        {researchWork.userId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.date}
+                        {researchWork.date}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.mediaId}
+                        {researchWork.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={pendingResearchPaper.paperLink}
+                          href={researchWork.paperLink}
                           target="_blank"
                           rel="noreferrer"
                         >

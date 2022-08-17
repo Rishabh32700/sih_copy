@@ -14,7 +14,7 @@ const ImageCard = ({ post }) => {
             <CardMedia
               component="img"
               height="115"
-              image={post.postLink}
+              image={post.mediaURL}
               alt="org image"
               className="img"              
             />
@@ -25,8 +25,8 @@ const ImageCard = ({ post }) => {
                 Media Id : {post.mediaId}
                 <br />
                 When : {post.date} <br />
-                Likes : {post.likesCount} <br />
-                Comment : {post.commentCount} <br />
+                Likes : {post.totalLikeCount} <br />
+                Comment : {post.totalCommentCount} <br />
               </Typography>
             </CardContent>
           </div>

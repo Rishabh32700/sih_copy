@@ -146,18 +146,20 @@ const IMAGELIST = [
 ];
 
 const RegisteredUserUploadedVideos = () => {
-  const [photos, setPhotos] = useState(IMAGELIST);
 
-  // const getPhotos = async () => {
-  //   const res = await axios.get(
-  //     config.server.path + config.api.getPendingPhotos
-  //   );
-  //   setPhotos(res.data.pendingPhotosArray);
-  //   console.log(res);
-  // };
+  const [videos, setVideos] = useState([]);
+  const { userId } = useParams();
+
+  const getUserVideos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getVideosForUserId+`?userId=${userId}`
+    );
+    setVideos(res.data.photosArray);
+    console.log(res.data);
+  };
 
   useEffect(() => {
-    // getPhotos();
+    getUserVideos();
   }, []);
   return (
     <div className="dashboard__community">
@@ -171,7 +173,7 @@ const RegisteredUserUploadedVideos = () => {
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Total Images Uploaded"
+                title="Total Videos Uploaded"
                 total={714000}
                 icon={"ant-design:UserAddOutLined"}
               />
@@ -179,7 +181,7 @@ const RegisteredUserUploadedVideos = () => {
 
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Approved Images"
+                title="Approved videos"
                 total={1352831}
                 color="info"
                 icon={"ant-design:user-filled"}
@@ -188,7 +190,7 @@ const RegisteredUserUploadedVideos = () => {
 
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Rejected Images"
+                title="Rejected videos"
                 total={1723315}
                 color="warning"
                 icon={"ant-design:video-filled"}
@@ -196,10 +198,10 @@ const RegisteredUserUploadedVideos = () => {
             </Grid>
           </Grid>
         </div>
-        <div className="uploaded__images__card">
+        <div className="uploaded__videos__card">
           <Grid container spacing={3}>
-            {photos &&
-              photos.map((post, id) => (
+            {videos &&
+              videos.map((post, id) => (
                 <Grid item xs={12} sm={6} md={4}>
                   <ImageCard post={post} key={id} />
                 </Grid>

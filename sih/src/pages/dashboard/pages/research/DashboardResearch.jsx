@@ -18,6 +18,7 @@ import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
+import config from "../../../../ApiConfig/Config";
 const RESEARCHLIST = [
   {
     name: "Frozen yoghurt",
@@ -152,6 +153,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const DashboardResearch = ({ isAdmin }) => {
   var isAdmin = false
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+  const userId = userRoleFromSession.userId;
     console.log(userRoleFromSession.role);
     if(userRoleFromSession.role === 1){
       isAdmin = true
@@ -166,10 +168,12 @@ const DashboardResearch = ({ isAdmin }) => {
   const getPendingResearchPapers = async () => {
     try {
       const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
+        config.server.path +
+        config.api.getPendingResearchWork +
+        `?userId=${userId}`
       );
-      setPendingResearchPapers(res.data.pendingResearchArray);
-      console.log("Research", res);
+      // setPendingResearchPapers(res.data.pendingResearchArray);
+      console.log("Research", res.data.pendingResearchWork);
     } catch (error) {
       console.log(error);
     }

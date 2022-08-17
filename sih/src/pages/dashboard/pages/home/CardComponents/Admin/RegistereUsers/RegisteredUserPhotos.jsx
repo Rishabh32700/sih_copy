@@ -6,7 +6,7 @@ import ImageCard from "../ImageCard";
 import { Typography, Button } from "@mui/material";
 import axios from "axios";
 import AppWidgetSummary from "../../../AppWidgetSummary";
-
+import config from "../../../../../../../ApiConfig/Config";
 import "../uploadedImages.css";
 import { useParams } from "react-router-dom";
 
@@ -149,19 +149,19 @@ const IMAGELIST = [
 ];
 
 const RegisteredUserUploadedImages = () => {
-  const [photos, setPhotos] = useState(IMAGELIST);
+  const [photos, setPhotos] = useState([]);
   const { userId } = useParams();
 
-  // const getPhotos = async () => {
-  //   const res = await axios.get(
-  //     config.server.path + config.api.getPendingPhotos
-  //   );
-  //   setPhotos(res.data.pendingPhotosArray);
-  //   console.log(res);
-  // };
+  const getUserPhotos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getPhotosForUserId+`?userId=${userId}`
+    );
+    console.log(res);
+    setPhotos(res.data.photosArray);
+  };
 
   useEffect(() => {
-    // getPhotos();
+    getUserPhotos();
   }, []);
   return (
     <div className="dashboard__community">

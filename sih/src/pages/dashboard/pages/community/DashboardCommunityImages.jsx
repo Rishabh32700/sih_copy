@@ -72,8 +72,8 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       mediaId: id,
       postStatus: "2",
     };
-    const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
+    const res = await axios.post(
+      config.server.path + config.api.updatePostStatus,
       {
         ...obj,
       }

@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 import ImageCard from "./ImageCard";
 import { Typography, Button } from "@mui/material";
 import axios from "axios";
+import config from "../../../../../../ApiConfig/Config";
 import AppWidgetSummary from "../../AppWidgetSummary";
 
 const IMAGELIST = [
@@ -146,19 +147,20 @@ const IMAGELIST = [
 ];
 
 const UploadedVideos = () => {
-  const [photos, setPhotos] = useState(IMAGELIST);
+  const [videos, setVideos] = useState([]);
 
-  // const getPhotos = async () => {
-  //   const res = await axios.get(
-  //     config.server.path + config.api.getPendingPhotos
-  //   );
-  //   setPhotos(res.data.pendingPhotosArray);
-  //   console.log(res);
-  // };
+  const getApprovedVideos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getApprovedVideos
+    );
+    setVideos(res.data.approvedVideosArray);
+    console.log(res);
+  };
 
   useEffect(() => {
-    // getPhotos();
+    getApprovedVideos();
   }, []);
+  
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
@@ -171,7 +173,7 @@ const UploadedVideos = () => {
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Total Images Uploaded"
+                title="Total videos Uploaded"
                 total={714000}
                 icon={"ant-design:UserAddOutLined"}
               />
@@ -179,7 +181,7 @@ const UploadedVideos = () => {
 
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Approved Images"
+                title="Approved videos"
                 total={1352831}
                 color="info"
                 icon={"ant-design:user-filled"}
@@ -188,7 +190,7 @@ const UploadedVideos = () => {
 
             <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="Rejected Images"
+                title="Rejected videos"
                 total={1723315}
                 color="warning"
                 icon={"ant-design:video-filled"}
@@ -196,12 +198,12 @@ const UploadedVideos = () => {
             </Grid>
           </Grid>
         </div>
-        <div className="uploaded__images__card">
+        <div className="uploaded__videos__card">
           <Grid container spacing={3}>
-            {photos &&
-              photos.map((post, id) => (
+            {videos &&
+              videos.map((post) => (
                 <Grid item xs={12} sm={6} md={4}>
-                  <ImageCard post={post} key={id} />
+                  <ImageCard post={post} key={post.mediaId} />
                 </Grid>
               ))}
           </Grid>
