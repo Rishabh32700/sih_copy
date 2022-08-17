@@ -180,7 +180,7 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
       const res = await axios.get(
         config.server.path + config.api.getPendingVideos + `?userId=${userId}`
       );
-      setPendingVideos(res.data.pendingVideosArray);
+      setPendingVideos(res.data.pendingVideos);
       console.log("Videos", res);
     } catch (error) {
       console.log(error);

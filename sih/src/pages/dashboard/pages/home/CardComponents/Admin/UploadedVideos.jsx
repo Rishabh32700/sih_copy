@@ -169,35 +169,6 @@ const UploadedVideos = () => {
             Images Section Modal
           </Typography>
         </div>
-        <div className="uploaded__images__count">
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Total videos Uploaded"
-                total={714000}
-                icon={"ant-design:UserAddOutLined"}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Approved videos"
-                total={1352831}
-                color="info"
-                icon={"ant-design:user-filled"}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <AppWidgetSummary
-                title="Rejected videos"
-                total={1723315}
-                color="warning"
-                icon={"ant-design:video-filled"}
-              />
-            </Grid>
-          </Grid>
-        </div>
         <div className="uploaded__videos__card">
           <Grid container spacing={3}>
             {videos &&

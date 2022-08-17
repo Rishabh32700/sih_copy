@@ -151,17 +151,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const DashboardResearch = ({ isAdmin }) => {
-  var isAdmin = false
+  var isAdmin = false;
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
-    console.log(userRoleFromSession.role);
-    if(userRoleFromSession.role === 1){
-      isAdmin = true
-    }else if(userRoleFromSession.role ===2){
-      isAdmin = false
-    }
-    console.log(isAdmin);
-
+  console.log(userRoleFromSession.role);
+  if (userRoleFromSession.role === 1) {
+    isAdmin = true;
+  } else if (userRoleFromSession.role === 2) {
+    isAdmin = false;
+  }
+  console.log(isAdmin);
 
   const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
 
@@ -169,10 +168,10 @@ const DashboardResearch = ({ isAdmin }) => {
     try {
       const res = await axios.get(
         config.server.path +
-        config.api.getPendingResearchWork +
-        `?userId=${userId}`
+          config.api.getPendingResearchWork +
+          `?userId=${userId}`
       );
-      // setPendingResearchPapers(res.data.pendingResearchArray);
+      setPendingResearchPapers(res.data.pendingResearchWork);
       console.log("Research", res.data.pendingResearchWork);
     } catch (error) {
       console.log(error);
@@ -230,18 +229,11 @@ const DashboardResearch = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && (
-                    <StyledTableCell align="left">User Id</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Media ID</StyledTableCell>
                   <StyledTableCell align="left">Paper Link</StyledTableCell>
-                  {isAdmin && (
-                    <StyledTableCell align="left">Action</StyledTableCell>
-                  )}
-                  {!isAdmin && (
-                    <StyledTableCell align="left">Delete</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -268,21 +260,20 @@ const DashboardResearch = ({ isAdmin }) => {
                           See Paper
                         </a>
                       </StyledTableCell>
-                      {isAdmin && (
-                        <StyledTableCell align="right">
-                          <Box component="div" sx={{ display: "inline" }}>
-                            <CancelIcon color="action" />
-                          </Box>
-                          <Box component="div" sx={{ display: "inline" }}>
-                            <DoneIcon color="primary" />
-                          </Box>
-                        </StyledTableCell>
-                      )}
-                      {!isAdmin && (
-                        <StyledTableCell align="left">
-                          <Button>Delete</Button>
-                        </StyledTableCell>
-                      )}
+                      <StyledTableCell align="right">
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <CancelIcon
+                            color="action"
+                            onClick={handleCancelClick(pendingResearchPaper.mediaId)}
+                          />
+                        </Box>
+                        <Box component="div" sx={{ display: "inline" }}>
+                          <DoneIcon
+                            color="primary"
+                            onClick={handleDoneClick(pendingResearchPaper.mediaId)}
+                          />
+                        </Box>
+                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
               </TableBody>

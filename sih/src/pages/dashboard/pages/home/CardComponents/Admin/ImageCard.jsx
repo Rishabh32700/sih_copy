@@ -20,6 +20,7 @@ const ImageCard = ({ post }) => {
         }
       );
       console.log(res);
+      
     } catch (error) {}
   };
   return (
