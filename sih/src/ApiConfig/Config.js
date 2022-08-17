@@ -26,6 +26,7 @@ const config = {
         getVideosForUserId:'getVideosForUserId',
         getPhotosForUserId:'getPhotosForUserId',
         getResearchWorkForUserId:'getResearchWorkForUserId',
+        deletePost:'deletePost',
 
 
 

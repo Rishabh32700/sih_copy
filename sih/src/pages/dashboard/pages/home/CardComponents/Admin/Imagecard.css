@@ -1,16 +1,16 @@
-.webinar__card{
+.post__card{
     width: 250px;
     /* border: 2px solid red; */
     
 }
 
-.webinar__card__container{
+.post__card__container{
     width: 100%;
     /* border: 2px solid green; */
     box-shadow: 2px 2px 3px grey;
 }
 
-.webinar__card:hover .webinar__card__container{
+.post__card:hover .post__card__container{
     /* transform: scale(1.1); */
     transition: all 1s;
     transform: rotatey(360deg) translatez(410px);

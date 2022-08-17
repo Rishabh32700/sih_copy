@@ -23,7 +23,6 @@ const DashboardHome = ({}) => {
   }
   console.log(isAdmin);
 
-
   const [registeredUsersCount, setRegisteredUsersCount] = useState(0);
 
   const [pendingPhotosCount, setPendingPhotosCount] = useState(0);
@@ -32,17 +31,19 @@ const DashboardHome = ({}) => {
   const [approvedVideosCount, setApprovedVideosCount] = useState(0);
   const [approvedResearchWorkCount, setApprovedResearchWorkCount] = useState(0);
 
-
-
-
-
   const getRegisteredUsersCount = async () => {
     const res = await axios.get(
-      config.server.path +config.role.admin+
+      config.server.path +
+        config.role.admin +
         config.api.getUserDetails +
         `?count=true&userId=${userId}`
     );
-    setRegisteredUsersCount(res.data.userDetails[0].totalSimpleUsers);
+    if (res.data.userDetails.length === 0) {
+      setRegisteredUsersCount(0);
+    } else {
+      setRegisteredUsersCount(res.data.userDetails[0].totalSimpleUsers);
+    }
+    console.log("Approved users", res.data);
   };
   const getPendingPhotosCount = async () => {
     const res = await axios.get(
@@ -58,23 +59,41 @@ const DashboardHome = ({}) => {
         config.api.getPendingVideos +
         `?count=true&userId=${userId}`
     );
-    console.log(res);
+    // console.log(res);
   };
+
+
   const getApprovedPhotosCount = async () => {
     const res = await axios.get(
       config.server.path +
         config.api.getCountOfApprovedPhotos +
         `?userId=${userId}`
     );
-    setApprovedPhotosCount(res.data.approvedPhotosCount[0].totalApprovedPhotos);
+
+    if (res.data.approvedPhotosCount.length === 0) {
+      setApprovedPhotosCount(0);
+    } else {
+      setApprovedPhotosCount(res.data.approvedPhotosCount[0].totalApprovedPhotos);
+    }
+    console.log("Approved Photos", res.data);
   };
+
+
+
   const getApprovedVideosCount = async () => {
     const res = await axios.get(
       config.server.path +
         config.api.getCountOfApprovedVideos +
         `?userId=${userId}`
     );
-    setApprovedVideosCount(res.data.approvedVideosCount[0].totalApprovedVideos);
+    if (res.data.approvedVideosCount.length === 0) {
+      setApprovedVideosCount(0);
+    } else {
+      setApprovedVideosCount(
+        res.data.approvedVideosCount[0].totalApprovedVideos
+      );
+    }
+    console.log("Approved Videos", res.data);
   };
 
   const getPendingResearchWorkCount = async () => {
@@ -84,7 +103,7 @@ const DashboardHome = ({}) => {
         `?userId=${userId}&count=true`
     );
 
-    console.log(res.data.pendingResearchWork);
+    // console.log(res.data.pendingResearchWork);
   };
 
   const getApprovedResearchWorkCount = async () => {
@@ -93,8 +112,15 @@ const DashboardHome = ({}) => {
         config.api.getApprovedResearchWork +
         `?userId=${userId}&count=true`
     );
-
-    console.log(res.data.approvedResearchWork);
+    if (res.data.approvedResearchWork.length === 0) {
+      setApprovedResearchWorkCount(0);
+    } else {
+      console.log("somethig");
+      setApprovedResearchWorkCount(
+        res.data.approvedResearchWork[0].totalApprovedResearchWork
+      );
+    }
+    console.log("Approved Research Work", res.data);
   };
 
   useEffect(() => {
@@ -164,7 +190,7 @@ const DashboardHome = ({}) => {
                   <div className="card">
                     <AppWidgetSummary
                       title="Research Work Uploaded"
-                      total={234}
+                      total={approvedResearchWorkCount}
                       color="error"
                       icon={"ant-design:bug-filled"}
                       onClick={() =>

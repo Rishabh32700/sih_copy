@@ -43,6 +43,12 @@ const RegisteredUsersCardTable = ({ user }) => {
     console.log(user.userId);
   };
 
+  const handleChangeRoleToAdmin = (checked, event) => {
+    console.log(checked, event);
+
+    
+  };
+
   return (
     <StyledTableRow key={user.userId}>
       <StyledTableCell align="left">{user.userId}</StyledTableCell>
@@ -53,7 +59,7 @@ const RegisteredUsersCardTable = ({ user }) => {
           style={{ width: "80px" }}
           checkedChildren="Admin"
           unCheckedChildren="Regular"
-          defaultChecked
+          onChange={handleChangeRoleToAdmin}
         />
       </StyledTableCell>
       <StyledTableCell align="left">

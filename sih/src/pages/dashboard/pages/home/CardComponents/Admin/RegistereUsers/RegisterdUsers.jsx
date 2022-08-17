@@ -87,60 +87,6 @@ const RegisterdUsers = () => {
               {allUsers &&
                 allUsers.map((user) => (
                   <RegisteredUsersCardTable key={user.userId} user={user} />
-
-                  // <StyledTableRow key={user.userId}>
-                  //   <StyledTableCell align="left">
-                  //     {user.userId}
-                  //   </StyledTableCell>
-                  //   <StyledTableCell align="left">
-                  //     {user.emailAddress}
-                  //   </StyledTableCell>
-                  //   <StyledTableCell align="left">
-                  //     {user.userName}
-                  //   </StyledTableCell>
-                  //   <StyledTableCell align="left">
-                  //     <Switch
-                  //       style={{ width: "80px" }}
-                  //       checkedChildren="Admin"
-                  //       unCheckedChildren="Regular"
-                  //       defaultChecked
-                  //     />
-                  //   </StyledTableCell>
-                  //   <StyledTableCell align="left">
-                  //     <div>
-                  //       <IconButton
-                  //         aria-label="more"
-                  //         id="long-button"
-                  //         aria-controls={open ? "long-menu" : undefined}
-                  //         aria-expanded={open ? "true" : undefined}
-                  //         aria-haspopup="true"
-                  //         onClick={handleClick}
-                  //       >
-                  //         <MoreVertIcon style={{ color: "#000" }} />
-                  //       </IconButton>
-                  //       <Menu
-                  //         id="long-menu"
-                  //         MenuListProps={{
-                  //           "aria-labelledby": "long-button",
-                  //         }}
-                  //         anchorEl={anchorEl}
-                  //         open={open}
-                  //         onClose={handleClose}
-                  //         PaperProps={{
-                  //           style: {
-                  //             maxHeight: ITEM_HEIGHT * 4.5,
-                  //             width: "20ch",
-                  //           },
-                  //         }}
-                  //       >
-                  //         <MenuItem onClick={()=>handleClickMoreInfo(user.emailAddress)}>
-                  //           More Info
-                  //         </MenuItem>
-                  //         <MenuItem onClick={handleClose}>Delete</MenuItem>
-                  //       </Menu>
-                  //     </div>
-                  //   </StyledTableCell>
-                  // </StyledTableRow>
                 ))}
             </TableBody>
           </Table>
