@@ -11,6 +11,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import config from "../../../../../../ApiConfig/Config";
 
 const RESEARCHLIST = [
   {
@@ -163,56 +164,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const UploadedResearchWork = () => {
-  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
-
-  const getPendingResearchPapers = async () => {
+  const [approvedResearchPapers, setApprovedResearchPapers] = useState([]);
+  const userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+  const userId = userRoleFromSession.userId;
+  const getApprovedResearchPapers = async () => {
     try {
       const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
+        config.server.path +
+        config.api.getApprovedResearchWork +
+        `?userId=${userId}`
       );
-      setPendingResearchPapers(res.data.pendingResearchArray);
-      console.log("Videos", res);
+      setApprovedResearchPapers(res.data.approvedResearchWork);
+      console.log(" Approved Research Paperd", res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    try {
-      const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-        {
-          ...obj,
-        }
-      );
-      getPendingResearchPapers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
-    );
-    getPendingResearchPapers();
-  };
+  
 
   useEffect(() => {
-    getPendingResearchPapers();
+    getApprovedResearchPapers();
   }, []);
 
   return (
@@ -236,21 +208,23 @@ const UploadedResearchWork = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {RESEARCHLIST &&
-                  RESEARCHLIST.map((pendingResearchPaper, id) => (
-                    <StyledTableRow key={id}>
+                {approvedResearchPapers &&
+                  approvedResearchPapers.map((approvedResearchPaper) => (
+                    <StyledTableRow key={approvedResearchPaper.mediaId}>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.userId}
+                        {/* {approvedResearchPaper.userId} */}
+                        Hardcoded userId
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.date}
+                        {/* {approvedResearchPaper.date}/ */}
+                        Hardcoded date
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.mediaId}
+                        {approvedResearchPaper.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={pendingResearchPaper.paperLink}
+                          href={approvedResearchPaper.mediaURL}
                           target="_blank"
                           rel="noreferrer"
                         >

@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 
 import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
+import config from "../../../../ApiConfig/Config";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -158,28 +159,28 @@ const RESEARCHLIST = [
     postLink: "https://google.com",
     status: true,
   },
-]
+];
 
 const DashboardCommunityVideos = ({ isAdmin }) => {
-
-  var isAdmin = false
+  var isAdmin = false;
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
-    console.log(userRoleFromSession.role);
-    if(userRoleFromSession.role === 1){
-      isAdmin = true
-    }else if(userRoleFromSession.role ===2){
-      isAdmin = false
-    }
-    console.log(isAdmin);
-
+  const userId = userRoleFromSession.userId;
+  console.log(userRoleFromSession.role);
+  if (userRoleFromSession.role === 1) {
+    isAdmin = true;
+  } else if (userRoleFromSession.role === 2) {
+    isAdmin = false;
+  }
+  console.log(isAdmin);
 
   const [pendingVideos, setPendingVideos] = useState([]);
+
   const getPendingVideos = async () => {
     try {
       const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingVideos"
+        config.server.path + config.api.getPendingVideos + `?userId=${userId}`
       );
-      setPendingVideos(res.data.pendingVideosArray);
+      setPendingVideos(res.data.pendingVideos);
       console.log("Videos", res);
     } catch (error) {
       console.log(error);
@@ -194,7 +195,7 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
     };
     try {
       const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+        config.server.path + config.api.updatePostStatus + `?userId=${userId}`,
         {
           ...obj,
         }
@@ -212,7 +213,7 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
       postStatus: "1",
     };
     const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+      config.server.path + config.api.updatePostStatus + `?userId=${userId}`,
       {
         ...obj,
       }
@@ -251,43 +252,46 @@ const DashboardCommunityVideos = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingVideos && pendingVideos.map((video) => (
-                  <StyledTableRow key={video.mediaId}>
-                    {isAdmin && (
+                {pendingVideos &&
+                  pendingVideos.map((video) => (
+                    <StyledTableRow key={video.mediaId}>
+                      {isAdmin && (
+                        <StyledTableCell align="left">
+                          {video.userId}
+                        </StyledTableCell>
+                      )}
                       <StyledTableCell align="left">
-                        {video.userId}
+                        {video.date}
                       </StyledTableCell>
-                    )}
-                    <StyledTableCell align="left">{video.date}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {video.mediaId}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={video.mediaURL}>See Post</a>
-                    </StyledTableCell>
-                    {isAdmin && (
-                      <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon
-                            color="action"
-                            onClick={() => handleCancelClick(video.mediaId)}
-                          />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon
-                            color="primary"
-                            onClick={() => handleDoneClick(video.mediaId)}
-                          />
-                        </Box>
-                      </StyledTableCell>
-                    )}
-                    {!isAdmin && (
                       <StyledTableCell align="left">
-                        <Button>Delete</Button>
+                        {video.mediaId}
                       </StyledTableCell>
-                    )}
-                  </StyledTableRow>
-                ))}
+                      <StyledTableCell align="left">
+                        <a href={video.mediaURL}>See Post</a>
+                      </StyledTableCell>
+                      {isAdmin && (
+                        <StyledTableCell align="right">
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <CancelIcon
+                              color="action"
+                              onClick={() => handleCancelClick(video.mediaId)}
+                            />
+                          </Box>
+                          <Box component="div" sx={{ display: "inline" }}>
+                            <DoneIcon
+                              color="primary"
+                              onClick={() => handleDoneClick(video.mediaId)}
+                            />
+                          </Box>
+                        </StyledTableCell>
+                      )}
+                      {!isAdmin && (
+                        <StyledTableCell align="left">
+                          <Button>Delete</Button>
+                        </StyledTableCell>
+                      )}
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

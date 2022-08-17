@@ -45,23 +45,23 @@ const DashboardCommunityImages = ({ isAdmin }) => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  var isAdmin = false
+  var isAdmin = false;
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
-    console.log(userRoleFromSession.role);
-    if(userRoleFromSession.role === 1){
-      isAdmin = true
-    }else if(userRoleFromSession.role ===2){
-      isAdmin = false
-    }
-    console.log(isAdmin);
-  
+  const userId = userRoleFromSession.userId;
+  console.log(userRoleFromSession.role);
+  if (userRoleFromSession.role === 1) {
+    isAdmin = true;
+  } else if (userRoleFromSession.role === 2) {
+    isAdmin = false;
+  }
+  console.log(isAdmin);
 
   const getPhotos = async () => {
     setLoading(true);
     const res = await axios.get(
-      config.server.path + config.api.getPendingPhotos
+      config.server.path + config.api.getPendingPhotos + `?userId=${userId}`
     );
-    setPhotos(res.data.pendingPhotosArray);
+    setPhotos(res.data.pendingPhotos);
     console.log(res);
     setLoading(false);
   };
@@ -72,8 +72,8 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       mediaId: id,
       postStatus: "2",
     };
-    const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos",
+    const res = await axios.post(
+      config.server.path + config.api.updatePostStatus,
       {
         ...obj,
       }
@@ -97,7 +97,6 @@ const DashboardCommunityImages = ({ isAdmin }) => {
   useEffect(() => {
     getPhotos();
   }, []);
-  debugger
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
@@ -111,7 +110,6 @@ const DashboardCommunityImages = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                 
                   {isAdmin && (
                     <StyledTableCell align="left">User Id</StyledTableCell>
                   )}
@@ -130,6 +128,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
                 {loading ? (
                   <CircularProgress />
                 ) : (
+                  photos &&
                   photos.map((photo, id) => (
                     <StyledTableRow key={id}>
                       {isAdmin && (

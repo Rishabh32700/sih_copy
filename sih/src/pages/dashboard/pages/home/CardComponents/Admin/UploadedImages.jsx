@@ -6,7 +6,7 @@ import ImageCard from "./ImageCard";
 import { Typography, Button } from "@mui/material";
 import axios from "axios";
 import AppWidgetSummary from "../../AppWidgetSummary";
-
+import config from "../../../../../../ApiConfig/Config";
 import './uploadedImages.css'
 
 const IMAGELIST = [
@@ -150,68 +150,30 @@ const IMAGELIST = [
 const UploadedImages = () => {
   const [photos, setPhotos] = useState(IMAGELIST);
 
-  // const getPhotos = async () => {
-  //   const res = await axios.get(
-  //     config.server.path + config.api.getPendingPhotos
-  //   );
-  //   setPhotos(res.data.pendingPhotosArray);
-  //   console.log(res);
-  // };
+  const getApprovedPhotos = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getApprovedPhotos
+    );
+    setPhotos(res.data.approvedPhotosArray);
+    console.log(res);
+  };
 
   useEffect(() => {
-    // getPhotos();
+    getApprovedPhotos();
   }, []);
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
         <div className="dashboard__home--heading dashboard__research__heading">
           {/* <Typography variant="h3" gutterBottom component="div"> */}
-          <h1>Images Section Modal</h1>
+          <h1>Images Section</h1>
           {/* </Typography> */}
-        </div>
-        <div className="uploaded__images__count">
-          <div className="dashboard__home__card__list">
-            <div className="dashboard__card wrapper">
-              <div className="card">
-                <AppWidgetSummary
-                className="dashboard__card__inner__div"
-                  title="Total Images Uploaded"
-                  total={714000}
-                  icon={"ant-design:UserAddOutLined"}
-                />
-              </div>
-            </div>
-
-            <div className="dashboard__card wrapper">
-              <div className="card">
-                <AppWidgetSummary
-                className="dashboard__card__inner__div"
-                  title="Approved Images"
-                  total={1352831}
-                  color="info"
-                  icon={"ant-design:user-filled"}
-                />
-              </div>
-            </div>
-
-            <div className="dashboard__card wrapper">
-              <div className="card">
-                <AppWidgetSummary
-                className="dashboard__card__inner__div"
-                  title="Rejected Images"
-                  total={1723315}
-                  color="warning"
-                  icon={"ant-design:video-filled"}
-                />
-              </div>
-            </div>
-          </div>
         </div>
         <div className="uploaded__images__card__container">
             {photos &&
-              photos.map((post, id) => (
+              photos.map((post) => (
                 <div className="uploaded__images__card">
-                  <ImageCard post={post} key={id} />
+                  <ImageCard post={post} key={post.mediaId} />
                 </div>
               ))}
         </div>
