@@ -5,7 +5,6 @@ import { Grid } from "@mui/material";
 import ImageCard from "./ImageCard";
 import { Typography, Button } from "@mui/material";
 import axios from "axios";
-import config from "../../../../../../ApiConfig/Config";
 import AppWidgetSummary from "../../AppWidgetSummary";
 
 const IMAGELIST = [
@@ -146,35 +145,65 @@ const IMAGELIST = [
   },
 ];
 
-const UploadedVideos = () => {
-  const [videos, setVideos] = useState([]);
+const RegisteredUserUploadedVideos = () => {
 
-  const getApprovedVideos = async () => {
+  const [videos, setVideos] = useState([]);
+  const { userId } = useParams();
+
+  const getUserVideos = async () => {
     const res = await axios.get(
-      config.server.path + config.api.getApprovedVideos
+      config.server.path + config.api.getVideosForUserId+`?userId=${userId}`
     );
-    setVideos(res.data.approvedVideosArray);
-    console.log(res);
+    setVideos(res.data.photosArray);
+    console.log(res.data);
   };
 
   useEffect(() => {
-    getApprovedVideos();
+    getUserVideos();
   }, []);
-  
   return (
     <div className="dashboard__community">
       <div className="dashboard__community__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Images Section Modal
+          User Videos Section
           </Typography>
+        </div>
+        <div className="uploaded__images__count">
+          <Grid container spacing={6}>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Total Videos Uploaded"
+                total={714000}
+                icon={"ant-design:UserAddOutLined"}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Approved videos"
+                total={1352831}
+                color="info"
+                icon={"ant-design:user-filled"}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title="Rejected videos"
+                total={1723315}
+                color="warning"
+                icon={"ant-design:video-filled"}
+              />
+            </Grid>
+          </Grid>
         </div>
         <div className="uploaded__videos__card">
           <Grid container spacing={3}>
             {videos &&
-              videos.map((post) => (
+              videos.map((post, id) => (
                 <Grid item xs={12} sm={6} md={4}>
-                  <ImageCard post={post} key={post.mediaId} />
+                  <ImageCard post={post} key={id} />
                 </Grid>
               ))}
           </Grid>
@@ -184,4 +213,4 @@ const UploadedVideos = () => {
   );
 };
 
-export default UploadedVideos;
+export default RegisteredUserUploadedVideos;

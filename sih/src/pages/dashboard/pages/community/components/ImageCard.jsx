@@ -5,13 +5,20 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Grid } from "@mui/material";
 const ImageCard = ({ post, isAdmin }) => {
+  var isAdmin = false
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userRoleFromSession.role);
+    if(userRoleFromSession.role === 1){
+      isAdmin = true
+    }else if(userRoleFromSession.role ===2){
+      isAdmin = false
+    }
+    console.log(isAdmin);
+
   return (
     <div className="webinar__card">
       <div className="webinar__card__container">

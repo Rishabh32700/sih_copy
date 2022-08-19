@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import "./DashboardCommunity.css";
-import ImageCard from "./component/ImageCard";
+import ImageCard from "./components/ImageCard";
 import axios from "axios";
 import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
 const IMAGELIST = [
@@ -143,6 +143,16 @@ const IMAGELIST = [
 ];
 
 const DashboardModalImages = ({ isAdmin }) => {
+  var isAdmin = false
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userRoleFromSession.role);
+    if(userRoleFromSession.role === 1){
+      isAdmin = true
+    }else if(userRoleFromSession.role ===2){
+      isAdmin = false
+    }
+    console.log(isAdmin);
+
   const [photos, setPhotos] = useState([]);
 
   const getPhotos = async () => {

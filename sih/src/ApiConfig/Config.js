@@ -16,8 +16,21 @@ const config = {
     getApprovedPhotos: "getApprovedPhotos",
     getPendingPhotos: "getPendingPhotos",
     updatePostStatus: "updatePostStatus",
-    uploadResearchWork: "uploadResearchWork",
+    getPendingVideos: "getPendingVideos",
+    getApprovedVideos: "getApprovedVideos",
+    getCountOfApprovedPhotos: "getCountOfApprovedPhotos",
+    getCountOfApprovedVideos: "getCountOfApprovedVideos",
+    getPendingResearchWork: "getPendingResearchWork",
     getApprovedResearchWork: "getApprovedResearchWork",
+    getUserDetails: "getUserDetails",
+    getVideosForUserId: "getVideosForUserId",
+    getPhotosForUserId: "getPhotosForUserId",
+    getResearchWorkForUserId: "getResearchWorkForUserId",
+    deletePost: "deletePost",
+    uploadResearchWork: "uploadResearchWork",
+  },
+  role: {
+    admin: "admin/",
   },
 };
 export default config;

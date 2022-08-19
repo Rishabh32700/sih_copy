@@ -6,24 +6,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import "./DashboardResearch.css";
-import DoneIcon from "@mui/icons-material/Done";
-import Box from "@material-ui/core/Box";
-import CancelIcon from "@mui/icons-material/Cancel";
-// material
 import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
-// import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
-import config from "../../../../ApiConfig/Config";
+
 const RESEARCHLIST = [
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -32,6 +26,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -41,6 +37,8 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
@@ -48,6 +46,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -56,6 +56,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -65,12 +67,16 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
+    mediaId: "adasfffsaddda.jpg",
+
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
@@ -80,6 +86,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -148,72 +156,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
 }));
 
-const DashboardResearch = ({ isAdmin }) => {
-  var isAdmin = false;
-  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
-  const userId = userRoleFromSession.userId;
-  console.log(userRoleFromSession.role);
-  if (userRoleFromSession.role === 1) {
-    isAdmin = true;
-  } else if (userRoleFromSession.role === 2) {
-    isAdmin = false;
-  }
-  console.log(isAdmin);
+const RegisteredUserUploadedResearch = () => {
+  const [researchWorks, setResearchWorks] = useState([]);
+  const { userId } = useParams();
 
-  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
-
-  const getPendingResearchPapers = async () => {
-    try {
-      const res = await axios.get(
-        config.server.path +
-          config.api.getPendingResearchWork +
-          `?userId=${userId}`
-      );
-      setPendingResearchPapers(res.data.pendingResearchWork);
-      console.log("Research", res.data.pendingResearchWork);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    try {
-      const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-        {
-          ...obj,
-        }
-      );
-      getPendingResearchPapers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
+  const getUserResearchWork = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getResearchWorkForUserId + `?userId=${userId}`
     );
-    getPendingResearchPapers();
+    console.log(res.data);
+    setResearchWorks(res.data.photosArray);
   };
 
   useEffect(() => {
-    getPendingResearchPapers();
+    getUserResearchWork();
   }, []);
 
   return (
@@ -237,23 +199,21 @@ const DashboardResearch = ({ isAdmin }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingResearchPapers &&
-                  pendingResearchPapers.map((pendingResearchPaper, id) => (
+                {researchWorks &&
+                  researchWorks.map((researchWork, id) => (
                     <StyledTableRow key={id}>
-                      {isAdmin && (
-                        <StyledTableCell align="left">
-                          {pendingResearchPaper.userId}
-                        </StyledTableCell>
-                      )}
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.date}
+                        {researchWork.userId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.mediaId}
+                        {researchWork.date}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {researchWork.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={pendingResearchPaper.paperLink}
+                          href={researchWork.paperLink}
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -261,18 +221,7 @@ const DashboardResearch = ({ isAdmin }) => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon
-                            color="action"
-                            onClick={handleCancelClick(pendingResearchPaper.mediaId)}
-                          />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon
-                            color="primary"
-                            onClick={handleDoneClick(pendingResearchPaper.mediaId)}
-                          />
-                        </Box>
+                        <Button>Delete</Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -285,4 +234,4 @@ const DashboardResearch = ({ isAdmin }) => {
   );
 };
 
-export default DashboardResearch;
+export default RegisteredUserUploadedResearch;

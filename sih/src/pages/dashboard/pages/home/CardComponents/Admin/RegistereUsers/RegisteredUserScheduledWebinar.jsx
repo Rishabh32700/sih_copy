@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import "./DashboardHomeAdmin.css";
+import '../DashboardHomeAdmin.css'
 import { Button, Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
@@ -181,13 +181,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
 }));
-const WebinarsTillNow = () => {
+
+const RegisteredUserScheduledWebinars = () => {
   return (
     <div className="dashboard__research">
       <div className="dashboard__research__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Webinars Till Now Section
+            Scheduled Webinars Section
           </Typography>
         </div>
         <div className="dashboard__research__table">
@@ -199,13 +200,6 @@ const WebinarsTillNow = () => {
                   <StyledTableCell align="left">Department</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Host</StyledTableCell>
-                  <StyledTableCell align="left">
-                    Registered Users
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    No of Participants
-                  </StyledTableCell>
-                  <StyledTableCell align="left">Recording Link</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -219,11 +213,6 @@ const WebinarsTillNow = () => {
                     </StyledTableCell>
                     <StyledTableCell align="left">{row.date}</StyledTableCell>
                     <StyledTableCell align="left">{row.host}</StyledTableCell>
-                    <StyledTableCell align="left">105</StyledTableCell>
-                    <StyledTableCell align="left">75</StyledTableCell>
-                    <StyledTableCell align="left">
-                      <a href={row.webinarLink}>See Recording</a>
-                    </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -235,4 +224,4 @@ const WebinarsTillNow = () => {
   );
 };
 
-export default WebinarsTillNow;
+export default RegisteredUserScheduledWebinars;

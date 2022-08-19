@@ -33,6 +33,11 @@ import DashboardWebinar from "./pages/dashboard/pages/webinars/DashboardWebinar"
 import DashboardModalImages from "./pages/dashboard/pages/community/DashboardModalImages";
 import DashboardHome from "./pages/dashboard/pages/home/DashboardHome";
 import RegisteredUserDetails from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserDetails";
+import RegisteredUserUploadedImages from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
+import RegisteredUserUploadedVideos from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
+import RegisteredUserUploadedResearch from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
+import RegisteredUserScheduledWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserScheduledWebinar";
+import RegisteredUserRegisteredWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserRegisteredWebinar";
 
 export let gData = createContext();
 
@@ -118,6 +123,26 @@ const App = () => {
                 <Route
                   path="home/registerdUsers/:userId"
                   element={<RegisteredUserDetails />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId/uploadedImages"
+                  element={<RegisteredUserUploadedImages />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId/uploadedVideos"
+                  element={<RegisteredUserUploadedVideos />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId/uploadedResearch"
+                  element={<RegisteredUserUploadedResearch />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId/registeredWebinars"
+                  element={<RegisteredUserRegisteredWebinars />}
+                />
+                <Route
+                  path="home/registerdUsers/:userId/scheduledWebinars"
+                  element={<RegisteredUserScheduledWebinars />}
                 />
                 <Route
                   path="home/uploadedImages"

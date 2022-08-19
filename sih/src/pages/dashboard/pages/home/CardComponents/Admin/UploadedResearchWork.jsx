@@ -6,24 +6,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-// import "./DashboardResearch.css";
-import DoneIcon from "@mui/icons-material/Done";
-import Box from "@material-ui/core/Box";
-import CancelIcon from "@mui/icons-material/Cancel";
-// material
 import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
-// import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import DashboardMainMenu from '../../../../main__menu__dashboard/DashboardMainMenu';
+import config from "../../../../../../ApiConfig/Config";
 
 const RESEARCHLIST = [
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -32,6 +27,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -41,6 +38,8 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
@@ -48,6 +47,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: false,
@@ -56,6 +57,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -65,12 +68,16 @@ const RESEARCHLIST = [
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
+    mediaId: "adasfffsaddda.jpg",
+
     paperLink: "https://google.com",
     status: true,
   },
   {
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
+    mediaId: "adasfffsaddda.jpg",
+
     date: "Thu Sep 03 2020 08:21:14",
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
@@ -80,6 +87,8 @@ const RESEARCHLIST = [
     name: "Frozen yoghurt",
     userId: "aasd-fghj-asd",
     date: "Thu Sep 03 2020 08:21:14",
+    mediaId: "adasfffsaddda.jpg",
+
     category: "Ashley Jacobson",
     paperLink: "https://google.com",
     status: true,
@@ -155,56 +164,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const UploadedResearchWork = () => {
-  const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
-
-  const getPendingResearchPapers = async () => {
+  const [approvedResearchPapers, setApprovedResearchPapers] = useState([]);
+  const userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+  const userId = userRoleFromSession.userId;
+  const getApprovedResearchPapers = async () => {
     try {
       const res = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getPendingPhotos"
+        config.server.path +
+        config.api.getApprovedResearchWork +
+        `?userId=${userId}`
       );
-      setPendingResearchPapers(res.data.pendingResearchArray);
-      console.log("Videos", res);
+      setApprovedResearchPapers(res.data.approvedResearchWork);
+      console.log(" Approved Research Paperd", res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    try {
-      const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-        {
-          ...obj,
-        }
-      );
-      getPendingResearchPapers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
-    );
-    getPendingResearchPapers();
-  };
+  
 
   useEffect(() => {
-    getPendingResearchPapers();
+    getApprovedResearchPapers();
   }, []);
 
   return (
@@ -228,21 +208,23 @@ const UploadedResearchWork = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pendingResearchPapers &&
-                  pendingResearchPapers.map((pendingResearchPaper, id) => (
-                    <StyledTableRow key={id}>
+                {approvedResearchPapers &&
+                  approvedResearchPapers.map((approvedResearchPaper) => (
+                    <StyledTableRow key={approvedResearchPaper.mediaId}>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.userId}
+                        {/* {approvedResearchPaper.userId} */}
+                        Hardcoded userId
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.date}
+                        {/* {approvedResearchPaper.date}/ */}
+                        Hardcoded date
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.mediaId}
+                        {approvedResearchPaper.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={pendingResearchPaper.paperLink}
+                          href={approvedResearchPaper.mediaURL}
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -250,12 +232,7 @@ const UploadedResearchWork = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <CancelIcon color="action" />
-                        </Box>
-                        <Box component="div" sx={{ display: "inline" }}>
-                          <DoneIcon color="primary" />
-                        </Box>
+                        <Button>Delete</Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
