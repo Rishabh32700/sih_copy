@@ -250,42 +250,7 @@ const DashboardHome = ({}) => {
                   </div>
                 </div>
 
-                <div className="homepage__add__webinar__button">
-                  <Button type="primary" onClick={showModal}>
-                    Create A Webinar
-                  </Button>
-                </div>
-                <div className="homepage__add__webinar__modal">
-                  <Modal
-                    title="Add New Webinar"
-                    visible={isModalVisible}
-                    onOk={handleCancel}
-                    onCancel={handleCancel}
-                    okText="Add Webinar"
-                  >
-                    <div>
-                      <Space>
-                        Name: <Input placeholder="Enter Bike Name" />
-                      </Space>
-                      <br />
-                      <br />
-                      <Space>
-                        Host: <Input placeholder="Enter Bike Color" />
-                      </Space>
-                      <br />
-                      <br />
-                      <Space>
-                        Department: <Input placeholder="Enter Bike Location" />
-                      </Space>
-                      <br />
-                      <br />
-                      <Space>
-                        Date :
-                        <DatePicker showTime />
-                      </Space>
-                    </div>
-                  </Modal>
-                </div>
+               
               </div>
             </div>
           </div>

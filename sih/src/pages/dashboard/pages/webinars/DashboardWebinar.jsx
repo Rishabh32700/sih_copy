@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import "./DashboardWebinar.css";
+import { Input, Space, DatePicker, Button, Modal } from "antd";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -14,6 +15,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
+import axios from 'axios'
 
 const WEBINARLIST = [
   {
@@ -187,16 +189,45 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const DashboardWebinar = ({ isAdmin }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [agenda, setAgenda] = useState("");
+  const [duration, setDuration] = useState("");
+  const [departmentName, setdepartment] = useState("");
+  const [meetingTopic, setMeetingTopic] = useState("");
 
-  var isAdmin = false
+  var isAdmin = false;
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
-    console.log(userRoleFromSession.role);
-    if(userRoleFromSession.role === 1){
-      isAdmin = true
-    }else if(userRoleFromSession.role ===2){
-      isAdmin = false
-    }
-    console.log(isAdmin);
+  const userId = userRoleFromSession.userId;
+  console.log(userRoleFromSession.role);
+  if (userRoleFromSession.role === 1) {
+    isAdmin = true;
+  } else if (userRoleFromSession.role === 2) {
+    isAdmin = false;
+  }
+  console.log(isAdmin);
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const handleCreateWebinar = () => {
+    setIsModalVisible(false);
+    console.log(agenda, duration, departmentName, meetingTopic);
+
+    const res = axios.post(`https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/admin/webinars/createNewWebinar`, {
+      agenda: agenda,
+      startTime: "2022-08-25T07:32:58Z",
+      adminUserId: userId,
+      duration: duration,
+      departmentName: departmentName,
+      meetingTopic: meetingTopic,
+      meetingType: 1,
+    },{
+      headers:{'User-Id':userId}
+    });
+  };
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
   return (
     <div className="dashboard__research">
@@ -205,6 +236,11 @@ const DashboardWebinar = ({ isAdmin }) => {
           <Typography variant="h3" gutterBottom component="div">
             Webinars Section
           </Typography>
+          <div className="homepage__add__webinar__button">
+            <Button type="primary" onClick={showModal}>
+              Create A Webinar
+            </Button>
+          </div>
         </div>
         <div className="dashboard__research__table">
           <TableContainer component={Paper}>
@@ -264,6 +300,63 @@ const DashboardWebinar = ({ isAdmin }) => {
               </TableBody>
             </Table>
           </TableContainer>
+        </div>
+
+        <div className="homepage__add__webinar__modal">
+          <Modal
+            title="Add New Webinar"
+            visible={isModalVisible}
+            onOk={handleCreateWebinar}
+            onCancel={handleCancel}
+            okText="Add Webinar"
+          >
+            <div>
+              <Space>
+                Agenda:{" "}
+                <Input
+                  placeholder="Enter Bike Name"
+                  onChange={(e) => setAgenda(e.target.value)}
+                  value={agenda}
+                />
+              </Space>
+              <br />
+              <br />
+              <Space>
+                Date :
+                <DatePicker showTime />
+              </Space>
+              <br />
+              <br />
+              <Space>
+                Duration:{" "}
+                <Input
+                  placeholder="Enter Bike Color"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                />
+              </Space>
+              <br />
+              <br />
+              <Space>
+                Department:{" "}
+                <Input
+                  placeholder="Enter Bike Location"
+                  value={departmentName}
+                  onChange={(e) => setdepartment(e.target.value)}
+                />
+              </Space>
+              <br />
+              <br />
+              <Space>
+                Meeting Topic:{" "}
+                <Input
+                  placeholder="Enter Bike Location"
+                  value={meetingTopic}
+                  onChange={(e) => setMeetingTopic(e.target.value)}
+                />
+              </Space>
+            </div>
+          </Modal>
         </div>
       </div>
     </div>
