@@ -14,6 +14,8 @@ const SocialMedia = () => {
 
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
+  var userFromSession = JSON.parse(sessionStorage.getItem("user"));
+  console.log(userFromSession.userId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,18 +31,23 @@ const SocialMedia = () => {
         onUploadProgress: (data) => {
           setProgress(Math.round((100 * data.loaded) / data.total));
         },
+        headers: { 'User-Id': userFromSession.userId },
       }
     );
     console.log("Res1", res);
     setLoading(false);
     setProgress(0);
-    var userFromSession = JSON.parse(sessionStorage.getItem("user"));
-    console.log(userFromSession.userId);
 
-    const res2 = await axios.post(config.server.path + config.api.handlePost, {
-      userId: userFromSession.userId,
-      mediaIdArray: res.data.mediaIdArray,
-    });
+    const res2 = await axios.post(
+      config.server.path + config.api.handlePost,
+      {
+        userId: userFromSession.userId,
+        mediaIdArray: res.data.mediaIdArray,
+      },
+      {
+        headers: { 'User-Id': userFromSession.userId },
+      }
+    );
     console.log("Res2", res2);
     console.log("session session", sessionStorage.getItem("user"));
   };

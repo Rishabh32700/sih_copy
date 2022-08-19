@@ -27,6 +27,7 @@ const config = {
         getPhotosForUserId:'getPhotosForUserId',
         getResearchWorkForUserId:'getResearchWorkForUserId',
         deletePost:'deletePost',
+        changeUserRole:'changeUserRole'
 
 
 
