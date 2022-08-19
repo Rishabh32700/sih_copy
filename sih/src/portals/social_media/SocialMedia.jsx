@@ -19,7 +19,6 @@ const SocialMedia = () => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", image.data);
-    console.log(formData.get("file"));
     setLoading(true);
     setProgress(0);
     const res = await axios.post(
@@ -31,7 +30,6 @@ const SocialMedia = () => {
         },
       }
     );
-    console.log("Res1", res);
     setLoading(false);
     setProgress(0);
     var userFromSession = JSON.parse(sessionStorage.getItem("user"));
@@ -85,7 +83,9 @@ const SocialMedia = () => {
                   name="file"
                   onChange={handleFileChange}
                 ></input>
-                <button type="submit">Upload</button>
+                <button type="submit" disabled={image.data === ""}>
+                  Upload
+                </button>
               </form>
             </div>
             <Button
