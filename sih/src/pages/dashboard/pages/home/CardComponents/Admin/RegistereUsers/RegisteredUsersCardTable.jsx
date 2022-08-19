@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "antd";
+import { Button, Switch } from "antd";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,6 +9,8 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import TableCell from "@mui/material/TableCell";
 import { useNavigate } from "react-router-dom";
 import TableRow from "@mui/material/TableRow";
+import axios from "axios";
+import config from "../../../../../../../ApiConfig/Config";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -25,10 +27,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const ITEM_HEIGHT = 25;
 
-const RegisteredUsersCardTable = ({ user }) => {
+const RegisteredUsersCardTable = ({ user, getAllUsersBasicInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+
+  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
+  const userId = userRoleFromSession.userId;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,10 +48,32 @@ const RegisteredUsersCardTable = ({ user }) => {
     console.log(user.userId);
   };
 
-  const handleChangeRoleToAdmin = (checked, event) => {
-    console.log(checked, event);
+  const handleChangeRole = async (checked) => {
+    console.log(checked);
+    let obj;
+    if (checked) {
+      obj = {
+        userId: user.userId,
+        userRole: "1",
+      }
+    } else {
+      obj = {
+        userId: user.userId,
+        userRole: "2",
+      }
+    }
 
-    
+    const res = await axios.patch(
+      config.server.path +
+        config.role.admin +
+        config.api.changeUserRole +
+        `?userId=${userId}`,
+      {
+        ...obj,
+      }
+    );
+    console.log(res);
+    getAllUsersBasicInfo();
   };
 
   return (
@@ -55,12 +82,16 @@ const RegisteredUsersCardTable = ({ user }) => {
       <StyledTableCell align="left">{user.emailAddress}</StyledTableCell>
       <StyledTableCell align="left">{user.userName}</StyledTableCell>
       <StyledTableCell align="left">
-        <Switch
+        {/* <Switch
           style={{ width: "80px" }}
           checkedChildren="Admin"
           unCheckedChildren="Regular"
           onChange={handleChangeRoleToAdmin}
-        />
+          checked={user.userRole === 1}
+        /> */}
+
+        {user.userRole === 2 && <Button onClick={()=>handleChangeRole(true)}>Make Admin</Button>}
+        {user.userRole === 1 && <Button onClick={()=>handleChangeRole(false)}>Make Regular</Button>}
       </StyledTableCell>
       <StyledTableCell align="left">
         <div>

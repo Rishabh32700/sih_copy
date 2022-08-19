@@ -10,14 +10,10 @@ import "./DashboardResearch.css";
 import DoneIcon from "@mui/icons-material/Done";
 import Box from "@material-ui/core/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
-// material
 import { Typography } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
-// import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
-import { Button } from "@material-ui/core";
 import axios from "axios";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
 import config from "../../../../ApiConfig/Config";
 const RESEARCHLIST = [
   {
@@ -150,17 +146,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const DashboardResearch = ({ isAdmin }) => {
-  var isAdmin = false;
-  var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
-  const userId = userRoleFromSession.userId;
-  console.log(userRoleFromSession.role);
-  if (userRoleFromSession.role === 1) {
-    isAdmin = true;
-  } else if (userRoleFromSession.role === 2) {
-    isAdmin = false;
-  }
-  console.log(isAdmin);
+const DashboardResearch = () => {
+  var userFromSession = JSON.parse(sessionStorage.getItem("user"));
+  const userId = userFromSession.userId;
 
   const [pendingResearchPapers, setPendingResearchPapers] = useState([]);
 
@@ -240,11 +228,9 @@ const DashboardResearch = ({ isAdmin }) => {
                 {pendingResearchPapers &&
                   pendingResearchPapers.map((pendingResearchPaper, id) => (
                     <StyledTableRow key={id}>
-                      {isAdmin && (
                         <StyledTableCell align="left">
                           {pendingResearchPaper.userId}
                         </StyledTableCell>
-                      )}
                       <StyledTableCell align="left">
                         {pendingResearchPaper.date}
                       </StyledTableCell>

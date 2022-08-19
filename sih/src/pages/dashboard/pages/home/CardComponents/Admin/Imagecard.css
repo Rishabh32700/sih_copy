@@ -8,6 +8,11 @@
     width: 100%;
     /* border: 2px solid green; */
     box-shadow: 2px 2px 3px grey;
+    
+}
+.post__card__container:hover{
+    cursor: pointer;
+
 }
 
 .post__card:hover .post__card__container{

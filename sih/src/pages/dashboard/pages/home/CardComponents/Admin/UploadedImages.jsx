@@ -148,7 +148,7 @@ const IMAGELIST = [
 ];
 
 const UploadedImages = () => {
-  const [photos, setPhotos] = useState(IMAGELIST);
+  const [photos, setPhotos] = useState([]);
 
   const getApprovedPhotos = async () => {
     const res = await axios.get(

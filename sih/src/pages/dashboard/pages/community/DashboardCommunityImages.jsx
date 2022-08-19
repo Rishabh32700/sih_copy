@@ -110,18 +110,11 @@ const DashboardCommunityImages = ({ isAdmin }) => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  {isAdmin && (
-                    <StyledTableCell align="left">User Id</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Media Id</StyledTableCell>
                   <StyledTableCell align="left">Post Link</StyledTableCell>
-                  {isAdmin && (
-                    <StyledTableCell align="left">Action</StyledTableCell>
-                  )}
-                  {!isAdmin && (
-                    <StyledTableCell align="left">Delete</StyledTableCell>
-                  )}
+                  <StyledTableCell align="left">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

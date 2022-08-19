@@ -73,3 +73,26 @@
     height: 100vh !important;
   }
 }
+
+
+.modal__image__comment{
+  display: flex;
+  flex-direction: row;
+}
+.modal__image__action{
+  display: flex;
+  flex-direction: row;
+  justify-content: p;
+  padding: 10px;
+}
+
+.modal__image__action__icon{
+  padding: 5px;
+  margin: 10px;
+}
+
+.modal__images__comments__byUser{
+  border: 1px solid rgba(0, 0, 0, 0.156);
+  padding:10px;
+  margin: 10px auto;
+}

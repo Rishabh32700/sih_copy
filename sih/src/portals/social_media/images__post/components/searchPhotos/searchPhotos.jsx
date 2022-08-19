@@ -4,12 +4,12 @@ import ImageModal from "../imageModal/imageModal";
 import "./searchPhotos.css";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
+import ImageCardCommunity from "./ImageCard";
 
 const unsplash = createApi({
   accessKey: "Qy5FzE7XDnvR2rmmWz3v5wk06KoXw-DAbvNvaR6oVmw",
   // apiUrl: 'https://api.unsplash.com',
 });
-
 const SearchPhotos = () => {
   const [query, setQuery] = useState("");
   const [pics, setPics] = useState([]);
@@ -97,9 +97,10 @@ const SearchPhotos = () => {
       ) : (
         <div className="card-list">
           {approvedPhotos.map((approvedPhoto, index) => (
-            <div className="card" key={index} onClick={() => showModal(index)}>
-              <img src={approvedPhoto.mediaURL} alt="images" />
-            </div>
+              <ImageCardCommunity
+                image={approvedPhoto}
+                key={approvedPhoto.mediaURL}
+              />
           ))}
         </div>
       )}

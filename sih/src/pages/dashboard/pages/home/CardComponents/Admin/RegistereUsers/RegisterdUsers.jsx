@@ -86,7 +86,7 @@ const RegisterdUsers = () => {
             <TableBody>
               {allUsers &&
                 allUsers.map((user) => (
-                  <RegisteredUsersCardTable key={user.userId} user={user} />
+                  <RegisteredUsersCardTable key={user.userId} user={user} getAllUsersBasicInfo={getAllUsersBasicInfo} />
                 ))}
             </TableBody>
           </Table>

@@ -7,11 +7,14 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
 import config from "../../../../ApiConfig/Config";
 import axios from "axios";
+import { Button, Space, Modal, Input, DatePicker } from "antd";
 
 // components
 const DashboardHome = ({}) => {
   const navigate = useNavigate();
   const theme = useTheme();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   var isAdmin = false;
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
@@ -41,7 +44,7 @@ const DashboardHome = ({}) => {
     if (res.data.userDetails.length === 0) {
       setRegisteredUsersCount(0);
     } else {
-      setRegisteredUsersCount(res.data.userDetails[0].totalSimpleUsers);
+      setRegisteredUsersCount(res.data.userDetails[0].totalUsers);
     }
     console.log("Approved users", res.data);
   };
@@ -62,7 +65,6 @@ const DashboardHome = ({}) => {
     // console.log(res);
   };
 
-
   const getApprovedPhotosCount = async () => {
     const res = await axios.get(
       config.server.path +
@@ -73,12 +75,12 @@ const DashboardHome = ({}) => {
     if (res.data.approvedPhotosCount.length === 0) {
       setApprovedPhotosCount(0);
     } else {
-      setApprovedPhotosCount(res.data.approvedPhotosCount[0].totalApprovedPhotos);
+      setApprovedPhotosCount(
+        res.data.approvedPhotosCount[0].totalApprovedPhotos
+      );
     }
     console.log("Approved Photos", res.data);
   };
-
-
 
   const getApprovedVideosCount = async () => {
     const res = await axios.get(
@@ -122,11 +124,14 @@ const DashboardHome = ({}) => {
     }
     console.log("Approved Research Work", res.data);
   };
-
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
   useEffect(() => {
     getRegisteredUsersCount();
-    getPendingPhotosCount();
-    getPendingVideosCount();
     getApprovedPhotosCount();
     getApprovedVideosCount();
     getPendingResearchWorkCount();
@@ -244,6 +249,8 @@ const DashboardHome = ({}) => {
                     />
                   </div>
                 </div>
+
+               
               </div>
             </div>
           </div>
