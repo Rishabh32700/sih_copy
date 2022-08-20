@@ -10,6 +10,7 @@ import config from "../../ApiConfig/Config";
 import { toast } from "react-toastify";
 import { Document, Page } from "react-pdf";
 import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ResearchWork = () => {
   const toastId = useRef(null);
@@ -129,10 +130,25 @@ const ResearchWork = () => {
 
     getApprovedResearchWork();
   }, [refresh]);
+  const navigate = useNavigate();
   const notify = (msg) => {
-    toast.error(msg, {
-      toastId: "id",
-    });
+    toast.error(
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
+        {msg}
+        <Button variant="contained" onClick={() => navigate("/login")}>
+          Login
+        </Button>
+      </div>,
+      {
+        toastId: "id",
+      }
+    );
   };
   return (
     <>

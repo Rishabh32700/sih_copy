@@ -1,63 +1,115 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ImagesPost from "./images__post/ImagesPost";
 import "./socialMedia.css";
 import VideoPost from "./video__posts/VideoPost";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import config from "../../ApiConfig/Config";
-import { Box, LinearProgress, Typography } from "@material-ui/core";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SocialMedia = () => {
-  const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
-
-  const [image, setImage] = useState({ preview: "", data: "" });
-
-  const [progress, setProgress] = useState(0);
-  const [loading, setLoading] = useState(false);
-  var userFromSession = JSON.parse(sessionStorage.getItem("user"));
-  console.log(userFromSession.userId);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const toastId = useRef(null);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const [imgFile, setImgFile] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  const [imagesOrVideos, setImagesOrVideos] = useState(
+    <ImagesPost refresh={refresh} setRefresh={setRefresh} />
+  );
+  const navigate = useNavigate();
+  const handleUpload = async () => {
     let formData = new FormData();
-    formData.append("file", image.data);
-    setLoading(true);
-    setProgress(0);
-    const res = await axios.post(
-      config.server.path + config.api.uploadMedia,
-      formData,
-      {
-        onUploadProgress: (data) => {
-          setProgress(Math.round((100 * data.loaded) / data.total));
+    formData.append("file", imgFile.data);
+    console.log("file uploading");
+    try {
+      const res = await axios.post(
+        config.server.path + config.api.uploadMedia,
+        formData,
+        {
+          onUploadProgress: (p) => {
+            const progress = p.loaded / p.total;
+            if (toastId.current === null) {
+              toastId.current = toast("Upload in Progress", { progress });
+            } else {
+              toast.update(toastId.current, {
+                progress,
+                type: toast.TYPE.INFO,
+              });
+            }
+          },
+          headers: { "User-Id": user.userId },
+        }
+      );
+
+      toast.done(toastId.current);
+      toast.update(toastId.current, {
+        render: "Upload Done",
+        type: toast.TYPE.SUCCESS,
+        autoClose: 5000,
+      });
+      const res2 = await axios.post(
+        config.server.path + config.api.handlePost,
+        {
+          userId: user.userId,
+          mediaIdArray: res.data.mediaIdArray,
         },
-        headers: { 'User-Id': userFromSession.userId },
-      }
-    );
-    setLoading(false);
-    setProgress(0);
+        {
+          headers: { "User-Id": user.userId },
+        }
+      );
 
-    const res2 = await axios.post(
-      config.server.path + config.api.handlePost,
+      setRefresh(() => {
+        console.log("refresh true");
+        return true;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setImgFile(null);
+    toastId.current = null;
+    console.log("file uploaded");
+  };
+  const notify = (msg) => {
+    toast.error(
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
+        {msg}
+        <Button variant="contained" onClick={() => navigate("/login")}>
+          Login
+        </Button>
+      </div>,
       {
-        userId: userFromSession.userId,
-        mediaIdArray: res.data.mediaIdArray,
-      },
-      {
-        headers: { 'User-Id': userFromSession.userId },
+        toastId: "id",
       }
     );
-    console.log("Res2", res2);
-    console.log("session session", sessionStorage.getItem("user"));
   };
 
-  const handleFileChange = (e) => {
+  const handleChange = (e) => {
+    console.log("file change");
     const img = {
-      preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
+      preview: URL.createObjectURL(e.target.files[0]),
     };
-    setImage(img);
+    setImgFile(img);
   };
-  console.log(progress);
+
+  useEffect(() => {
+    if (imgFile) {
+      // console.log("not null");
+      handleUpload();
+    } else {
+      // console.log("file null");
+    }
+  }, [imgFile]);
+  useEffect(() => {
+    console.log(refresh);
+    setRefresh(false);
+  }, [refresh]);
   return (
     <>
       <div className="socialMedia">
@@ -74,26 +126,43 @@ const SocialMedia = () => {
                 fontSize: ".8rem",
               }}
               onClick={() => {
-                setImagesOrVideos(<ImagesPost />);
+                setImagesOrVideos(
+                  <ImagesPost refresh={refresh} setRefresh={setRefresh} />
+                );
               }}
             >
               Images
             </Button>
             <div className="App">
-              {/* {image.preview && (
-                <img src={image.preview} width="100" height="100" />
-              )} */}
-              <hr></hr>
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="file"
-                  name="file"
-                  onChange={handleFileChange}
-                ></input>
-                <button type="submit" disabled={image.data === ""}>
+              <div>
+                <Button
+                  variant="contained"
+                  style={{
+                    color: "#1976d2",
+                    backgroundColor: "white",
+                    fontWeight: "700",
+                    cursor: "pointer",
+                  }}
+                  component="label"
+                >
                   Upload
-                </button>
-              </form>
+                  <input
+                    hidden
+                    accept="image/jpeg"
+                    type="file"
+                    onChangeCapture={(e) => handleChange(e)}
+                    onClick={(e) => {
+                      if (user === null) {
+                        e.preventDefault();
+                        notify("Login before Uploading");
+                      } else {
+                        e.target.value = null;
+                        console.log(e.target.value);
+                      }
+                    }}
+                  />
+                </Button>
+              </div>
             </div>
             <Button
               variant="contained"
@@ -112,7 +181,7 @@ const SocialMedia = () => {
               Videos
             </Button>
           </div>
-          {loading ? (
+          {/* {loading ? (
             <div style={{ width: "80%", margin: "20px" }}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box sx={{ width: "100%", mr: 1 }}>
@@ -132,7 +201,7 @@ const SocialMedia = () => {
             </div>
           ) : (
             <></>
-          )}
+          )} */}
           <div className="social__media__rendering">{imagesOrVideos}</div>
         </div>
       </div>

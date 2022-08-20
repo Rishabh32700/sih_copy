@@ -3,9 +3,6 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
@@ -14,10 +11,8 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./authentication.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import FormControl from "@mui/material/FormControl";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
 
 import config from "../ApiConfig/Config";
 
@@ -130,7 +125,7 @@ const Login = () => {
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              <div style={{ marginTop: "1rem" }}>
+              {/* <div style={{ marginTop: "1rem" }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">
                     {t("Log_in_Role")}
@@ -154,7 +149,7 @@ const Login = () => {
                     </MenuItem>
                   </Select>
                 </FormControl>
-              </div>
+              </div> */}
             </div>
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
@@ -184,6 +179,11 @@ const Login = () => {
               <div className="authentication__links__signup">
                 <p className="links">
                   <Link to="/signup">{t("Log_in_Do_not_have_accnt")} ?</Link>
+                </p>
+              </div>
+              <div className="authentication__links__signup">
+                <p className="links">
+                  <Link to="/forgotPassword">{"Forgot Password"} ?</Link>
                 </p>
               </div>
             </div>
