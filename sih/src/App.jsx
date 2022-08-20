@@ -38,6 +38,7 @@ import RegisteredUserUploadedVideos from "./pages/dashboard/pages/home/CardCompo
 import RegisteredUserUploadedResearch from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
 import RegisteredUserScheduledWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserScheduledWebinar";
 import RegisteredUserRegisteredWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserRegisteredWebinar";
+import ForgotPassword from "./pages/ForgotPassword";
 
 export let gData = createContext();
 
@@ -73,10 +74,12 @@ const App = () => {
               set_dashboard_main_menu_state,
             }}
           >
-            {pathname !== "/signup" && pathname !== "/login" && (
-              <ThemeLanguageSwitcher />
-            )}
-            {pathname !== "/signup" && pathname !== "/login" && <PortalsMenu />}
+            {pathname !== "/signup" &&
+              pathname !== "/login" &&
+              pathname !== "/forgotPassword" && <ThemeLanguageSwitcher />}
+            {pathname !== "/signup" &&
+              pathname !== "/login" &&
+              pathname !== "/forgotPassword" && <PortalsMenu />}
 
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -86,6 +89,7 @@ const App = () => {
               <Route path="/community" element={<SocialMedia />} />
               <Route path="/webinar" element={<Webinars />} />
               <Route path="/research-section" element={<ResearchWork />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
 
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="" element={<DashboardHome />} />

@@ -10,7 +10,7 @@ const unsplash = createApi({
   accessKey: "Qy5FzE7XDnvR2rmmWz3v5wk06KoXw-DAbvNvaR6oVmw",
   // apiUrl: 'https://api.unsplash.com',
 });
-const SearchPhotos = () => {
+const SearchPhotos = ({ refresh, setRefresh }) => {
   const [query, setQuery] = useState("");
   const [pics, setPics] = useState([]);
   const [show, setShow] = useState(false);
@@ -33,7 +33,7 @@ const SearchPhotos = () => {
     (async () => {
       if (query === "") {
         setPics(initialData);
-        
+
         return;
       }
     })();
@@ -45,16 +45,17 @@ const SearchPhotos = () => {
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
     );
     setApprovedPhotos(res.data.approvedPhotosArray);
-    
-    console.log(res);
     setLoading(false);
+    setRefresh(false);
   };
 
   useEffect(() => {
     getApprovedPhotos();
-  }, []);
+  }, [refresh]);
 
-  console.log(loading);
+  // console.log(loading);
+  console.log(refresh);
+
   return (
     <div className="searchPhotos">
       {/* <ImageModal show={show} handleClose={hideModal}>
@@ -98,10 +99,10 @@ const SearchPhotos = () => {
       ) : (
         <div className="card-list">
           {approvedPhotos.map((approvedPhoto, index) => (
-              <ImageCardCommunity
-                image={approvedPhoto}
-                key={approvedPhoto.mediaURL}
-              />
+            <ImageCardCommunity
+              image={approvedPhoto}
+              key={approvedPhoto.mediaURL}
+            />
           ))}
         </div>
       )}
