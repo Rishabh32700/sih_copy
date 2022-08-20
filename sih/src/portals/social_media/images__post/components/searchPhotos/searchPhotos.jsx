@@ -33,7 +33,7 @@ const SearchPhotos = () => {
     (async () => {
       if (query === "") {
         setPics(initialData);
-
+        
         return;
       }
     })();
@@ -45,6 +45,7 @@ const SearchPhotos = () => {
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
     );
     setApprovedPhotos(res.data.approvedPhotosArray);
+    
     console.log(res);
     setLoading(false);
   };

@@ -73,7 +73,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       postStatus: "2",
     };
     const res = await axios.post(
-      config.server.path + config.api.updatePostStatus,
+      config.server.path + config.api.updatePostStatus + `?userId=${userId}`,
       {
         ...obj,
       }
@@ -87,7 +87,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
       postStatus: "1",
     };
     const res = await axios.post(
-      config.server.path + config.api.updatePostStatus,
+      config.server.path + config.api.updatePostStatus + `?userId=${userId}`,
       {
         ...obj,
       }

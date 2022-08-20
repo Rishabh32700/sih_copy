@@ -7,15 +7,22 @@ import axios from "axios";
 import config from "../../ApiConfig/Config";
 import { Box, LinearProgress, Typography } from "@material-ui/core";
 
+
 const SocialMedia = () => {
+  debugger
   const [imagesOrVideos, setImagesOrVideos] = useState(<ImagesPost />);
 
   const [image, setImage] = useState({ preview: "", data: "" });
 
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-  var userFromSession = JSON.parse(sessionStorage.getItem("user"));
-  console.log(userFromSession.userId);
+
+
+  // if(sessionStorage.getItem("user")){
+    var userFromSession = JSON.parse(sessionStorage.getItem("user"));
+    // console.log(userFromSession.userId);
+
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +30,7 @@ const SocialMedia = () => {
     formData.append("file", image.data);
     setLoading(true);
     setProgress(0);
+
     const res = await axios.post(
       config.server.path + config.api.uploadMedia,
       formData,
@@ -56,6 +64,7 @@ const SocialMedia = () => {
       data: e.target.files[0],
     };
     setImage(img);
+
   };
   console.log(progress);
   return (
@@ -79,6 +88,10 @@ const SocialMedia = () => {
             >
               Images
             </Button>
+
+              {
+                userFromSession && userFromSession.userId && 
+              
             <div className="App">
               {/* {image.preview && (
                 <img src={image.preview} width="100" height="100" />
@@ -88,6 +101,7 @@ const SocialMedia = () => {
                 <input
                   type="file"
                   name="file"
+                  accept="image/*, video/*"
                   onChange={handleFileChange}
                 ></input>
                 <button type="submit" disabled={image.data === ""}>
@@ -95,6 +109,8 @@ const SocialMedia = () => {
                 </button>
               </form>
             </div>
+              
+              }
             <Button
               variant="contained"
               style={{

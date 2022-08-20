@@ -33,7 +33,6 @@ const Login = () => {
     const loginData = {
       email: data.email,
       password: data.password,
-      loginType: `${data.role}`,
     };
     console.log(loginData);
 
@@ -130,31 +129,7 @@ const Login = () => {
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              <div style={{ marginTop: "1rem" }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    {t("Log_in_Role")}
-                  </InputLabel>
-                  <Select
-                    fullWidth
-                    defaultValue={t("Log_in_Role")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Type"
-                    variant="outlined"
-                    {...register("role", {
-                      required: "Type is required",
-                    })}
-                    error={errors.type}
-                    helperText={errors.type ? errors.type.message : ""}
-                  >
-                    <MenuItem value={1}>{t("Log_in_page_admin_type")}</MenuItem>
-                    <MenuItem value={2}>
-                      {t("Log_in_page_regular_type")}
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
+
             </div>
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
@@ -164,6 +139,7 @@ const Login = () => {
                       icon={<CheckBoxOutlineBlankIcon />}
                       checkboxicon={<CheckBoxIcon />}
                       name="checkedI"
+                      
                     />
                   }
                   label={t("Log_in_Remember_me")}
