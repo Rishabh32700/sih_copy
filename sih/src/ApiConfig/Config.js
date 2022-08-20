@@ -28,7 +28,8 @@ const config = {
     // forgotpassword : '/forgotpassword',
     uploadResearchWork: "uploadResearchWork",
     like:'like',
-    comment:'comment'
+    comment:'comment',
+    getCommentsOnPost:'getCommentsOnPost'
   },
   role: {
     admin: "admin/",

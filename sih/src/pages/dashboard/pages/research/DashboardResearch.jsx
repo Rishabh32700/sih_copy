@@ -177,10 +177,8 @@ const DashboardResearch = () => {
         "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
         {
           ...obj,
-          
         },
-        {headers: {"User-Id":userId}}
-
+        { headers: { "User-Id": userId } }
       );
       getPendingResearchPapers();
     } catch (error) {
@@ -199,9 +197,7 @@ const DashboardResearch = () => {
       {
         ...obj,
       },
-        {headers: {"User-Id":userId}}
-
-
+      { headers: { "User-Id": userId } }
     );
     getPendingResearchPapers();
   };
@@ -234,9 +230,9 @@ const DashboardResearch = () => {
                 {pendingResearchPapers &&
                   pendingResearchPapers.map((pendingResearchPaper, id) => (
                     <StyledTableRow key={id}>
-                        <StyledTableCell align="left">
-                          {pendingResearchPaper.userId}
-                        </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {pendingResearchPaper.userId}
+                      </StyledTableCell>
                       <StyledTableCell align="left">
                         {pendingResearchPaper.date}
                       </StyledTableCell>
@@ -256,13 +252,17 @@ const DashboardResearch = () => {
                         <Box component="div" sx={{ display: "inline" }}>
                           <CancelIcon
                             color="action"
-                            onClick={handleCancelClick(pendingResearchPaper.mediaId)}
+                            onClick={handleCancelClick(
+                              pendingResearchPaper.mediaId
+                            )}
                           />
                         </Box>
                         <Box component="div" sx={{ display: "inline" }}>
                           <DoneIcon
                             color="primary"
-                            onClick={handleDoneClick(pendingResearchPaper.mediaId)}
+                            onClick={handleDoneClick(
+                              pendingResearchPaper.mediaId
+                            )}
                           />
                         </Box>
                       </StyledTableCell>

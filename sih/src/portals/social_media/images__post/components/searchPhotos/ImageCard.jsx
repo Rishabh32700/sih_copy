@@ -9,9 +9,25 @@ const { Text } = Typography;
 const ImageCardCommunity = ({ image }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState("");
   var userFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userFromSession.userId;
-  const showModal = () => {
+  const showModal = async () => {
+    try {
+      const res = await axios.get(
+        config.server.path +
+          config.api.getCommentsOnPost +
+          `?mediaId=${image.mediaId}`,
+        {
+          headers: { "User-Id": userId },
+        }
+      );
+      setComments(res.data.commentsOnPostArray);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
     setIsModalVisible(true);
   };
 
@@ -137,26 +153,14 @@ const ImageCardCommunity = ({ image }) => {
           </div>
 
           <div className="modal__images__comments">
-            <div className="modal__images__comments__byUser">
-              Name : Nand Kumar <br />
-              Date : 2 August 2022 <br />
-              Comment: Very NOice Pic
-            </div>
-            <div className="modal__images__comments__byUser">
-              Name : Nand Kumar <br />
-              Date : 2 August 2022 <br />
-              Comment: Very NOice Pic
-            </div>
-            <div className="modal__images__comments__byUser">
-              Name : Nand Kumar <br />
-              Date : 2 August 2022 <br />
-              Comment: Very NOice Pic
-            </div>
-            <div className="modal__images__comments__byUser">
-              Name : Nand Kumar <br />
-              Date : 2 August 2022 <br />
-              Comment: Very NOice Pic
-            </div>
+            {comments &&
+              comments.map((comment) => (
+                <div className="modal__images__comments__byUser" key={comment.mediaId}>
+                  Name : {comment.fullName}<br />
+                  Date : 2 August 2022 <br />
+                  Comment: {comment.commentData}
+                </div>
+              ))}
           </div>
         </Modal>
       </div>
