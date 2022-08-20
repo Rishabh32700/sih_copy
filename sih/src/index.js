@@ -9,6 +9,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import HttpApi from "i18next-http-backend";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from 'react-redux';
+import store from './store/store'
 
 i18n
   .use(initReactI18next)
@@ -27,7 +29,10 @@ i18n
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
+
     <ToastContainer />
   </BrowserRouter>
 );

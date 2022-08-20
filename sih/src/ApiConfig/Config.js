@@ -27,6 +27,9 @@ const config = {
     // verifyOtp: '/user/verify?phoneNumber',
     // forgotpassword : '/forgotpassword',
     uploadResearchWork: "uploadResearchWork",
+    like:'like',
+    comment:'comment',
+    getCommentsOnPost:'getCommentsOnPost'
   },
   role: {
     admin: "admin/",
