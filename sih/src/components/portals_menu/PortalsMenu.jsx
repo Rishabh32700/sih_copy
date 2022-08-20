@@ -24,16 +24,12 @@ const settings = [
     RoutingLink: "/",
   },
   {
-    settingName: "Account",
-    RoutingLink: "/",
-  },
-  {
     settingName: "Dashboard",
     RoutingLink: "/dashboard",
   },
   {
     settingName: "Logout",
-    RoutingLink: "/",
+    RoutingLink: "/login",
   },
 ];
 
@@ -53,6 +49,16 @@ const PortalsMenu = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleClick = (key) => {
+    debugger
+    console.log("key",key);
+    if(key == "Logout"){
+      console.log(key);
+      sessionStorage.removeItem("user")
+      localStorage.removeItem("user")
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -245,8 +251,9 @@ const PortalsMenu = () => {
                   >
                     <Typography
                       textAlign="center"
-                      onClick={() => {
+                      onClick={(key) => {
                         myData.setState(index + 5);
+                        handleClick(setting.settingName)
                         navigate(setting.RoutingLink);
                       }}
                     >

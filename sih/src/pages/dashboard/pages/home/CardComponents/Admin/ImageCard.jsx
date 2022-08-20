@@ -45,7 +45,7 @@ const ImageCard = ({ post }) => {
           <CardMedia
             component="img"
             height="115"
-            image={post.mediaURL}
+            image={post.mediaId}
             alt="org image"
             className="img"
             onClick={()=>{console.log("hello");showModal()}}
@@ -56,7 +56,7 @@ const ImageCard = ({ post }) => {
             <Typography gutterBottom variant="p" component="div">
               Media Id : {post.mediaId}
               <br />
-              When : {post.date} <br />
+              When : {post.currentTimeStamp} <br />
               Likes : {post.totalLikeCount} <br />
               Comment : {post.totalCommentCount} <br />
             </Typography>

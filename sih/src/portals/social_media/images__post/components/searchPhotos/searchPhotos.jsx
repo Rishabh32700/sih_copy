@@ -45,7 +45,6 @@ const SearchPhotos = ({ refresh, setRefresh }) => {
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
     );
     setApprovedPhotos(res.data.approvedPhotosArray);
-
     setLoading(false);
     setRefresh(false);
   };

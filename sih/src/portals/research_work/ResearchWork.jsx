@@ -22,23 +22,7 @@ const ResearchWork = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const pdfs = [
-    {
-      id: 1,
-      label: "Document 1",
-      url: "https://test-ptab-docs-fe-assignment.s3.amazonaws.com/169020134",
-    },
-    {
-      id: 2,
-      label: "Document 2",
-      url: "https://test-ptab-docs-fe-assignment.s3.amazonaws.com/169020136",
-    },
-    {
-      id: 3,
-      label: "Document 3",
-      url: "https://test-ptab-docs-fe-assignment.s3.amazonaws.com/169020138",
-    },
-  ];
+  const researchPdfs = [];
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
@@ -87,6 +71,9 @@ const ResearchWork = () => {
           headers: { "User-Id": user.userId },
         }
       );
+      {
+        console.log(res);
+      }
 
       toast.done(toastId.current);
       toast.update(toastId.current, {
@@ -123,6 +110,8 @@ const ResearchWork = () => {
         config.server.path + config.api.getApprovedResearchWork
       );
       console.log(res.data.approvedResearchWork);
+      researchPdfs.push(...res.data.approvedResearchWork);
+      console.log(researchPdfs);
       setPdfList(res.data.approvedResearchWork);
       setRefresh(false);
       setLoading(false);
@@ -185,28 +174,31 @@ const ResearchWork = () => {
               ) : (
                 <ul style={{ overflow: "scroll" }}>
                   {pdfList.map((data, key) => (
-                    <li
-                      key={data.mediaId}
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        height: "100px",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <Button
+                    // return (
+                      <li
+                        key={data.mediaId}
                         style={{
-                          color: "#1976d2",
-                          backgroundColor: "white",
-                          fontWeight: "700",
-                          cursor: "pointer",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          height: "100px",
+                          justifyContent: "space-around",
                         }}
-                        onClick={() => setUrl(data.mediaURL)}
                       >
-                        {`Document ${key + 1}`}
-                      </Button>
-                    </li>
+                        {console.log("data", data)}
+                        <Button
+                          style={{
+                            color: "#1976d2",
+                            backgroundColor: "white",
+                            fontWeight: "700",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => setUrl(data.mediaURL)}
+                        >
+                          {`Document ${key + 1}`}
+                        </Button>
+                      </li>
+                    // );
                   ))}
                 </ul>
               )}
@@ -239,27 +231,20 @@ const ResearchWork = () => {
                 </Button>
               </div>
             </div>
-            <div className="webviewer" style={{ height: "100%" }}>
-              {/* <object
-                width="100%"
-                height="100%"
-                data={
-                  "https://vvgnli-mediabucket.s3.amazonaws.com/1bf7e53c-2fbf-41c0-adb2-1c2a2243e256"
-                }
-                type="application/pdf"
-              >
-                {" "}
-              </object> */}
-              <Document
-                file={
-                  "https://vvgnli-mediabucket.s3.amazonaws.com/1bf7e53c-2fbf-41c0-adb2-1c2a2243e256"
-                }
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
-                <Page pageNumber={pageNumber} />
-              </Document>
-            </div>
+            
+           
+              
+              
           </SplitPane>
+             
+                  <div className="webviewer" style={{ height: "100%" }}>
+                    <object
+                      width="100%"
+                      height="100%"
+                      data={url}
+                      type="application/pdf"
+                    ></object>
+                  </div>
         </div>
       </div>
     </>

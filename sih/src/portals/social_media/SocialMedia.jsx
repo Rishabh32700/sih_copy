@@ -133,37 +133,42 @@ const SocialMedia = () => {
             >
               Images
             </Button>
-            <div className="App">
-              <div>
-                <Button
-                  variant="contained"
-                  style={{
-                    color: "#1976d2",
-                    backgroundColor: "white",
-                    fontWeight: "700",
-                    cursor: "pointer",
-                  }}
-                  component="label"
-                >
-                  Upload
-                  <input
-                    hidden
-                    accept="image/jpeg"
-                    type="file"
-                    onChangeCapture={(e) => handleChange(e)}
-                    onClick={(e) => {
-                      if (user === null) {
-                        e.preventDefault();
-                        notify("Login before Uploading");
-                      } else {
-                        e.target.value = null;
-                        console.log(e.target.value);
-                      }
+
+            {
+              // userFromSession && userFromSession.userId &&
+
+              <div className="App">
+                <div>
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: "#1976d2",
+                      backgroundColor: "white",
+                      fontWeight: "700",
+                      cursor: "pointer",
                     }}
-                  />
-                </Button>
+                    component="label"
+                  >
+                    Upload
+                    <input
+                      hidden
+                      accept="image/jpeg"
+                      type="file"
+                      onChangeCapture={(e) => handleChange(e)}
+                      onClick={(e) => {
+                        if (user === null) {
+                          e.preventDefault();
+                          notify("Login before Uploading");
+                        } else {
+                          e.target.value = null;
+                          console.log(e.target.value);
+                        }
+                      }}
+                    />
+                  </Button>
+                </div>
               </div>
-            </div>
+            }
             <Button
               variant="contained"
               style={{

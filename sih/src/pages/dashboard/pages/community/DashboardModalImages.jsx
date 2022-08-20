@@ -163,33 +163,6 @@ const DashboardModalImages = ({ isAdmin }) => {
     console.log(res);
   };
 
-  const handleCancelClick = async (id) => {
-    console.log("Cancel", id);
-    const obj = {
-      mediaId: id,
-      postStatus: "2",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
-    );
-  };
-
-  const handleDoneClick = async (id) => {
-    console.log("Done");
-    const obj = {
-      mediaId: id,
-      postStatus: "1",
-    };
-    const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
-      {
-        ...obj,
-      }
-    );
-  };
   useEffect(() => {
     getPhotos();
   }, []);

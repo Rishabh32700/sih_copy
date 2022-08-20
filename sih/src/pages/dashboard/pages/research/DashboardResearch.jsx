@@ -177,7 +177,10 @@ const DashboardResearch = () => {
         "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
         {
           ...obj,
-        }
+          
+        },
+        {headers: {"User-Id":userId}}
+
       );
       getPendingResearchPapers();
     } catch (error) {
@@ -195,7 +198,10 @@ const DashboardResearch = () => {
       "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
       {
         ...obj,
-      }
+      },
+        {headers: {"User-Id":userId}}
+
+
     );
     getPendingResearchPapers();
   };

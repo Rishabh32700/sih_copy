@@ -34,7 +34,7 @@ import DashboardModalImages from "./pages/dashboard/pages/community/DashboardMod
 import DashboardHome from "./pages/dashboard/pages/home/DashboardHome";
 import RegisteredUserDetails from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserDetails";
 import RegisteredUserUploadedImages from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
-import RegisteredUserUploadedVideos from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
+import RegisteredUserUploadedVideos from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserVideos";
 import RegisteredUserUploadedResearch from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
 import RegisteredUserScheduledWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserScheduledWebinar";
 import RegisteredUserRegisteredWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserRegisteredWebinar";

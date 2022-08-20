@@ -28,7 +28,6 @@ const Login = () => {
     const loginData = {
       email: data.email,
       password: data.password,
-      loginType: `${data.role}`,
     };
     console.log(loginData);
 
