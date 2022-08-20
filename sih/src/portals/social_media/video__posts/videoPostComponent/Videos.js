@@ -12,10 +12,8 @@ import Ticker from "react-ticker";
 function Videos({
   id,
   src,
-  description,
   like,
   dislike,
-  share,
   comment,
 }) {
   const [playing, setPlaying] = useState(false);
@@ -50,12 +48,7 @@ function Videos({
 
       <div className="shortsContainer">
         <div className="shortsVideoTop">
-          <div className="shortsVideoTopIcon">
-            <ArrowBackIcon />
-          </div>
-          <div className="shortsVideoTopIcon">
-            <MoreVertIcon />
-          </div>
+
         </div>
         <div className="shortsVideoSideIcons">
           <div className="shortsVideoSideIcon">
@@ -71,10 +64,6 @@ function Videos({
             <p>{comment}</p>
           </div>
 
-          <div className="shortsVideoSideIcon">
-            <NearMeIcon />
-            <p>{share}</p>
-          </div>
         </div>
         <div className="shortsBottom">
           <div className="shortDetails">
