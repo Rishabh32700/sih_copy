@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Grid } from "@mui/material";
-import ImageCard from "./ImageCard";
+import ImageCard from "../ImageCard";
 import { Typography, Button } from "@mui/material";
 import axios from "axios";
-import AppWidgetSummary from "../../AppWidgetSummary";
+import AppWidgetSummary from "../../../AppWidgetSummary";
+import { useParams } from "react-router-dom";
+import config from "../../../../../../../ApiConfig/Config";
 
 const IMAGELIST = [
   {
@@ -146,13 +148,12 @@ const IMAGELIST = [
 ];
 
 const RegisteredUserUploadedVideos = () => {
-
   const [videos, setVideos] = useState([]);
   const { userId } = useParams();
 
   const getUserVideos = async () => {
     const res = await axios.get(
-      config.server.path + config.api.getVideosForUserId+`?userId=${userId}`
+      config.server.path + config.api.getVideosForUserId + `?userId=${userId}`
     );
     setVideos(res.data.photosArray);
     console.log(res.data);
@@ -166,7 +167,7 @@ const RegisteredUserUploadedVideos = () => {
       <div className="dashboard__community__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-          User Videos Section
+            User Videos Section
           </Typography>
         </div>
         <div className="uploaded__images__count">
