@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import { Grid } from "@mui/material";
 import ImageCard from "../ImageCard";
-import { Typography, Button } from "@mui/material";
 import axios from "axios";
 import AppWidgetSummary from "../../../AppWidgetSummary";
 import config from "../../../../../../../ApiConfig/Config";
 import "../uploadedImages.css";
 import { useParams } from "react-router-dom";
-
 
 const RegisteredUserUploadedImages = () => {
   const [photos, setPhotos] = useState([]);
@@ -22,7 +17,7 @@ const RegisteredUserUploadedImages = () => {
 
   const getUserPhotos = async () => {
     const res = await axios.get(
-      config.server.path + config.api.getPhotosForUserId+`?userId=${userId}`
+      config.server.path + config.api.getPhotosForUserId + `?userId=${userId}`
     );
     console.log(res);
     setRegularTotalPhotosCount(

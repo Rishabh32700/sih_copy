@@ -120,7 +120,6 @@ const ImageCardCommunity = ({ image }) => {
             left: "35%",
           }}
         >
-          {/* <div style={{border:"2px solid green", width:"100%", height:"100%", overflow:"scroll"}}> */}
 
           <div className="modal__image">
             <img

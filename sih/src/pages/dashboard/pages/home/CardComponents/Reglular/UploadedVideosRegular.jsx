@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ImageCard from "../Admin/ImageCard";
+import VideoCard from "../Admin/VideoCard";
 import AppWidgetSummary from "../../AppWidgetSummary";
 import "../Admin/uploadedImages.css";
 import config from "../../../../../../ApiConfig/Config";
@@ -83,7 +83,7 @@ const UploadedVideosRegular = () => {
           {videos &&
             videos.map((post, id) => (
               <div className="uploaded__images__card">
-                <ImageCard post={post} key={id} />
+                <VideoCard post={post} key={id} />
               </div>
             ))}
         </div>
