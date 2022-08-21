@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import ImageCard from "../ImageCard";
 import axios from "axios";
-import ImageCard from "../Admin/ImageCard";
+import RegularImageCard from "./RegularImageCard";
 import AppWidgetSummary from "../../AppWidgetSummary";
 import "../Admin/uploadedImages.css";
 import config from "../../../../../../ApiConfig/Config";
@@ -87,7 +87,7 @@ const UploadedImagesRegular = () => {
           {photos &&
             photos.map((post, id) => (
               <div className="uploaded__images__card">
-                <ImageCard post={post} key={id} />
+                <RegularImageCard post={post} key={id} />
               </div>
             ))}
         </div>

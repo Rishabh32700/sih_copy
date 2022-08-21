@@ -7,7 +7,7 @@ import config from "../../../../../../ApiConfig/Config";
 import "./Imagecard.css";
 import axios from "axios";
 import { Button, Modal } from "antd";
-const ImageCard = ({ post }) => {
+const ImageCard = ({ post,getApprovedPhotos }) => {
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
   const handleDeletePost = async () => {
@@ -21,6 +21,7 @@ const ImageCard = ({ post }) => {
           mediaId: post.mediaId,
         }
       );
+      await getApprovedPhotos();
       console.log(res);
     } catch (error) {}
   };
@@ -39,16 +40,14 @@ const ImageCard = ({ post }) => {
         <div className="post__card__post_info">
           <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
             <Typography gutterBottom variant="p" component="div">
-              Media Id : {post.mediaId}
+              {/* Media Id : {post.mediaId} */}
               <br />
               When : {post.currentTimeStamp} <br />
               Likes : {post.totalLikeCount} <br />
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              {post && post.status === 1 && (
-                <Button onClick={handleDeletePost}>Delete Post</Button>
-              )}
+                <Button onClick={handleDeletePost}  type="danger">Delete Post</Button>
             </div>
           </CardContent>
         </div>

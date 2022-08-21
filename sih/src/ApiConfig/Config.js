@@ -29,7 +29,8 @@ const config = {
     uploadResearchWork: "uploadResearchWork",
     like:'like',
     comment:'comment',
-    getCommentsOnPost:'getCommentsOnPost'
+    getCommentsOnPost:'getCommentsOnPost',
+    getLikedPost:'getLikedPost'
   },
   role: {
     admin: "admin/",
