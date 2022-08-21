@@ -12,135 +12,7 @@ import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
 
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    mediaId: "adasfffsaddda.jpg",
-
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    mediaId: "adasfffsaddda.jpg",
-
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    mediaId: "adasfffsaddda.jpg",
-
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -171,7 +43,7 @@ const RegisteredUserUploadedResearch = () => {
       config.server.path + config.api.getResearchWorkForUserId + `?userId=${userId}`
     );
     console.log(res.data);
-    setResearchWorks(res.data.photosArray);
+    setResearchWorks(res.data.researchWorkArray);
   };
 
   useEffect(() => {
@@ -183,7 +55,7 @@ const RegisteredUserUploadedResearch = () => {
       <div className="dashboard__research__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Research Section
+            Research Section for User {userId}
           </Typography>
         </div>
         <div className="dashboard__research__table">
@@ -191,7 +63,6 @@ const RegisteredUserUploadedResearch = () => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="left">User Id</StyledTableCell>
                   <StyledTableCell align="left">Date</StyledTableCell>
                   <StyledTableCell align="left">Media ID</StyledTableCell>
                   <StyledTableCell align="left">Paper Link</StyledTableCell>
@@ -203,17 +74,16 @@ const RegisteredUserUploadedResearch = () => {
                   researchWorks.map((researchWork, id) => (
                     <StyledTableRow key={id}>
                       <StyledTableCell align="left">
-                        {researchWork.userId}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {researchWork.date}
+                        {moment(researchPaper.currentTimeStamp).format(
+                          "dd DD MMMM YYYY"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         {researchWork.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={researchWork.paperLink}
+                          href={researchWork.mediaURL}
                           target="_blank"
                           rel="noreferrer"
                         >

@@ -131,7 +131,6 @@ const UploadedResearchRegular = () => {
                   researchPapers.map((researchPaper) => (
                     <StyledTableRow key={researchPaper.mediaId}>
                       <StyledTableCell align="left">
-                        {/* {approvedResearchPaper.date}/ */}
                         {moment(researchPaper.currentTimeStamp).format(
                           "dd DD MMMM YYYY"
                         )}
