@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ImageCard from "../ImageCard";
 import axios from "axios";
-import AppWidgetSummary from "../../../AppWidgetSummary";
 import config from "../../../../../../../ApiConfig/Config";
 import "../uploadedImages.css";
 import { useParams } from "react-router-dom";
+import RegisteredImageCard from "./RegisteredImageCard";
+import AppWidgetSummary from "../../../AppWidgetSummary";
 
 const RegisteredUserUploadedImages = () => {
   const [photos, setPhotos] = useState([]);
@@ -24,11 +24,9 @@ const RegisteredUserUploadedImages = () => {
       res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
         res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
     );
-    setPhotos(res.data.photosArray);
     setRegularTotalApprovedPhotosCount(
       res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia
     );
-    setPhotos(res.data.photosArray);
     setRegularTotalPendingPhotosCount(
       res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
     );
@@ -86,7 +84,7 @@ const RegisteredUserUploadedImages = () => {
           {photos &&
             photos.map((post, id) => (
               <div className="uploaded__images__card">
-                <ImageCard post={post} key={id} />
+                <RegisteredImageCard post={post} key={id} />
               </div>
             ))}
         </div>
