@@ -15,6 +15,13 @@ const ImageCardCommunity = ({ image }) => {
   var userFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userFromSession.userId;
   const showModal = async () => {
+   
+getLikedMediaArray();
+    setIsModalVisible(true);
+    
+  };
+
+  const getPostComments=async()=>{
     try {
       const res = await axios.get(
         config.server.path +
@@ -29,9 +36,7 @@ const ImageCardCommunity = ({ image }) => {
     } catch (error) {
       console.log(error);
     }
-
-    setIsModalVisible(true);
-  };
+  }
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -95,6 +100,24 @@ const ImageCardCommunity = ({ image }) => {
       console.log(error);
     }
   };
+
+  const getLikedMediaArray=async()=>{
+    try {
+      const res = await axios.post(
+        config.server.path + config.api.getLikedPost+`?userId=userId`,
+        {
+          mediaId: image.mediaId,
+          userId: userId,
+          commentData: comment,
+        },
+        {
+          headers: { "User-Id": userId },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="image__card__community">
       <div className="image__card__community__image">
@@ -120,7 +143,6 @@ const ImageCardCommunity = ({ image }) => {
             left: "35%",
           }}
         >
-          {/* <div style={{border:"2px solid green", width:"100%", height:"100%", overflow:"scroll"}}> */}
 
           <div className="modal__image">
             <img
@@ -175,6 +197,10 @@ const ImageCardCommunity = ({ image }) => {
             </div>
 
             <div className="modal__images__comments">
+
+              <div className="get__comments">
+                <Button onClick={getPostComments}>Show Comments</Button>
+              </div>
               {comments &&
                 comments.map((comment) => (
                   <div

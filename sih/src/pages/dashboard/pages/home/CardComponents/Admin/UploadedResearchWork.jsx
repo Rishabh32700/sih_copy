@@ -12,136 +12,7 @@ import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import config from "../../../../../../ApiConfig/Config";
-
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    mediaId: "adasfffsaddda.jpg",
-
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    mediaId: "adasfffsaddda.jpg",
-
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    mediaId: "adasfffsaddda.jpg",
-
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    mediaId: "adasfffsaddda.jpg",
-
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-];
+import moment from "moment";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -157,10 +28,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
 }));
 
 const UploadedResearchWork = () => {
@@ -171,8 +38,8 @@ const UploadedResearchWork = () => {
     try {
       const res = await axios.get(
         config.server.path +
-        config.api.getApprovedResearchWork +
-        `?userId=${userId}`
+          config.api.getApprovedResearchWork +
+          `?userId=${userId}`
       );
       setApprovedResearchPapers(res.data.approvedResearchWork);
       console.log(" Approved Research Paperd", res.data);
@@ -181,7 +48,24 @@ const UploadedResearchWork = () => {
     }
   };
 
-  
+  const handleDeleteResearch = async (mediaId) => {
+    console.log("Delete Research");
+    try {
+      const res = await axios.post(
+        config.server.path +
+          config.role.admin +
+          config.api.deletePost +
+          `?userId=${userId}`,
+        {
+          mediaId: mediaId,
+        }
+      );
+      await getApprovedResearchPapers();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getApprovedResearchPapers();
@@ -216,8 +100,9 @@ const UploadedResearchWork = () => {
                         Hardcoded userId
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {/* {approvedResearchPaper.date}/ */}
-                        Hardcoded date
+                        {moment(approvedResearchPaper.currentTimeStamp).format(
+                          "dddd DD MMMM YYYY"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         {approvedResearchPaper.mediaId}
@@ -232,7 +117,13 @@ const UploadedResearchWork = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        <Button>Delete</Button>
+                        <Button
+                          onClick={() =>
+                            handleDeleteResearch(approvedResearchPaper.mediaId)
+                          }
+                        >
+                          Delete
+                        </Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

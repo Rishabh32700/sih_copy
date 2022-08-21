@@ -30,7 +30,6 @@ import DashboardCommunityImages from "./pages/dashboard/pages/community/Dashboar
 import DashboardCommunityVideos from "./pages/dashboard/pages/community/DashboardCommunity";
 import DashboardResearch from "./pages/dashboard/pages/research/DashboardResearch";
 import DashboardWebinar from "./pages/dashboard/pages/webinars/DashboardWebinar";
-import DashboardModalImages from "./pages/dashboard/pages/community/DashboardModalImages";
 import DashboardHome from "./pages/dashboard/pages/home/DashboardHome";
 import RegisteredUserDetails from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserDetails";
 import RegisteredUserUploadedImages from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserPhotos";
@@ -98,7 +97,6 @@ const App = () => {
                 <Route path="videos" element={<DashboardCommunityVideos />} />
                 <Route path="research" element={<DashboardResearch />} />
                 <Route path="webinars" element={<DashboardWebinar />} />
-                <Route path="imagesModal" element={<DashboardModalImages />} />
                 <Route
                   path="home/uploadedImagesRegular"
                   element={<UploadedImagesRegular />}

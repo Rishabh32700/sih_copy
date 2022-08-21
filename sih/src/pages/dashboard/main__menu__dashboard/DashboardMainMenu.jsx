@@ -110,17 +110,6 @@ export default function DashboardMainMenu() {
             <ListItemText primary="Webinar" />
           </ListItemButton>
         </ListItem>
-        <ListItem
-          disablePadding
-          onClick={() => {
-            navigate("/dashboard/imagesModal");
-
-          }}
-        >
-          <ListItemButton>
-            <ListItemText primary="Image Modal" />
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );

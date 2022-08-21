@@ -52,7 +52,6 @@ const PortalsMenu = () => {
   };
 
   const handleClick = (key) => {
-    debugger
     console.log("key",key);
     if(key == "Logout"){
       console.log(key);
