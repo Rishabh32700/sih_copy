@@ -27,12 +27,12 @@ const DashboardHome = ({}) => {
   console.log(isAdmin);
 
   const [registeredUsersCount, setRegisteredUsersCount] = useState(0);
-
-  const [pendingPhotosCount, setPendingPhotosCount] = useState(0);
   const [approvedPhotosCount, setApprovedPhotosCount] = useState(0);
-  const [pendingVideosCount, setPendingVideosCount] = useState(0);
   const [approvedVideosCount, setApprovedVideosCount] = useState(0);
   const [approvedResearchWorkCount, setApprovedResearchWorkCount] = useState(0);
+  const [regularTotalPhotosCount, setRegularTotalPhotosCount] = useState(0);
+  const [regularTotalVideosCount, setRegularTotalVideosCount] = useState(0);
+  const [regularTotalResearchCount, setRegularTotalResearchCount] = useState(0);
 
   const getRegisteredUsersCount = async () => {
     const res = await axios.get(
@@ -48,23 +48,6 @@ const DashboardHome = ({}) => {
     }
     console.log("Approved users", res.data);
   };
-  const getPendingPhotosCount = async () => {
-    const res = await axios.get(
-      config.server.path +
-        config.api.getPendingPhotos +
-        `?count=true&userId=${userId}`
-    );
-    setPendingPhotosCount(res.data.pendingPhotos[0].totalPendingPhotos);
-  };
-  const getPendingVideosCount = async () => {
-    const res = await axios.get(
-      config.server.path +
-        config.api.getPendingVideos +
-        `?count=true&userId=${userId}`
-    );
-    // console.log(res);
-  };
-
   const getApprovedPhotosCount = async () => {
     const res = await axios.get(
       config.server.path +
@@ -124,11 +107,42 @@ const DashboardHome = ({}) => {
     }
     console.log("Approved Research Work", res.data);
   };
-  const handleCancel = () => {
-    setIsModalVisible(false);
+
+  const getRegularUserPhotosCount = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getPhotosForUserId + `?userId=${userId}`
+    );
+    setRegularTotalPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
+        res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
+
+    console.log("Regular Photos Work", res);
   };
-  const showModal = () => {
-    setIsModalVisible(true);
+  const getRegularUserVideosCount = async () => {
+    const res = await axios.get(
+      config.server.path + config.api.getVideosForUserId + `?userId=${userId}`
+    );
+    setRegularTotalVideosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
+        res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
+
+    console.log("Regular Videoss Work", res.data);
+  };
+
+  const getRegularUserResearchCount = async () => {
+    const res = await axios.get(
+      config.server.path +
+        config.api.getResearchWorkForUserId +
+        `?userId=${userId}`
+    );
+    //  setRegularTotalPhotosCount();
+    setRegularTotalResearchCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
+        res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
+    console.log("Regular Research Work", res.data);
   };
   useEffect(() => {
     getRegisteredUsersCount();
@@ -136,6 +150,10 @@ const DashboardHome = ({}) => {
     getApprovedVideosCount();
     getPendingResearchWorkCount();
     getApprovedResearchWorkCount();
+
+    getRegularUserPhotosCount();
+    getRegularUserVideosCount();
+    getRegularUserResearchCount();
   }, []);
 
   return (
@@ -249,8 +267,6 @@ const DashboardHome = ({}) => {
                     />
                   </div>
                 </div>
-
-               
               </div>
             </div>
           </div>
@@ -269,7 +285,7 @@ const DashboardHome = ({}) => {
                   <Grid item xs={12} sm={6} md={3}>
                     <AppWidgetSummary
                       title="Images Uploaded"
-                      total={714000}
+                      total={regularTotalPhotosCount}
                       icon={"ant-design:UserAddOutLined"}
                       onClick={() =>
                         navigate("/dashboard/home/uploadedImagesRegular")
@@ -281,7 +297,7 @@ const DashboardHome = ({}) => {
                   <Grid item xs={12} sm={6} md={3}>
                     <AppWidgetSummary
                       title="Videos Uploaded"
-                      total={1352831}
+                      total={regularTotalVideosCount}
                       color="info"
                       icon={"ant-design:user-filled"}
                       onClick={() =>
@@ -293,7 +309,7 @@ const DashboardHome = ({}) => {
                   <Grid item xs={12} sm={6} md={3}>
                     <AppWidgetSummary
                       title="Research Work Uploaded"
-                      total={234}
+                      total={regularTotalResearchCount}
                       color="error"
                       icon={"ant-design:bug-filled"}
                       onClick={() =>
@@ -332,8 +348,6 @@ const DashboardHome = ({}) => {
             </div>
           </div>
         )}
-        {/* </Container> */}
-        {/* </Page> */}
       </div>
     </div>
   );

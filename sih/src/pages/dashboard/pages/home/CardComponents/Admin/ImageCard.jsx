@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -24,31 +24,16 @@ const ImageCard = ({ post }) => {
       console.log(res);
     } catch (error) {}
   };
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   return (
     <div className="post__card">
       <div className="post__card__container">
-        <div className="post__card__image" >
+        <div className="post__card__image">
           <CardMedia
             component="img"
             height="115"
-            image={post.mediaId}
+            image={post.mediaURL}
             alt="org image"
             className="img"
-            onClick={()=>{console.log("hello");showModal()}}
           />
         </div>
         <div className="post__card__post_info">
@@ -61,11 +46,12 @@ const ImageCard = ({ post }) => {
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              <Button onClick={handleDeletePost}>Delete Post</Button>
+              {post && post.status === 1 && (
+                <Button onClick={handleDeletePost}>Delete Post</Button>
+              )}
             </div>
           </CardContent>
         </div>
-       
       </div>
     </div>
   );
