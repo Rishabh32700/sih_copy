@@ -4,10 +4,10 @@ const ProtectedRoutes = ({ element, Role }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   if (!user) {
-    return <Navigate to="/error" />;
+    return <Navigate replace to="/error" />;
   }
   if (Role && user.role !== Role) {
-    return <Navigate to="/error" />;
+    return <Navigate replace to="/error" />;
   }
   return element;
 };

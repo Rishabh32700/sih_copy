@@ -33,6 +33,7 @@ const config = {
     comment: "comment",
     getCommentsOnPost: "getCommentsOnPost",
     getLikedPost: "getLikedPost",
+    updateProfile: "updateProfile",
   },
   role: {
     admin: "admin/",

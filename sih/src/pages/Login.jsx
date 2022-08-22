@@ -134,10 +134,20 @@ const Login = () => {
       console.log("data", response.data);
       if (response.data.success) {
         if (response.data.user.isTempPassword === 1) {
-          navigate("/PasswordReset", {});
+          navigate("/PasswordReset", {
+            state: {
+              userId: response.data.user.userId,
+              email: response.data.user.email,
+            },
+          });
         }
         if (response.data.user.isTempPassword === 0) {
-          sessionStorage.setItem("user", JSON.stringify(response.data.user));
+          const user = {
+            ...response.data.user,
+            profilePicURL: response.data.profilePicURL,
+          };
+          console.log(user);
+          sessionStorage.setItem("user", JSON.stringify(user));
           toast.success(response.data.message, {
             position: "top-right",
             autoClose: 5000,
