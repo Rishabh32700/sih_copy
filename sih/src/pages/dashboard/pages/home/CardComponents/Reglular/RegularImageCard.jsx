@@ -39,15 +39,17 @@ const RegularImageCard = ({ post }) => {
         <div className="post__card__post_info">
           <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
             <Typography gutterBottom variant="p" component="div">
-              {/* Media Id : {post.mediaId} */}
-              <br />
               When : {post.currentTimeStamp} <br />
               Likes : {post.totalLikeCount} <br />
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              {post && post.status === 1 && (
-                <Button onClick={handleDeletePost}>Delete Post</Button>
+              {post && post.status === 1 ? (
+                <Button onClick={handleDeletePost} type="danger">
+                  Delete Post
+                </Button>
+              ) : (
+                <Button>Pending For Approval</Button>
               )}
             </div>
           </CardContent>

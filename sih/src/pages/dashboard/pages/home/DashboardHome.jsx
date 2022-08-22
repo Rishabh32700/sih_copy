@@ -33,6 +33,9 @@ const DashboardHome = ({}) => {
   const [regularTotalPhotosCount, setRegularTotalPhotosCount] = useState(0);
   const [regularTotalVideosCount, setRegularTotalVideosCount] = useState(0);
   const [regularTotalResearchCount, setRegularTotalResearchCount] = useState(0);
+  const [futureWebinarCount, setFutureWebinarCount] = useState(0);
+  const [pastWebinarCount, setPastWebinarCount] = useState(0);
+  const [onGoingWebinarCount, setOnGoingWebinarCount] = useState(0);
 
   const getRegisteredUsersCount = async () => {
     const res = await axios.get(
@@ -144,13 +147,44 @@ const DashboardHome = ({}) => {
     );
     console.log("Regular Research Work", res.data);
   };
-  useEffect(() => {
-    getRegisteredUsersCount();
-    getApprovedPhotosCount();
-    getApprovedVideosCount();
-    getPendingResearchWorkCount();
-    getApprovedResearchWorkCount();
 
+  const getWebinarsCount = async () => {
+    try {
+      const future = await axios.get(
+        config.server.path + config.role.admin + config.api.getFutureWebinars,
+        {
+          headers: { "User-Id": userId },
+        }
+      );
+      setFutureWebinarCount(future.data.webinars.length);
+      console.log("Future", future);
+      const past = await axios.get(
+        config.server.path + config.role.admin + config.api.getPastWebinars,
+        {
+          headers: { "User-Id": userId },
+        }
+      );
+      console.log("past", past);
+      setPastWebinarCount(past.data.webinars.length);
+      const ongoing = await axios.get(
+        config.server.path + config.role.admin + config.api.getOngoingWebinars,
+        {
+          headers: { "User-Id": userId },
+        }
+      );
+      setOnGoingWebinarCount(ongoing.data.webinars.length);
+      console.log("ongoing", ongoing);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    if (isAdmin) {
+      getRegisteredUsersCount();
+      getApprovedPhotosCount();
+      getApprovedVideosCount();
+      getPendingResearchWorkCount();
+      getApprovedResearchWorkCount();
+      getWebinarsCount();
+    }
     getRegularUserPhotosCount();
     getRegularUserVideosCount();
     getRegularUserResearchCount();
@@ -228,8 +262,8 @@ const DashboardHome = ({}) => {
                 <div className="dashboard__card wrapper">
                   <div className="card">
                     <AppWidgetSummary
-                      title="Webinar Till Now"
-                      total={714000}
+                      title="Past Webinars"
+                      total={pastWebinarCount}
                       icon={"ant-design:android-filled"}
                       onClick={() => navigate("/dashboard/home/webinarTillNow")}
                       className="dashboard__card__inner__div"
@@ -242,7 +276,7 @@ const DashboardHome = ({}) => {
                   <div className="card">
                     <AppWidgetSummary
                       title="Active Webinar"
-                      total={1352831}
+                      total={onGoingWebinarCount}
                       color="info"
                       icon={"ant-design:apple-filled"}
                       onClick={() => navigate("/dashboard/home/activeWebinars")}
@@ -256,7 +290,7 @@ const DashboardHome = ({}) => {
                   <div className="card">
                     <AppWidgetSummary
                       title="Scheduled Webinars"
-                      total={1723315}
+                      total={futureWebinarCount}
                       color="warning"
                       icon={"ant-design:windows-filled"}
                       onClick={() =>
