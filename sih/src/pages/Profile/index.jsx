@@ -70,43 +70,71 @@ const ProfilePage = () => {
     formData.append("file", imgFile.data);
     console.log("file uploading");
     try {
-      const res = await axios.post(
-        config.server.path + config.api.uploadMedia,
-        formData,
-        {
-          onUploadProgress: (p) => {
-            const progress = p.loaded / p.total;
-            if (toastId.current === null) {
-              toastId.current = toast("Upload in Progress", { progress });
-            } else {
-              toast.update(toastId.current, {
-                progress,
-                type: toast.TYPE.INFO,
-              });
-            }
+      if (imgFile !== "") {
+        const res = await axios.post(
+          config.server.path + config.api.uploadMedia,
+          formData,
+          {
+            onUploadProgress: (p) => {
+              const progress = p.loaded / p.total;
+              if (toastId.current === null) {
+                toastId.current = toast("Upload in Progress", { progress });
+              } else {
+                toast.update(toastId.current, {
+                  progress,
+                  type: toast.TYPE.INFO,
+                });
+              }
+            },
+            headers: { "User-Id": user.userId },
+          }
+        );
+        toast.done(toastId.current);
+        toast.update(toastId.current, {
+          render: "Profile Photo Changed",
+          type: toast.TYPE.SUCCESS,
+          autoClose: 5000,
+        });
+        const res2 = await axios.post(
+          config.server.path + config.api.handlePostPic,
+          {
+            userId: user.userId,
+            mediaId: res.data.mediaIdArray[0],
           },
-          headers: { "User-Id": user.userId },
-        }
-      );
-      toast.done(toastId.current);
-      toast.update(toastId.current, {
-        render: "Profile Photo Changed",
-        type: toast.TYPE.SUCCESS,
-        autoClose: 5000,
-      });
-      const res2 = await axios.post(
-        config.server.path + config.api.handlePostPic,
-        {
-          userId: user.userId,
-          mediaId: res.data.mediaIdArray[0],
-        },
-        {
-          headers: { "User-Id": user.userId },
-        }
-      );
-      console.log("res2", res2);
+          {
+            headers: { "User-Id": user.userId },
+          }
+        );
+
+        const newUser = { ...user, profilePicURL: res2.data.mediaURL };
+        sessionStorage.setItem("user", JSON.stringify(newUser));
+      }
+      if (data.firstName !== user.name || data.userName !== user.username) {
+        const res = await axios.patch(
+          config.server.path + config.api.updateProfile,
+          {
+            userId: user.userId,
+            name: data.firstName,
+            userName: data.userName,
+          },
+          {
+            headers: { "User-Id": user.userId },
+          }
+        );
+        console.log(res);
+
+        const newUser = {
+          ...user,
+          name: data.firstName,
+          username: data.userName,
+        };
+        sessionStorage.setItem("user", JSON.stringify(newUser));
+      }
+      toast.success("save success", { toastId: "hi" });
+      console.log("upload done");
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message, { toastId: "hi" });
     }
   };
   const handleChange = (e) => {
@@ -117,6 +145,12 @@ const ProfilePage = () => {
     setImgFile(img);
   };
 
+  const buttonDisable =
+    imgFile === "" &&
+    watch().firstName === user.name &&
+    watch().userName === user.username;
+
+  console.log("button", buttonDisable);
   return (
     <>
       <div className="signup">
@@ -136,7 +170,7 @@ const ProfilePage = () => {
               User
               {imgFile !== null ? (
                 <img
-                  src={imgFile?.preview}
+                  src={imgFile?.preview || user.profilePicURL}
                   alt=""
                   style={{
                     width: "150px",
@@ -310,7 +344,11 @@ const ProfilePage = () => {
               }`}</div>
             </div>
             <div>
-              <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+              <Button
+                variant="contained"
+                onClick={handleSubmit(onSubmit)}
+                disabled={buttonDisable}
+              >
                 save
               </Button>
             </div>

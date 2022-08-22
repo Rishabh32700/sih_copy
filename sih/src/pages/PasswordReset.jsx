@@ -10,6 +10,8 @@ import "./authentication.css";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import config from "../ApiConfig/Config";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PasswordReset = () => {
   const {
@@ -18,6 +20,9 @@ const PasswordReset = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.state.email);
   const onSubmit = async (data) => {
     console.log("sumbit", data);
 
@@ -27,16 +32,25 @@ const PasswordReset = () => {
     }
     try {
       setLoading(true);
-      const res = await fetch(config.server.path + config.api.updatePassword, {
-        password: data.password,
-      });
+      const res = await axios.post(
+        config.server.path + config.api.updatePassword,
+        {
+          password: data.password,
+          email: location.state.email,
+          confirmPassword: data.password,
+        },
+        {
+          headers: { "User-Id": location.state.userId },
+        }
+      );
       console.log(res);
       setLoading(false);
+      toast.success("Password reset");
+      navigate("/login");
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     }
-
-    toast.success("Password reset");
   };
   return (
     <div className="signin">

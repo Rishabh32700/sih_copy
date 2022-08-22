@@ -53,8 +53,8 @@ const PortalsMenu = () => {
   };
 
   const handleClick = (key) => {
-    console.log("key",key);
-    if(key == "Logout"){
+    console.log("key", key);
+    if (key == "Logout") {
       console.log(key);
       sessionStorage.removeItem("user");
       localStorage.removeItem("user");
@@ -234,7 +234,7 @@ const PortalsMenu = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>{user?.name[0]}</Avatar>
+                  <Avatar src={user?.profilePicURL}>{user?.username[0]}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
@@ -257,7 +257,7 @@ const PortalsMenu = () => {
                   <MenuItem
                     key={setting.settingName}
                     onClick={handleCloseUserMenu}
-                    disabled = {user===null}
+                    disabled={user === null}
                   >
                     <Typography
                       textAlign="center"
