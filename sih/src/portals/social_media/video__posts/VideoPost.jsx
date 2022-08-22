@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./videoPost.css";
 
 import Videos from "./videoPostComponent/Videos";
-
+import config from "../../../ApiConfig/Config";
 import axios from "axios";
 
 const VideoPost = () => {
@@ -13,7 +13,7 @@ const VideoPost = () => {
   const getAllApprovedVideos = async () => {
     try {
       const res = await axios.get(
-        `https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedVideos`
+        config.server.path + config.api.getApprovedVideos,
       );
       setApprovedVideos(res.data.approvedVideosArray);
       console.log(res);

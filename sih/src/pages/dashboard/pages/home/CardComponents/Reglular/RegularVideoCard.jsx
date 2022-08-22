@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import config from "../../../../../../../ApiConfig/Config";
-import "../Imagecard.css";
+import config from "../../../../../../ApiConfig/Config";
+import "../Admin/Imagecard.css";
 import axios from "axios";
 import { Button } from "antd";
 import moment from "moment";
-const RegisteredImageCard = ({ post, getApprovedPhotos }) => {
+const RegularVideoCard = ({ post, setVideos }) => {
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
   const handleDeletePost = async () => {
@@ -21,7 +22,7 @@ const RegisteredImageCard = ({ post, getApprovedPhotos }) => {
           mediaId: post.mediaId,
         }
       );
-      await getApprovedPhotos();
+      await setVideos();
       console.log(res);
     } catch (error) {}
   };
@@ -32,27 +33,32 @@ const RegisteredImageCard = ({ post, getApprovedPhotos }) => {
           <CardMedia
             component="img"
             height="115"
-            image={post.mediaURL}
+            video={post.mediaURL}
             alt="org image"
             className="img"
           />
+          {/* <div className="vedio__player">
+            <Player
+              fluid={false}
+              height={50}
+              width={20}
+              playsInline
+              src={post.mediaURL}
+            />
+          </div> */}
         </div>
         <div className="post__card__post_info">
           <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
             <Typography gutterBottom variant="p" component="div">
-              When :{moment(post.currentTimeStamp).format("dddd DD MMMM YYYY")}
+              When : {moment(post.currentTimeStamp).format(
+                "dddd DD MMMM YYYY"
+              )}{" "}
               <br />
               Likes : {post.totalLikeCount} <br />
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              {post.status === 1 ? (
-                <Button onClick={handleDeletePost} type="danger">
-                  Delete Post
-                </Button>
-              ) : (
-                <Button>Pending For Approval</Button>
-              )}
+                <Button onClick={handleDeletePost} type="danger">Delete Post</Button>
             </div>
           </CardContent>
         </div>
@@ -61,4 +67,4 @@ const RegisteredImageCard = ({ post, getApprovedPhotos }) => {
   );
 };
 
-export default RegisteredImageCard;
+export default RegularVideoCard;

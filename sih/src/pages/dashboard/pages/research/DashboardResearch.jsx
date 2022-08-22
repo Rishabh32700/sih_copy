@@ -15,120 +15,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import config from "../../../../ApiConfig/Config";
-const RESEARCHLIST = [
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: false,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-  {
-    name: "Frozen yoghurt",
-    userId: "aasd-fghj-asd",
-    date: "Thu Sep 03 2020 08:21:14",
-    category: "Ashley Jacobson",
-    paperLink: "https://google.com",
-    status: true,
-  },
-];
+import moment from "moment";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -174,7 +61,8 @@ const DashboardResearch = () => {
     };
     try {
       const res = await axios.post(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+        config.server.path +
+        config.api.updatePostStatus,
         {
           ...obj,
         },
@@ -193,7 +81,8 @@ const DashboardResearch = () => {
       postStatus: "1",
     };
     const res = await axios.post(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/updatePostStatus",
+      config.server.path +
+      config.api.updatePostStatus,
       {
         ...obj,
       },
@@ -211,7 +100,7 @@ const DashboardResearch = () => {
       <div className="dashboard__research__container">
         <div className="dashboard__research__heading">
           <Typography variant="h3" gutterBottom component="div">
-            Research Section
+           Pending For Approval Research Section
           </Typography>
         </div>
         <div className="dashboard__research__table">
@@ -228,20 +117,20 @@ const DashboardResearch = () => {
               </TableHead>
               <TableBody>
                 {pendingResearchPapers &&
-                  pendingResearchPapers.map((pendingResearchPaper, id) => (
-                    <StyledTableRow key={id}>
+                  pendingResearchPapers.map((pendingResearchPaper) => (
+                    <StyledTableRow key={pendingResearchPaper.mediaId}>
                       <StyledTableCell align="left">
                         {pendingResearchPaper.userId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {pendingResearchPaper.date}
+                        {moment(pendingResearchPaper.currentTimeStamp).format("dddd DD MMMM YYYY")}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         {pendingResearchPaper.mediaId}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         <a
-                          href={pendingResearchPaper.paperLink}
+                          href={pendingResearchPaper.mediaURL}
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -252,7 +141,7 @@ const DashboardResearch = () => {
                         <Box component="div" sx={{ display: "inline" }}>
                           <CancelIcon
                             color="action"
-                            onClick={handleCancelClick(
+                            onClick={()=>handleCancelClick(
                               pendingResearchPaper.mediaId
                             )}
                           />
@@ -260,7 +149,7 @@ const DashboardResearch = () => {
                         <Box component="div" sx={{ display: "inline" }}>
                           <DoneIcon
                             color="primary"
-                            onClick={handleDoneClick(
+                            onClick={()=>handleDoneClick(
                               pendingResearchPaper.mediaId
                             )}
                           />
