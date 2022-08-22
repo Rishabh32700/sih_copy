@@ -6,6 +6,7 @@ import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import ImageCardCommunity from "./ImageCard";
 import { useDispatch, useSelector } from "react-redux";
+import config from "../../../../../ApiConfig/Config";
 
 const unsplash = createApi({
   accessKey: "Qy5FzE7XDnvR2rmmWz3v5wk06KoXw-DAbvNvaR6oVmw",
@@ -19,7 +20,6 @@ const SearchPhotos = ({ refresh, setRefresh }) => {
   const [index, setindex] = useState(0);
   const [ImageCount, SetCount] = useState(15);
   const [initialData, setInitialData] = useState([]);
-
   const {approvedPhotos}=useSelector((state)=>state.community)
 
   const [loading, setLoading] = useState(true);
@@ -37,8 +37,9 @@ const SearchPhotos = ({ refresh, setRefresh }) => {
   const getApprovedPhotos = async () => {
     setLoading(true);
     const res = await axios.get(
-      "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+      config.server.path + config.api.getApprovedPhotos,
     );
+    console.log(res.data.approvedPhotosArray)
     dispatch({type:"approvedPhotos",payload:res.data.approvedPhotosArray});
     setLoading(false);
     setRefresh(false);
@@ -93,10 +94,11 @@ const SearchPhotos = ({ refresh, setRefresh }) => {
         </div>
       ) : (
         <div className="card-list">
-          {approvedPhotos.map((approvedPhoto, index) => (
+          {approvedPhotos.map((approvedPhoto) => (
             <ImageCardCommunity
               image={approvedPhoto}
-              key={approvedPhoto.mediaURL}
+              key={approvedPhoto.mediaId}
+              getApprovedPhotos={getApprovedPhotos}
             />
           ))}
         </div>

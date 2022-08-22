@@ -11,15 +11,13 @@ import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
 
 import CancelIcon from "@mui/icons-material/Cancel";
-// material
 import { Typography, Button, CircularProgress } from "@mui/material";
-// import Scrollbar from "./components/ScrollBar";
 import { styled } from "@mui/material/styles";
 
 import { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
-import DashboardMainMenu from "../../main__menu__dashboard/DashboardMainMenu";
 import config from "../../../../ApiConfig/Config";
+import moment from "moment";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -101,8 +99,8 @@ const DashboardCommunityImages = ({ isAdmin }) => {
     <div className="dashboard__community">
       <div className="dashboard__community__container">
         <div className="dashboard__research__heading">
-          <Typography variant="h3" gutterBottom component="div">
-            Images Section
+          <Typography variant="h5" gutterBottom component="div">
+            Pending For Approval Images Section
           </Typography>
         </div>
         <div className="dashboard__community__list">
@@ -123,12 +121,12 @@ const DashboardCommunityImages = ({ isAdmin }) => {
                 ) : (
                   photos &&
                   photos.map((photo, id) => (
-                    <StyledTableRow key={id}>
-                      {isAdmin && (
-                        <StyledTableCell align="left">{id}</StyledTableCell>
-                      )}
+                    <StyledTableRow key={photo.mediaId}>
+                        <StyledTableCell align="left">{photo.userId}</StyledTableCell>
                       <StyledTableCell align="left">
-                        2 Aptil 2020
+                        {moment(photo.currentTimeStamp).format(
+                          "dddd DD MMMM YYYY"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         {photo.mediaId}

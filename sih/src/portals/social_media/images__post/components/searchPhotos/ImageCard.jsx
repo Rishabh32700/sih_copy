@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Space, Typography, Input, Button } from "antd";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import axios from "axios";
@@ -8,20 +9,19 @@ import config from "../../../../../ApiConfig/Config";
 import "./imageCard.css";
 const { Text } = Typography;
 
-const ImageCardCommunity = ({ image }) => {
+const ImageCardCommunity = ({ image, getApprovedPhotos }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState("");
+  const [likedPosts, setLikedPosts] = useState([]);
   var userFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userFromSession.userId;
   const showModal = async () => {
-   
-getLikedMediaArray();
+   await getLikedMediaArray();
     setIsModalVisible(true);
-    
   };
 
-  const getPostComments=async()=>{
+  const getPostComments = async () => {
     try {
       const res = await axios.get(
         config.server.path +
@@ -36,7 +36,7 @@ getLikedMediaArray();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -59,6 +59,7 @@ getLikedMediaArray();
           headers: { "User-Id": userId },
         }
       );
+      await getApprovedPhotos();
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -77,6 +78,7 @@ getLikedMediaArray();
           headers: { "User-Id": userId },
         }
       );
+      await getApprovedPhotos();
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -96,28 +98,26 @@ getLikedMediaArray();
           headers: { "User-Id": userId },
         }
       );
+      await getApprovedPhotos();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getLikedMediaArray=async()=>{
+  const getLikedMediaArray = async () => {
     try {
-      const res = await axios.post(
-        config.server.path + config.api.getLikedPost+`?userId=userId`,
-        {
-          mediaId: image.mediaId,
-          userId: userId,
-          commentData: comment,
-        },
-        {
-          headers: { "User-Id": userId },
-        }
+      const res = await axios.get(
+        config.server.path + config.api.getLikedPosts + `?userId=${userId}`
       );
+      console.log(res);
+      setLikedPosts(res.data.likedPostsArray);
+      // console.log(
+      //   res.data.likedPostsArray.find((x) => x.mediaId === image.mediaId)
+      // );
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div className="image__card__community">
       <div className="image__card__community__image">
@@ -143,7 +143,6 @@ getLikedMediaArray();
             left: "35%",
           }}
         >
-
           <div className="modal__image">
             <img
               src={image.mediaURL}
@@ -154,7 +153,7 @@ getLikedMediaArray();
               }}
               style={{
                 width: "100%",
-                height:"60%",
+                height: "60%",
                 position: "absolute",
                 top: "0",
                 left: "0",
@@ -170,16 +169,23 @@ getLikedMediaArray();
             </div>
             <div className="modal__image__action">
               <div className="modal__image__action__like modal__image__action__icon">
-                <ThumbUpIcon
-                  style={{ fill: "#0072ea" }}
-                  onClick={handleClickLike}
-                />
-              </div>
-              <div className="modal__image__action__dislike modal__image__action__icon">
-                <ThumbDownIcon
-                  style={{ fill: "#0072ea" }}
-                  onClick={handleClickDislike}
-                />
+                {likedPosts.find((x) => x.mediaId === image.mediaId) ===
+                  undefined && (
+                  <ThumbUpOutlinedIcon
+                    style={{
+                      color: "0072ea",
+                    }}
+                    onClick={handleClickLike}
+                  />
+                )}
+                {likedPosts.find((x) => x.mediaId === image.mediaId) && (
+                  <ThumbUpIcon
+                    style={{
+                      color: "0072ea",
+                    }}
+                    onClick={handleClickDislike}
+                  />
+                )}
               </div>
             </div>
 
@@ -197,7 +203,6 @@ getLikedMediaArray();
             </div>
 
             <div className="modal__images__comments">
-
               <div className="get__comments">
                 <Button onClick={getPostComments}>Show Comments</Button>
               </div>
@@ -209,7 +214,7 @@ getLikedMediaArray();
                   >
                     Name : {comment.fullName}
                     <br />
-                    Date : 2 August 2022 <br />
+                    Date : HardCoded date <br />
                     Comment: {comment.commentData}
                   </div>
                 ))}
