@@ -25,7 +25,7 @@ const config = {
     changeUserRole: 'changeUserRole',
     // getOtp: '/user/sendotp',
     // verifyOtp: '/user/verify?phoneNumber',
-    // forgotpassword : '/forgotpassword',
+    forgotpassword: "forgot-password",
     uploadResearchWork: "uploadResearchWork",
     like: 'post/like',
     comment: 'post/comment',
@@ -34,6 +34,8 @@ const config = {
     getFutureWebinars: 'webinars/getFutureWebinars',
     getOngoingWebinars: 'webinars/getOngoingWebinars',
     getPastWebinars: 'webinars/getPastWebinars',
+    updatePassword: "user/update-password",
+    handlePostPic: "handleProfilePic",
   },
  
   role: {

@@ -18,7 +18,7 @@ const SocialMedia = () => {
     <ImagesPost refresh={refresh} setRefresh={setRefresh} />
   );
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const handleUpload = async () => {
     let formData = new FormData();
     formData.append("file", imgFile.data);
@@ -78,6 +78,7 @@ const SocialMedia = () => {
     toastId.current = null;
     console.log("file uploaded");
   };
+  console.log("refresh", refresh);
   const notify = (msg) => {
     toast.error(
       <div

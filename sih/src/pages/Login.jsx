@@ -1,5 +1,3 @@
-
-
 import {
   TextField,
   Button,
@@ -59,8 +57,7 @@ export function Captcha(props) {
         element.disabled = true;
         element.style.cursor = "not-allowed";
         inputData.style.display = "none";
-        props.setLoginButtonDisable(false)
-
+        props.setLoginButtonDisable(false);
       } else {
         element.style.backgroundColor = "red";
         element.style.cursor = "not-allowed";
@@ -83,15 +80,11 @@ export function Captcha(props) {
   };
 
   return (
-    <div style={{ marginTop:"1rem",  width:"100%"}}>
-      <div style={{display:"flex", flexDirection:"column", width:"100%"}}>
-        <h4
-          id="captcha"
-        >
-          {captcha}
-        </h4>
+    <div style={{ marginTop: "1rem", width: "100%" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+        <h4 id="captcha">{captcha}</h4>
 
-        <div style={{display:"flex", justifyContent:"space-between"}}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <input
             type="text"
             id="inputType"
@@ -116,9 +109,8 @@ export function Captcha(props) {
   );
 }
 
-
 const Login = () => {
-const [loginButtonDisable, setLoginButtonDisable] = useState(true)
+  const [loginButtonDisable, setLoginButtonDisable] = useState(true);
 
   const {
     register,
@@ -141,17 +133,23 @@ const [loginButtonDisable, setLoginButtonDisable] = useState(true)
       console.log(response);
       console.log("data", response.data);
       if (response.data.success) {
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-        });
-        navigate("/");
+        if (response.data.user.isTempPassword === 1) {
+          navigate("/PasswordReset", {});
+        }
+        if (response.data.user.isTempPassword === 0) {
+          sessionStorage.setItem("user", JSON.stringify(response.data.user));
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          navigate("/");
+        }
+        // navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -212,25 +210,15 @@ const [loginButtonDisable, setLoginButtonDisable] = useState(true)
                   error={errors.password}
                   {...register("password", {
                     required: "This field is required",
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*['@','#','$','&','%']).{8,16}$/,
-                      message:
-                        "Password should consist of atleast one number, one uppercase ,one lowercase and one special character",
-                    },
-                    minLength: { value: 8, message: "Atleast 8 character" },
-                    maxLength: {
-                      value: 16,
-                      message: "Atmost 16 character",
-                    },
                   })}
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              
-
             </div>
-              <Captcha loginButtonDisable={loginButtonDisable} setLoginButtonDisable={setLoginButtonDisable}/>
+            <Captcha
+              loginButtonDisable={loginButtonDisable}
+              setLoginButtonDisable={setLoginButtonDisable}
+            />
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
                 <FormControlLabel
@@ -271,7 +259,6 @@ const [loginButtonDisable, setLoginButtonDisable] = useState(true)
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </>
   );
 };

@@ -71,9 +71,8 @@ const ResearchWork = () => {
           headers: { "User-Id": user.userId },
         }
       );
-      {
-        console.log(res);
-      }
+
+      console.log(res);
 
       toast.done(toastId.current);
       toast.update(toastId.current, {
@@ -175,29 +174,29 @@ const ResearchWork = () => {
                 <ul style={{ overflow: "scroll" }}>
                   {pdfList.map((data, key) => (
                     // return (
-                      <li
-                        key={data.mediaId}
+                    <li
+                      key={data.mediaId}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        height: "100px",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      {console.log("data", data)}
+                      <Button
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          height: "100px",
-                          justifyContent: "space-around",
+                          color: "#1976d2",
+                          backgroundColor: "white",
+                          fontWeight: "700",
+                          cursor: "pointer",
                         }}
+                        onClick={() => setUrl(data.mediaURL)}
                       >
-                        {console.log("data", data)}
-                        <Button
-                          style={{
-                            color: "#1976d2",
-                            backgroundColor: "white",
-                            fontWeight: "700",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => setUrl(data.mediaURL)}
-                        >
-                          {`Document ${key + 1}`}
-                        </Button>
-                      </li>
+                        {`Document ${key + 1}`}
+                      </Button>
+                    </li>
                     // );
                   ))}
                 </ul>
@@ -231,20 +230,15 @@ const ResearchWork = () => {
                 </Button>
               </div>
             </div>
-            
-           
-              
-              
+            <div className="webviewer" style={{ height: "100%" }}>
+              <object
+                width="100%"
+                height="100%"
+                data={url}
+                type="application/pdf"
+              />
+            </div>
           </SplitPane>
-             
-                  <div className="webviewer" style={{ height: "100%" }}>
-                    <object
-                      width="100%"
-                      height="100%"
-                      data={url}
-                      type="application/pdf"
-                    ></object>
-                  </div>
         </div>
       </div>
     </>
