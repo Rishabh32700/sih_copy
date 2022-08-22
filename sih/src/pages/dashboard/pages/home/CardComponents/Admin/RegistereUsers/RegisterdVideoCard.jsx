@@ -32,7 +32,7 @@ const RegisteredVideoCard = ({ post, setVideos }) => {
           <CardMedia
             component="img"
             height="115"
-            image={post.mediaURL}
+            video={post.mediaURL}
             alt="org image"
             className="img"
           />
@@ -46,9 +46,13 @@ const RegisteredVideoCard = ({ post, setVideos }) => {
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              <Button onClick={handleDeletePost} type="danger">
-                Delete Post
-              </Button>
+              {post.status === 1 ? (
+                <Button onClick={handleDeletePost} type="danger">
+                  Delete Post
+                </Button>
+              ) : (
+                <Button>Pending For Approval</Button>
+              )}
             </div>
           </CardContent>
         </div>

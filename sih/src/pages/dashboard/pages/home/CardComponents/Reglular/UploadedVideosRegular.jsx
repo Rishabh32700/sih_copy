@@ -4,6 +4,7 @@ import VideoCard from "../Admin/VideoCard";
 import AppWidgetSummary from "../../AppWidgetSummary";
 import "../Admin/uploadedImages.css";
 import config from "../../../../../../ApiConfig/Config";
+import RegularVideoCard from "./RegularVideoCard";
 
 const UploadedVideosRegular = () => {
   const [videos, setVideos] = useState([]);
@@ -82,8 +83,8 @@ const UploadedVideosRegular = () => {
         <div className="uploaded__images__card__container">
           {videos &&
             videos.map((post, id) => (
-              <div className="uploaded__images__card">
-                <VideoCard post={post} key={id} />
+              <div className="uploaded__images__card" key={post.mediaId}>
+                <RegularVideoCard post={post} setVideos={setVideos}  />
               </div>
             ))}
         </div>

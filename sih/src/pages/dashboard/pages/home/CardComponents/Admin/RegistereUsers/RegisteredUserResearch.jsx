@@ -11,8 +11,10 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-
-
+import { useParams } from "react-router-dom";
+import config from "../../../../../../../ApiConfig/Config";
+import moment from "moment";
+import AppWidgetSummary from "../../../AppWidgetSummary";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,21 +30,33 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
 }));
 
 const RegisteredUserUploadedResearch = () => {
   const [researchWorks, setResearchWorks] = useState([]);
   const { userId } = useParams();
-
+  const [regularTotalPhotosCount, setRegularTotalPhotosCount] = useState(0);
+  const [regularTotalApprovedPhotosCount, setRegularTotalApprovedPhotosCount] =
+    useState(0);
+  const [regularTotalPendingPhotosCount, setRegularTotalPendingPhotosCount] =
+    useState(0);
   const getUserResearchWork = async () => {
     const res = await axios.get(
-      config.server.path + config.api.getResearchWorkForUserId + `?userId=${userId}`
+      config.server.path +
+        config.api.getResearchWorkForUserId +
+        `?userId=${userId}`
     );
     console.log(res.data);
+    setRegularTotalPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
+        res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
+    setRegularTotalApprovedPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia
+    );
+    setRegularTotalPendingPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
     setResearchWorks(res.data.researchWorkArray);
   };
 
@@ -57,6 +71,44 @@ const RegisteredUserUploadedResearch = () => {
           <Typography variant="h3" gutterBottom component="div">
             Research Section for User {userId}
           </Typography>
+        </div>
+        <div className="uploaded__images__count">
+          <div className="dashboard__home__card__list">
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                  className="dashboard__card__inner__div"
+                  title="Total Research Uploaded"
+                  total={regularTotalPhotosCount}
+                  icon={"ant-design:UserAddOutLined"}
+                />
+              </div>
+            </div>
+
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                  className="dashboard__card__inner__div"
+                  title="Approved Research"
+                  total={regularTotalApprovedPhotosCount}
+                  color="info"
+                  icon={"ant-design:user-filled"}
+                />
+              </div>
+            </div>
+
+            <div className="dashboard__card wrapper">
+              <div className="card">
+                <AppWidgetSummary
+                  className="dashboard__card__inner__div"
+                  title="Pending Research"
+                  total={regularTotalPendingPhotosCount}
+                  color="warning"
+                  icon={"ant-design:video-filled"}
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="dashboard__research__table">
           <TableContainer component={Paper}>
@@ -74,8 +126,8 @@ const RegisteredUserUploadedResearch = () => {
                   researchWorks.map((researchWork, id) => (
                     <StyledTableRow key={id}>
                       <StyledTableCell align="left">
-                        {moment(researchPaper.currentTimeStamp).format(
-                          "dd DD MMMM YYYY"
+                        {moment(researchWork.currentTimeStamp).format(
+                          "dddd DD MMMM YYYY"
                         )}
                       </StyledTableCell>
                       <StyledTableCell align="left">
@@ -91,7 +143,11 @@ const RegisteredUserUploadedResearch = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        <Button>Delete</Button>
+                        {researchWork.status === 1 ? (
+                          <Button>Delete</Button>
+                        ) : (
+                          <Button>Pending For Approval</Button>
+                        )}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

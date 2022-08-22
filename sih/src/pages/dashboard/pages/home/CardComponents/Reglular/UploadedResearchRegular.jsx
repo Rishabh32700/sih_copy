@@ -30,10 +30,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
 }));
 
 const UploadedResearchRegular = () => {
@@ -132,7 +128,7 @@ const UploadedResearchRegular = () => {
                     <StyledTableRow key={researchPaper.mediaId}>
                       <StyledTableCell align="left">
                         {moment(researchPaper.currentTimeStamp).format(
-                          "dd DD MMMM YYYY"
+                          "dddd DD MMMM YYYY"
                         )}
                       </StyledTableCell>
                       <StyledTableCell align="left">

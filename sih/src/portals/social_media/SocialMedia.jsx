@@ -65,7 +65,7 @@ const SocialMedia = () => {
         return true;
       });
       const approvedRes = await axios.get(
-        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+        config.server.path + config.api.getApprovedPhotos
       );
       dispatch({
         type: "approvedPhotos",
