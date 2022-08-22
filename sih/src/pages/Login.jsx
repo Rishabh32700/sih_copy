@@ -38,17 +38,23 @@ const Login = () => {
       console.log(response);
       console.log("data", response.data);
       if (response.data.success) {
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-        });
-        navigate("/");
+        if (response.data.user.isTempPassword === 1) {
+          navigate("/PasswordReset", {});
+        }
+        if (response.data.user.isTempPassword === 0) {
+          sessionStorage.setItem("user", JSON.stringify(response.data.user));
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          navigate("/");
+        }
+        // navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -109,46 +115,10 @@ const Login = () => {
                   error={errors.password}
                   {...register("password", {
                     required: "This field is required",
-                    pattern: {
-                      value:
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*['@','#','$','&','%']).{8,16}$/,
-                      message:
-                        "Password should consist of atleast one number, one uppercase ,one lowercase and one special character",
-                    },
-                    minLength: { value: 8, message: "Atleast 8 character" },
-                    maxLength: {
-                      value: 16,
-                      message: "Atmost 16 character",
-                    },
                   })}
                   helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              {/* <div style={{ marginTop: "1rem" }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    {t("Log_in_Role")}
-                  </InputLabel>
-                  <Select
-                    fullWidth
-                    defaultValue={t("Log_in_Role")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Type"
-                    variant="outlined"
-                    {...register("role", {
-                      required: "Type is required",
-                    })}
-                    error={errors.type}
-                    helperText={errors.type ? errors.type.message : ""}
-                  >
-                    <MenuItem value={1}>{t("Log_in_page_admin_type")}</MenuItem>
-                    <MenuItem value={2}>
-                      {t("Log_in_page_regular_type")}
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </div> */}
             </div>
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
@@ -189,7 +159,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </>
   );
 };

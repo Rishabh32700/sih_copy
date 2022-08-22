@@ -21,7 +21,7 @@ import "./portalsMenu.css";
 const settings = [
   {
     settingName: "Profile",
-    RoutingLink: "/",
+    RoutingLink: "/profile",
   },
   {
     settingName: "Dashboard",
@@ -52,12 +52,11 @@ const PortalsMenu = () => {
   };
 
   const handleClick = (key) => {
-    debugger
-    console.log("key",key);
-    if(key == "Logout"){
+    console.log("key", key);
+    if (key === "Logout") {
       console.log(key);
-      sessionStorage.removeItem("user")
-      localStorage.removeItem("user")
+      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
     }
   };
 
@@ -225,7 +224,7 @@ const PortalsMenu = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>{user?.email[0]}</Avatar>
+                  <Avatar>{user?.name[0]}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
@@ -253,7 +252,7 @@ const PortalsMenu = () => {
                       textAlign="center"
                       onClick={(key) => {
                         myData.setState(index + 5);
-                        handleClick(setting.settingName)
+                        handleClick(setting.settingName);
                         navigate(setting.RoutingLink);
                       }}
                     >

@@ -39,6 +39,10 @@ import RegisteredUserUploadedResearch from "./pages/dashboard/pages/home/CardCom
 import RegisteredUserScheduledWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserScheduledWebinar";
 import RegisteredUserRegisteredWebinars from "./pages/dashboard/pages/home/CardComponents/Admin/RegistereUsers/RegisteredUserRegisteredWebinar";
 import ForgotPassword from "./pages/ForgotPassword";
+import ProfilePage from "./pages/Profile";
+import PasswordReset from "./pages/PasswordReset";
+import ProtectedRoutes from "./Auth/Auth";
+import ErrorPage from "./pages/404page";
 
 export let gData = createContext();
 
@@ -76,10 +80,14 @@ const App = () => {
           >
             {pathname !== "/signup" &&
               pathname !== "/login" &&
-              pathname !== "/forgotPassword" && <ThemeLanguageSwitcher />}
+              pathname !== "/forgotPassword" &&
+              pathname !== "/PasswordReset" &&
+              pathname !== "/error" && <ThemeLanguageSwitcher />}
             {pathname !== "/signup" &&
               pathname !== "/login" &&
-              pathname !== "/forgotPassword" && <PortalsMenu />}
+              pathname !== "/forgotPassword" &&
+              pathname !== "/PasswordReset" &&
+              pathname !== "/error" && <PortalsMenu />}
 
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -90,8 +98,14 @@ const App = () => {
               <Route path="/webinar" element={<Webinars />} />
               <Route path="/research-section" element={<ResearchWork />} />
               <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/PasswordReset" element={<PasswordReset />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/error" element={<ErrorPage />} />
 
-              <Route path="/dashboard" element={<Dashboard />}>
+              <Route
+                path="/dashboard"
+                element={<ProtectedRoutes element={<Dashboard />} />}
+              >
                 <Route path="" element={<DashboardHome />} />
                 <Route path="images" element={<DashboardCommunityImages />} />
                 <Route path="videos" element={<DashboardCommunityVideos />} />

@@ -58,10 +58,7 @@ const SocialMedia = () => {
         }
       );
 
-      setRefresh(() => {
-        console.log("refresh true");
-        return true;
-      });
+      setRefresh(true);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +66,7 @@ const SocialMedia = () => {
     toastId.current = null;
     console.log("file uploaded");
   };
+  console.log("refresh", refresh);
   const notify = (msg) => {
     toast.error(
       <div
