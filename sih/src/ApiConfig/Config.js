@@ -29,6 +29,10 @@ const config = {
     uploadResearchWork: "uploadResearchWork",
     updatePassword: "user/update-password",
     handlePostPic: "handleProfilePic",
+    like: "like",
+    comment: "comment",
+    getCommentsOnPost: "getCommentsOnPost",
+    getLikedPost: "getLikedPost",
   },
   role: {
     admin: "admin/",

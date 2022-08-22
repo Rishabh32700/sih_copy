@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import config from "../../../../../../ApiConfig/Config";
-import "./Imagecard.css";
+import "../Admin/Imagecard.css";
 import axios from "axios";
-import { Button,} from "antd";
-import moment from 'moment'
-const ImageCard = ({ post, getApprovedPhotos }) => {
+import { Button } from "antd";
+const RegularImageCard = ({ post }) => {
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
   const handleDeletePost = async () => {
@@ -21,7 +21,6 @@ const ImageCard = ({ post, getApprovedPhotos }) => {
           mediaId: post.mediaId,
         }
       );
-      await getApprovedPhotos();
       console.log(res);
     } catch (error) {}
   };
@@ -40,15 +39,16 @@ const ImageCard = ({ post, getApprovedPhotos }) => {
         <div className="post__card__post_info">
           <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
             <Typography gutterBottom variant="p" component="div">
-              When :{moment(post.currentTimeStamp).format("dddd DD MMMM YYYY")}
+              {/* Media Id : {post.mediaId} */}
               <br />
+              When : {post.currentTimeStamp} <br />
               Likes : {post.totalLikeCount} <br />
               Comment : {post.totalCommentCount} <br />
             </Typography>
             <div className="post__card__delete__button">
-              <Button onClick={handleDeletePost} type="danger">
-                Delete Post
-              </Button>
+              {post && post.status === 1 && (
+                <Button onClick={handleDeletePost}>Delete Post</Button>
+              )}
             </div>
           </CardContent>
         </div>
@@ -57,4 +57,4 @@ const ImageCard = ({ post, getApprovedPhotos }) => {
   );
 };
 
-export default ImageCard;
+export default RegularImageCard;

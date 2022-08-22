@@ -7,6 +7,7 @@ import axios from "axios";
 import config from "../../ApiConfig/Config";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const SocialMedia = () => {
   const toastId = useRef(null);
@@ -17,6 +18,7 @@ const SocialMedia = () => {
     <ImagesPost refresh={refresh} setRefresh={setRefresh} />
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleUpload = async () => {
     let formData = new FormData();
     formData.append("file", imgFile.data);
@@ -58,7 +60,17 @@ const SocialMedia = () => {
         }
       );
 
-      setRefresh(true);
+      setRefresh(() => {
+        console.log("refresh true");
+        return true;
+      });
+      const approvedRes = await axios.get(
+        "https://vvgnlisandboxapi.herokuapp.com/api/vvgnli/v1/getApprovedPhotos"
+      );
+      dispatch({
+        type: "approvedPhotos",
+        payload: approvedRes.data.approvedPhotosArray,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -150,7 +162,7 @@ const SocialMedia = () => {
                     Upload
                     <input
                       hidden
-                      accept="image/jpeg"
+                      accept="image/* video/*"
                       type="file"
                       onChangeCapture={(e) => handleChange(e)}
                       onClick={(e) => {

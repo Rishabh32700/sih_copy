@@ -292,7 +292,7 @@ const Signup = () => {
                     required: "This field is required",
                     minLength: { value: 3, message: "Atleast 3 character" },
                     pattern: {
-                      value: /^[A-Za-z]+$/i,
+                      value: /^[a-zA-Z ]*$/,
                       message: "Invalid Name",
                     },
                   })}
@@ -430,9 +430,9 @@ const Signup = () => {
                   />
                 </div>
                 <div className="ph-no__container">
-                  <div>
+                  {/* <div> */}
                     <PhoneInput
-                      style={{ width: "90%", height: "100%", outline: "none" }}
+                      style={{ width: "90%", height: "100%"}}
                       id="phonenumber"
                       country={"in"}
                       value={phoneNumber}
@@ -445,7 +445,7 @@ const Signup = () => {
                         setCountryCode(country.countryCode);
                       }}
                     />
-                  </div>
+                  {/* </div> */}
                 </div>
               </div>
               <div className="email__password__conatiner">

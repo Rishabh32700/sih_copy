@@ -152,6 +152,26 @@
     width: 100% !important;
 }
 
+.react-tel-input {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.react-tel-input input{
+    width: 100% !important;
+    height: 100% !important;
+    border-left: none !important; 
+    outline: none;
+  
+  }
+
+  .flag-dropdown, .selected-flag{
+    /* border: 2px solid red !important; */
+     border-right: none !important;
+     outline: none;
+    background-color: transparent !important;
+  }
+
 .email__password__conatiner{
     width: 66%;
 }
@@ -313,3 +333,12 @@
         height: 100%;
     }
 }
+
+
+
+.MuiIconButton-label svg,
+.MuiRadio-root svg{
+    color: #1890ff;
+ 
+}
+  

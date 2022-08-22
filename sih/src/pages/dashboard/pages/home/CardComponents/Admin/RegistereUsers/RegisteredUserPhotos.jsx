@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import { Grid } from "@mui/material";
-import ImageCard from "../ImageCard";
-import { Typography, Button } from "@mui/material";
 import axios from "axios";
-import AppWidgetSummary from "../../../AppWidgetSummary";
 import config from "../../../../../../../ApiConfig/Config";
 import "../uploadedImages.css";
 import { useParams } from "react-router-dom";
-
+import RegisteredImageCard from "./RegisteredImageCard";
+import AppWidgetSummary from "../../../AppWidgetSummary";
 
 const RegisteredUserUploadedImages = () => {
   const [photos, setPhotos] = useState([]);
   const { userId } = useParams();
+  const [regularTotalPhotosCount, setRegularTotalPhotosCount] = useState(0);
+  const [regularTotalApprovedPhotosCount, setRegularTotalApprovedPhotosCount] =
+    useState(0);
+  const [regularTotalPendingPhotosCount, setRegularTotalPendingPhotosCount] =
+    useState(0);
 
   const getUserPhotos = async () => {
     const res = await axios.get(
-      config.server.path + config.api.getPhotosForUserId+`?userId=${userId}`
+      config.server.path + config.api.getPhotosForUserId + `?userId=${userId}`
     );
     console.log(res);
+    setRegularTotalPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia +
+        res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
+    setRegularTotalApprovedPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfApprovedMedia
+    );
+    setRegularTotalPendingPhotosCount(
+      res.data.countOfApprovedAndPendingMedia.countOfPendingMedia
+    );
     setPhotos(res.data.photosArray);
   };
 
@@ -39,7 +49,7 @@ const RegisteredUserUploadedImages = () => {
                 <AppWidgetSummary
                   className="dashboard__card__inner__div"
                   title="Total Images Uploaded"
-                  total={714000}
+                  total={regularTotalPhotosCount}
                   icon={"ant-design:UserAddOutLined"}
                 />
               </div>
@@ -50,7 +60,7 @@ const RegisteredUserUploadedImages = () => {
                 <AppWidgetSummary
                   className="dashboard__card__inner__div"
                   title="Approved Images"
-                  total={1352831}
+                  total={regularTotalApprovedPhotosCount}
                   color="info"
                   icon={"ant-design:user-filled"}
                 />
@@ -61,8 +71,8 @@ const RegisteredUserUploadedImages = () => {
               <div className="card">
                 <AppWidgetSummary
                   className="dashboard__card__inner__div"
-                  title="Rejected Images"
-                  total={1723315}
+                  title="Pending Images"
+                  total={regularTotalPendingPhotosCount}
                   color="warning"
                   icon={"ant-design:video-filled"}
                 />
@@ -74,7 +84,7 @@ const RegisteredUserUploadedImages = () => {
           {photos &&
             photos.map((post, id) => (
               <div className="uploaded__images__card">
-                <ImageCard post={post} key={id} />
+                <RegisteredImageCard post={post} key={id} />
               </div>
             ))}
         </div>

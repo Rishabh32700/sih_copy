@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import config from "../../../../../../ApiConfig/Config";
-import "./Imagecard.css";
+import config from "../../../../../../../ApiConfig/Config";
+import "../Imagecard.css";
 import axios from "axios";
-import { Button,} from "antd";
-import moment from 'moment'
-const ImageCard = ({ post, getApprovedPhotos }) => {
+import { Button } from "antd";
+import moment from "moment";
+const RegisteredImageCard = ({ post, getApprovedPhotos }) => {
   var userRoleFromSession = JSON.parse(sessionStorage.getItem("user"));
   const userId = userRoleFromSession.userId;
   const handleDeletePost = async () => {
@@ -57,4 +57,4 @@ const ImageCard = ({ post, getApprovedPhotos }) => {
   );
 };
 
-export default ImageCard;
+export default RegisteredImageCard;

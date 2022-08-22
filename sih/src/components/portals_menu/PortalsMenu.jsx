@@ -52,8 +52,13 @@ const PortalsMenu = () => {
   };
 
   const handleClick = (key) => {
+<<<<<<< HEAD
     console.log("key", key);
     if (key === "Logout") {
+=======
+    console.log("key",key);
+    if(key == "Logout"){
+>>>>>>> main
       console.log(key);
       sessionStorage.removeItem("user");
       localStorage.removeItem("user");
