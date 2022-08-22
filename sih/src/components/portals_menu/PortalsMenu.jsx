@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { gData } from "../../App";
 
 import AppBar from "@mui/material/AppBar";
@@ -39,6 +39,7 @@ const PortalsMenu = () => {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [disableTillLogin, setDisableTillLogin] = React.useState(true);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,13 +53,8 @@ const PortalsMenu = () => {
   };
 
   const handleClick = (key) => {
-<<<<<<< HEAD
-    console.log("key", key);
-    if (key === "Logout") {
-=======
     console.log("key",key);
     if(key == "Logout"){
->>>>>>> main
       console.log(key);
       sessionStorage.removeItem("user");
       localStorage.removeItem("user");
@@ -70,6 +66,15 @@ const PortalsMenu = () => {
   };
 
   const user = JSON.parse(sessionStorage.getItem("user"));
+
+  // useEffect(()=>{
+
+  //   if(user){
+  //     setDisableTillLogin(false)
+  //   }
+  // },[disableTillLogin, user]
+
+  // )
   console.log(user);
   return (
     <>
@@ -252,6 +257,7 @@ const PortalsMenu = () => {
                   <MenuItem
                     key={setting.settingName}
                     onClick={handleCloseUserMenu}
+                    disabled = {user===null}
                   >
                     <Typography
                       textAlign="center"
