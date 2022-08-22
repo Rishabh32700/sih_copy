@@ -76,6 +76,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
         ...obj,
       }
     );
+    await getPhotos()
   };
 
   const handleDoneClick = async (id) => {
@@ -90,6 +91,7 @@ const DashboardCommunityImages = ({ isAdmin }) => {
         ...obj,
       }
     );
+    await getPhotos()
   };
 
   useEffect(() => {
