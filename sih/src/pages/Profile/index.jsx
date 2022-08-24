@@ -168,7 +168,7 @@ const ProfilePage = () => {
               }}
             >
               User
-              {imgFile !== null ? (
+              {imgFile !== "" ? (
                 <img
                   src={imgFile?.preview || user.profilePicURL}
                   alt=""

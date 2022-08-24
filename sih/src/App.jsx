@@ -43,7 +43,7 @@ import ProfilePage from "./pages/Profile";
 import PasswordReset from "./pages/PasswordReset";
 import ProtectedRoutes from "./Auth/Auth";
 import ErrorPage from "./pages/404page";
-
+import WebinarShowPage from "./pages/webinarShowPage/webinarShowPage";
 export let gData = createContext();
 
 const App = () => {
@@ -101,7 +101,7 @@ const App = () => {
               <Route path="/PasswordReset" element={<PasswordReset />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/error" element={<ErrorPage />} />
-
+              <Route path="/showWebinars" element={<WebinarShowPage />} />
               <Route
                 path="/dashboard"
                 element={<ProtectedRoutes element={<Dashboard />} />}
