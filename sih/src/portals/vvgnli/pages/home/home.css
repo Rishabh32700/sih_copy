@@ -1,8 +1,10 @@
 .home{
     overflow: scroll;
     /* border: 2px solid red; */
-    width: 100%;
+    width: 90%;
     height: 80vh;
+    margin: auto;
+    background-color: white;
 }
 
 .home__container{

@@ -1,22 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { gData } from "../../../App";
 
 import "./vvgnliMainMenu.css";
+import { useNavigate } from "react-router-dom";
 
 export default function VvgnliMainMenu() {
-  const myGlobalDataForVvgnliMainMenu = useContext(gData);
+const navigate = useNavigate()
 
   const [state, setState] = React.useState({
     left: false,
@@ -46,7 +44,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("home");
+            navigate("/vvgnli")
           }}
         >
           <ListItemButton>
@@ -56,9 +54,8 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "about_us"
-            );
+            navigate("/vvgnli/about-us")
+            console.log("gjhsdjkvjvjrkwblkrcbh");
           }}
         >
           <ListItemButton>
@@ -68,9 +65,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "research"
-            );
+            navigate("/vvgnli/research")
           }}
         >
           <ListItemButton>
@@ -80,9 +75,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "training"
-            );
+            navigate("/vvgnli/training")
           }}
         >
           <ListItemButton>
@@ -92,9 +85,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "publication"
-            );
+            navigate("/vvgnli/publication")
           }}
         >
           <ListItemButton>
@@ -104,7 +95,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("library");
+            navigate("/vvgnli/library") 
           }}
         >
           <ListItemButton>
@@ -114,7 +105,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("people");
+            navigate("/vvgnli/people") 
           }}
         >
           <ListItemButton>
@@ -124,9 +115,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "online_training"
-            );
+            navigate("/vvgnli/online-training") 
           }}
         >
           <ListItemButton>
@@ -136,9 +125,7 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state(
-              "e_resources"
-            );
+            navigate("/vvgnli/e-resource")
           }}
         >
           <ListItemButton>
@@ -148,14 +135,13 @@ export default function VvgnliMainMenu() {
         <ListItem
           disablePadding
           onClick={() => {
-            myGlobalDataForVvgnliMainMenu.set_vvgnli_main_menu_state("mou");
+            navigate("/vvgnli/mou")
           }}
         >
           <ListItemButton>
             <ListItemText primary="MOU" />
           </ListItemButton>
         </ListItem>
-        {/* ))} */}
       </List>
     </Box>
   );

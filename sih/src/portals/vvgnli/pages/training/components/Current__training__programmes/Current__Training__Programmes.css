@@ -1,0 +1,49 @@
+.Current__Training__Programmes__inner__containers{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    /* border: 2px solid blue; */
+
+
+}
+
+.Current__Training__Programmes__left__container{
+    width: 20%;
+
+    /* border: 2px solid red; */
+    padding: 1rem;
+
+}
+.Current__Training__Programmes__right__container{
+    width: 80%;
+    /* border: 2px solid red; */
+    padding: 1rem;
+
+}
+
+
+.Current__Training__Programmes__left ul li{
+    margin-top: 2rem;
+    cursor: pointer;
+    
+    
+}
+
+.current__training__programmes__main__rendering__container{
+    /* border: 2px solid green; */
+}
+
+.current__training__programmes__main__rendering{
+    /* border: 2px solid blue; */
+}
+
+.current__training__programmes__main__rendering__upper__container__buttons__container{
+    margin: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.current__training__programmes__main__rendering__upper__container__buttons__container__button{
+    background-color: #1976d2 !important;
+}

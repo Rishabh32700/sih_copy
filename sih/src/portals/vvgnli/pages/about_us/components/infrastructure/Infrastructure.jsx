@@ -1,10 +1,14 @@
 import React from "react";
+import VvgnliMainMenu from "../../../../main__menu_vvgnli/VvgnliMainMenu";
+import AboutUSSubmenu from "../about__us__submenu/AboutUsSubmenu";
 
 import "./infrastructure.css";
 
 const Infrastructure = () => {
   return (
     <>
+      <VvgnliMainMenu />
+      <AboutUSSubmenu />
       <div className="director__general__desk">
         <div className="director__general__desk__container">
           <div className="director__general__desk__heading__container">
@@ -639,15 +643,29 @@ const Infrastructure = () => {
               </div>
             </div>
             <div className="infrastructure__moreInfo__container">
-                <p> <em> For all information contact: </em></p>
-                <p> <strong> Director General </strong></p>
-                <p> <strong>V.V. Giri National Labour Institute </strong></p>
-                <p>Sector 24, NOIDA-201 301</p>
-                <p>District - Gautam Budh Nagar (U.P.) INDIA</p>
-                <p>Tel. : 2411470, 2411533, 2411534, 2411535</p>
-                <p>Fax : 2411471 STD Code 91-0120</p>
-                <p>Email : dg.vvgnli@gov.in</p>
-                <p>Notes:-Prefix 95-120 for dialing from Delhi, Prefix 0120 for dialing from outside Delhi and prefix 91- 11-120 for dialing from outside India. The Institute is working five days a week (Monday to Friday, 9.00 a.m. to 5.30 p.m.).</p>
+              <p>
+                {" "}
+                <em> For all information contact: </em>
+              </p>
+              <p>
+                {" "}
+                <strong> Director General </strong>
+              </p>
+              <p>
+                {" "}
+                <strong>V.V. Giri National Labour Institute </strong>
+              </p>
+              <p>Sector 24, NOIDA-201 301</p>
+              <p>District - Gautam Budh Nagar (U.P.) INDIA</p>
+              <p>Tel. : 2411470, 2411533, 2411534, 2411535</p>
+              <p>Fax : 2411471 STD Code 91-0120</p>
+              <p>Email : dg.vvgnli@gov.in</p>
+              <p>
+                Notes:-Prefix 95-120 for dialing from Delhi, Prefix 0120 for
+                dialing from outside Delhi and prefix 91- 11-120 for dialing
+                from outside India. The Institute is working five days a week
+                (Monday to Friday, 9.00 a.m. to 5.30 p.m.).
+              </p>
             </div>
           </div>
         </div>

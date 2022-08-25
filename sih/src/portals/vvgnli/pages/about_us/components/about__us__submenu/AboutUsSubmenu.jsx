@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import "./aboutUsSubmenu.css";
 
@@ -12,10 +12,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 
-import { gData } from "../../../../../../App";
+import { useNavigate } from "react-router-dom";
 
 const AboutUSSubmenu = () => {
-  let my__data__from__vvgnli__about_us__submenu = useContext(gData);
+  const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -62,84 +62,66 @@ const AboutUSSubmenu = () => {
               >
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "about_us"
-                    );
+                    console.log("hello  hello");
+
+                    navigate("/vvgnli/about-us");
                   }}
                 >
-                  <Typography textAlign="center">
-                    About US
-                  </Typography>
+                  <Typography textAlign="center">About US</Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => {
+                    console.log("hello  director general");
+                    navigate("/vvgnli/about-us/director-general");
+                  }}
+                >
+                  <Typography textAlign="center">Director General</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "director_general"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/vision-mission");
                   }}
                 >
-                  <Typography textAlign="center">
-                    Director General
-                  </Typography>
+                  <Typography textAlign="center">Vision & mission</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "vision_and_mission"
-                    );
-                  }}
-                >
-                  <Typography textAlign="center">
-                    Vision & mission
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "history"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/history");
                   }}
                 >
                   <Typography textAlign="center">History</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "governing_bodies"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/governing-bodies");
                   }}
                 >
-                  <Typography textAlign="center">
-                    Governing Bodies
-                  </Typography>
+                  <Typography textAlign="center">Governing Bodies</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "infrastructure"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/infrastructure");
                   }}
                 >
-                  <Typography textAlign="center">
-                    Infrastructure
-                  </Typography>
+                  <Typography textAlign="center">Infrastructure</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "networking"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/networking");
                   }}
                 >
-                  <Typography textAlign="center">
-                    Networking
-                  </Typography>
+                  <Typography textAlign="center">Networking</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    my__data__from__vvgnli__about_us__submenu.set_vvgnli_about_submenu_state(
-                      "whos_who"
-                    );
+                    console.log("hello  hello");
+                    navigate("/vvgnli/about-us/whoswho");
                   }}
                 >
                   <Typography textAlign="center">Who's who</Typography>
@@ -154,6 +136,3 @@ const AboutUSSubmenu = () => {
 };
 
 export default AboutUSSubmenu;
-
-
-

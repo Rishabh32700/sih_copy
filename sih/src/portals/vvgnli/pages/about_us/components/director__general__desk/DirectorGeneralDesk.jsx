@@ -1,10 +1,16 @@
 import React from 'react'
+import VvgnliMainMenu from '../../../../main__menu_vvgnli/VvgnliMainMenu'
+import AboutUSSubmenu from '../about__us__submenu/AboutUsSubmenu'
 
 import './directorGeneralDesk.css'
+
+
 
 const DirectorGeneralDesk = () => {
   return (
     <>
+    <VvgnliMainMenu/>
+<AboutUSSubmenu />
         <div className="director__general__desk">
             <div className="director__general__desk__container">
                 <div className="director__general__desk__heading__container">

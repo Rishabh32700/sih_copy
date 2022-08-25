@@ -130,7 +130,8 @@ const PortalsMenu = () => {
               >
                 <MenuItem
                   onClick={() => {
-                    myData.setState(1);
+                    console.log("vvgnli");
+                    navigate("/");
                   }}
                 >
                   <Typography textAlign="center">VVGNLI</Typography>
@@ -192,7 +193,8 @@ const PortalsMenu = () => {
             >
               <Button
                 onClick={() => {
-                  myData.setState(1);
+                  console.log("vvgnli");
+                  navigate("vvgnli");
                 }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >

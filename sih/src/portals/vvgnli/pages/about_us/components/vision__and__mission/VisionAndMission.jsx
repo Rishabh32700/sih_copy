@@ -1,10 +1,14 @@
 import React from "react";
 
-import './visionAndMission.css'
+import VvgnliMainMenu from "../../../../main__menu_vvgnli/VvgnliMainMenu";
+import AboutUSSubmenu from "../about__us__submenu/AboutUsSubmenu";
+import "./visionAndMission.css";
 
 const VisionAndMission = () => {
   return (
     <>
+      <VvgnliMainMenu />
+      <AboutUSSubmenu />
       <div className="director__general__desk vision__and__mission">
         <div className="director__general__desk__container vision__and__mission__container">
           <div className="vision__and__mission__heading__container">

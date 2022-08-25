@@ -1,7 +1,8 @@
 import React from "react";
 
-import VvgnliMainContent from "./main__content__vvgnli/VvgnliMainContent";
 import VvgnliMainMenu from "./main__menu_vvgnli/VvgnliMainMenu";
+import Home from "./pages/home/Home";
+
 
 import "./vvgnli.css";
 
@@ -11,7 +12,7 @@ const Vvgnli = () => {
       <VvgnliMainMenu />
       <div className="vvgnli">
         <div className="vvgnli__container">
-          <VvgnliMainContent />
+          <Home />
         </div>
       </div>
     </>

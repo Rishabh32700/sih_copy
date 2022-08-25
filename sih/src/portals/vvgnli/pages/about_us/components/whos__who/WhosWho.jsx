@@ -7,6 +7,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import VvgnliMainMenu from "../../../../main__menu_vvgnli/VvgnliMainMenu";
+import AboutUSSubmenu from "../about__us__submenu/AboutUsSubmenu";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -123,6 +125,8 @@ const fellows__rows = [
 const WhosWho = () => {
   return (
     <>
+      <VvgnliMainMenu />
+      <AboutUSSubmenu />
       <div className="whos__who">
         <div className="whos__who__container">
           <div className="whos__who__director__general__table__container">
@@ -183,8 +187,6 @@ const WhosWho = () => {
             </div>
           </div>
 
-
-
           <div className="whos__who__senior__fellows__table__container">
             <div className="whos__who__senior__fellows__table__heading__container">
               <h1>Senior Fellows</h1>
@@ -242,8 +244,6 @@ const WhosWho = () => {
               </TableContainer>
             </div>
           </div>
-
-
 
           <div className="whos__who__fellows__table__container">
             <div className="whos__who__fellows__table__heading__container">

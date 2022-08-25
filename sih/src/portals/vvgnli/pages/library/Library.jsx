@@ -1,12 +1,14 @@
 import React from 'react'
 
 import './library.css'
+import VvgnliMainMenu from '../../main__menu_vvgnli/VvgnliMainMenu'
 
 const Library = () => {
   return (
     <>
-        <div className="library">
-            <div className="library__container">
+    <VvgnliMainMenu />
+        <div className="about library">
+            <div className="about__container library__container">
                 hello i am library section
             </div>
         </div>

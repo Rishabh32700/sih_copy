@@ -1,5 +1,5 @@
 import React from 'react'
-import FooterVvgnli from '../../../../footer__vvgnli/FooterVvgnli'
+// import FooterVvgnli from '../../../../footer__vvgnli/FooterVvgnli'
 
 import './mainContentAboutUs.css'
 
@@ -47,7 +47,7 @@ const MainContentAboutUs = () => {
 
             </ul>
           </section>
-          <FooterVvgnli />
+          {/* <FooterVvgnli /> */}
         </div>
       </div>
     </>

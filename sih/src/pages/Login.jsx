@@ -17,98 +17,6 @@ import { useTranslation } from "react-i18next";
 
 import config from "../ApiConfig/Config";
 
-export function Captcha(props) {
-  const [captchaState, setCaptchaState] = useState({
-    username: "",
-  });
-
-  const characters = "abc123";
-
-  function generateString(length) {
-    let result = "";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
-  const captcha = generateString(6); // Function called here and save in captcha variable
-
-  let handleChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    captchaState[name] = value;
-    setCaptchaState(captchaState);
-  };
-
-  const onSubmit = (e) => {
-    var element = document.getElementById("succesBTN");
-    var inputData = document.getElementById("inputType");
-    element.style.cursor = "wait";
-    element.innerHTML = "Checking...";
-    inputData.disabled = true;
-    element.disabled = true;
-
-    var myFunctions = function () {
-      if (captcha == captchaState.username) {
-        element.style.backgroundColor = "green";
-        element.innerHTML = "Captcha Verified";
-        element.disabled = true;
-        element.style.cursor = "not-allowed";
-        inputData.style.display = "none";
-        props.setLoginButtonDisable(false);
-      } else {
-        element.style.backgroundColor = "red";
-        element.style.cursor = "not-allowed";
-        element.innerHTML = "Not Matched";
-        element.disabled = true;
-        //  element.disabled = true;
-
-        var myFunction = function () {
-          element.style.backgroundColor = "#007bff";
-          element.style.cursor = "pointer";
-          element.innerHTML = "Verify Captcha";
-          element.disabled = false;
-          inputData.disabled = false;
-          inputData.value = "sssss";
-        };
-        setTimeout(myFunction, 5000);
-      }
-    };
-    setTimeout(myFunctions, 5000);
-  };
-
-  return (
-    <div style={{ marginTop: "1rem", width: "100%" }}>
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-        <h4 id="captcha">{captcha}</h4>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <input
-            type="text"
-            id="inputType"
-            className="form-control"
-            placeholder="Enter Captcha"
-            name="username"
-            onChange={handleChange}
-            autocomplete="off"
-            style={{ width: "60%" }}
-          />
-          <button
-            type="button"
-            id="succesBTN"
-            onClick={onSubmit}
-            class="btn btn-primary ml-1"
-          >
-            Verify Captcha
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const Login = () => {
   const [loginButtonDisable, setLoginButtonDisable] = useState(true);
 
@@ -225,10 +133,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <Captcha
-              loginButtonDisable={loginButtonDisable}
-              setLoginButtonDisable={setLoginButtonDisable}
-            />
+
             <div className="terms__and__button__container">
               <div className="terms__checkbox">
                 <FormControlLabel
